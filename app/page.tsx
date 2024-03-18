@@ -8,20 +8,21 @@ export default function Home() {
   return (
     <main className="w-full mx-auto flex flex-col">
       <Hero />
-      <section className="container py-10 w-full flex flex-col gap-12 px-6 md:px-32">
+      <section className="container py-6 w-full flex flex-col gap-12 px-6 md:px-32">
         <TrustedCompanies />
         <hr />
       </section>
-      <section className="container py-10 w-full px-6 md:px-32">
+      <section className="container py-6 w-full px-6 md:px-32">
         <HowItWorks />
       </section>
 
-      <section>
-        <Services />
-      </section>
-      <section>
+      <section className="container py-6 w-full px-6 md:px-32">
         <About />
       </section>
+
+      {/* <section>
+        <Services />
+      </section> */}
     </main>
   );
 }

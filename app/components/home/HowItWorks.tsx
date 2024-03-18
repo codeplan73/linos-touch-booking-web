@@ -5,13 +5,13 @@ import HowItWorkCard from "./howItWorks/HowItWorkCard";
 const HowItWorks = () => {
   return (
     <div className="w-full flex flex-col py-8 items-center gap-8">
-      <h4 className="text-md uppercase text-gray4 font-thin font-sans">
+      <h4 className="text-sm md:text-md uppercase text-gray4 font-thin font-sans">
         how it works
       </h4>
-      <h1 className="font-sans font-semibold text-4xl">
+      <h1 className="font-sans font-semibold text-2xl md:text-4xl text-center">
         How to Get Our Service
       </h1>
-      <p className="text-gray3 text-balance text-center">
+      <p className="text-gray3 text-balance text-center text-">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit fuga
         optio nulla libero possimus eaque consectetur quis modi voluptas,
         commodi veniam, numquam quisquam quos soluta! Quia sunt iure atque at!
