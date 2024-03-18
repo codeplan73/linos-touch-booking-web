@@ -31,7 +31,7 @@ export default function RootLayout({
 
       <body className={`${heebo.className}, ${cn(fontSans.variable)}`}>
         <Navbar />
-        <main className="w-full md:max-w-7xl">{children}</main>
+        <main className="w-full">{children}</main>
         <Footer />
       </body>
     </html>

@@ -48,7 +48,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black opacity-65"></div>
 
       {/* Content */}
-      <div className="absolute inset-0 flex flex-col justify-start pt-52  items-center text-white gap-8 md:gap-10 px-6">
+      <div className="absolute inset-0 flex flex-col justify-start pt-52 md:pt-36  items-center text-white gap-8 md:gap-10 px-6">
         <h4 className="text-warningColor text-xl md:text-2xl text-center font-sans  md:mt-12 font-semibold">
           15 Years Experienced
         </h4>
