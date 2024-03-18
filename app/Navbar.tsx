@@ -44,7 +44,7 @@ const Navbar = () => {
       }`}
     >
       {/* Blur effect is applied to the background here */}
-      <div className="relative">
+      <div className="relative container">
         <div className="w-full container mx-auto px-4 py-4 flex items-center justify-between text-white">
           <Link href="/" className="">
             <Image

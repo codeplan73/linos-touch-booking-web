@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const TrustedCompanies = () => {
   return (
-    <div className="w-full md:max-w-7xl mx-auto font-sans flex flex-col gap-10">
+    <div className="w-full font-sans flex flex-col gap-10">
       <h4 className="text-2xl text-center text-gray3">
         Trusted by over <span className="text-blue-500">90k+</span> companies
         worldwide
