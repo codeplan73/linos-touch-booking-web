@@ -7,11 +7,11 @@ const HeroForm = () => {
       <BiSearchAlt className="absolute text-2xl font-bold text-slate-400 left-4" />
       <input
         type="text"
-        className="text-slate-700 w-full px-12 py-6 outline-none rounded-2xl bg-slate-200 opacity-60 text-2xl"
+        className="text-slate-700 w-full px-10 md:px-12 py-4 md:py-6 outline-none border border-secondaryColor rounded-2xl bg-slate-200 opacity-60 text-xl md:text-2xl"
         placeholder="Enter your post code"
         id=""
       />
-      <button className="bg-warningColor border-none px-6 text-xl py-4 rounded-xl absolute right-4 text-black font-semibold font-sans">
+      <button className="hover:bg-secondaryColor hover:text-white bg-warningColor border-none px-2 md:px-6 text-md md:text-xl py-2 md:py-4 rounded-xl absolute right-4 text-secondaryColor font-semibold font-sans">
         Find your cleaner
       </button>
     </form>
