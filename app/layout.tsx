@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter as FontSans, Heebo } from "next/font/google";
+// import  useTriot  from './fonts/font'
 import "./globals.css";
 import Head from "next/head";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const heebo = Heebo({ subsets: ["latin"] });
+
+import { cn } from "@/lib/utils";
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Linos-Touch",
@@ -18,12 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" sizes="any" />
 
-      <body className={inter.className}>
+      <body className={`${heebo.className}, ${cn(fontSans.variable)}`}>
         <Navbar />
-        <main>{children}</main>
+        <main className="w-full md:max-w-7xl">{children}</main>
         <Footer />
       </body>
     </html>
