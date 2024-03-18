@@ -6,50 +6,50 @@ const Hero = () => {
   const words1 = [
     {
       text: "We",
-      className: "text-6xl font-semibold text-center",
+      className: "text-7xl text-center text-white",
     },
     {
       text: "Work",
-      className: "text-6xl font-semibold text-center",
+      className: "text-7xl text-center text-white",
     },
     {
       text: "For",
-      className: "text-6xl font-semibold text-center",
+      className: "text-7xl text-center text-white",
     },
     {
       text: "You",
-      className: "text-6xl font-semibold text-center",
+      className: "text-7xl text-center text-white",
     },
     {
       text: "To",
-      className: "text-6xl font-semibold text-center",
+      className: "text-7xl text-center text-white",
     },
   ];
   const words2 = [
     {
       text: "Give",
-      className: "text-6xl font-semibold text-center",
+      className: "text-7xl text-center text-white",
     },
     {
       text: "Best",
-      className: "text-6xl font-semibold text-center",
+      className: "text-7xl text-center text-white",
     },
     {
       text: "Services",
-      className: "text-6xl font-semibold text-center",
+      className: "text-7xl text-center text-white",
     },
   ];
   return (
     <div
-      className="relative w-full md:w-[100vw] bg-no-repeat bg-center md:bg-top bg-cover h-[90vh]  overflow-hidden"
+      className="relative w-full md:w-[100vw] bg-no-repeat bg-center md:bg-top bg-cover h-[100vh]  overflow-hidden"
       style={{ backgroundImage: "url('/images/bg-main.jpeg')" }}
     >
       {/* Background Overlay */}
-      <div className="absolute inset-0 bg-black opacity-75"></div>
+      <div className="absolute inset-0 bg-black opacity-65"></div>
 
       {/* Content */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-white gap-8">
-        <h4 className="text-primaryColor text-xl text-center">
+      <div className="absolute inset-0 flex flex-col justify-center items-center text-white gap-10">
+        <h4 className="text-warningColor text-2xl text-center font-sans mt-12 font-semibold ">
           15 Years Experienced
         </h4>
 
@@ -61,7 +61,7 @@ const Hero = () => {
           Give Best Services
         </h2> */}
         <TypewriterEffect words={words2} />
-        <p className="text-center">
+        <p className="text-center font-sans">
           Experience our renowned customer obserssion and commitment to perfect
           service <br /> delivery. Free quotes available - let us take the
           stress our of cleaning
