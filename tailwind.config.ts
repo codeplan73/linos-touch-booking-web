@@ -25,6 +25,7 @@ const config = {
       colors: {
         primaryColor: "#F2994A",
         secondaryColor: "#092C4C",
+        secondaryColor2: "#141414",
         infoColor: "#2F80ED",
         successColor: "#27AE60",
         warningColor: "#E2B93B",
