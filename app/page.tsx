@@ -4,6 +4,7 @@ import About from "./components/home/About";
 import TrustedCompanies from "./components/home/TrustedCompanies";
 import HowItWorks from "./components/home/HowItWorks";
 import Counter from "./components/Counter";
+import Projects from "./components/home/Projects";
 
 export default function Home() {
   return (
@@ -40,6 +41,10 @@ export default function Home() {
 
       <section className="container py-12 md:py-24 w-full px-6 md:px-32 bg-yellow-50">
         <Services />
+      </section>
+
+      <section className="container py-12 md:py-24 w-full px-6 md:px-32">
+        <Projects />
       </section>
     </main>
   );
