@@ -38,7 +38,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container py-12 w-full px-6 md:px-32 bg-orange-50">
+      <section className="container py-12 md:py-24 w-full px-6 md:px-32 bg-yellow-50">
         <Services />
       </section>
     </main>
