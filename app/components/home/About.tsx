@@ -4,7 +4,7 @@ import { PiStarFourFill } from "react-icons/pi";
 
 const About = () => {
   return (
-    <div className="flex flex-col gap-6 md:gap-8 max-w-7xl container">
+    <div className="flex flex-col gap-6 md:gap-8 max-w-7xl">
       <p className="text-center md:text-left font-bold uppercase text-blue-500 text-xs font-sans leading-tight">
         / About Us
       </p>

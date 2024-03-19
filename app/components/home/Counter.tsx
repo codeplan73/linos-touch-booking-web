@@ -2,7 +2,7 @@ import React from "react";
 
 const Counter = () => {
   return (
-    <div className="flex flex-col gap-10 items-start justify-center container">
+    <div className="flex flex-col gap-10 items-start justify-center">
       <h2 className="font-bold text-4xl">
         <span className="mr-2 border-4 border-t-white border-r-white border-l-white border-b-primaryColor">
           By the

@@ -5,25 +5,32 @@ import TrustedCompanies from "./components/home/TrustedCompanies";
 import HowItWorks from "./components/home/HowItWorks";
 import Counter from "./components/Counter";
 import Projects from "./components/home/Projects";
+import Testimonials from "./components/home/Testimonials";
 
 export default function Home() {
   return (
     <main className="w-full mx-auto flex flex-col">
       <Hero />
-      <section className="container py-6 w-full flex flex-col gap-12 px-6 md:px-32">
-        <TrustedCompanies />
+      <section className="py-6 w-full flex flex-col gap-12 px-6 md:px-32">
+        <div className="container">
+          <TrustedCompanies />
+        </div>
         <hr />
       </section>
-      <section className="container py-6 w-full px-6 md:px-32">
-        <HowItWorks />
+      <section className="py-6 w-full px-6 md:px-32">
+        <div className="container">
+          <HowItWorks />
+        </div>
       </section>
 
-      <section className="container py-6 w-full px-6 md:px-32">
-        <About />
+      <section className="py-6 w-full px-6 md:px-32">
+        <div className="container">
+          <About />
+        </div>
       </section>
 
-      <section className="container py-12 w-full px-6 md:px-32">
-        <div className="flex flex-col gap-10 items-start justify-center container">
+      <section className="py-12 w-full px-6 md:px-32">
+        <div className="container flex flex-col gap-10 items-start justify-center">
           <h2 className="font-bold text-4xl">
             <span className="mr-2 border-4 border-t-white border-r-white border-l-white border-b-primaryColor">
               By the
@@ -39,12 +46,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container py-12 md:py-24 w-full px-6 md:px-32 bg-yellow-50">
-        <Services />
+      <section className="py-12 md:py-24 w-full px-6 md:px-32 bg-yellow-50">
+        <div className="container">
+          <Services />
+        </div>
       </section>
 
-      <section className="container py-12 md:py-24 w-full px-6 md:px-32">
-        <Projects />
+      <section className="py-12 md:py-24 w-full px-6 md:px-32">
+        <div className="container">
+          <Projects />
+        </div>
+      </section>
+
+      <section className="py-12 md:py-24 w-full px-6 md:px-32 bg-gray-200">
+        <div className="container">
+          <Testimonials />
+        </div>
       </section>
     </main>
   );

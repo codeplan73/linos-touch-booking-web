@@ -5,7 +5,7 @@ import { Link } from "lucide-react";
 
 const Projects = () => {
   return (
-    <div className="w-full md:max-w-7xl flex flex-col items-start justify-center container gap-12">
+    <div className="w-full md:max-w-7xl flex flex-col items-start justify-center gap-12">
       <div className="flex flex-col items-center justify-center gap-4 mx-auto">
         <h2 className="text-2xl md:text-4xl font-bold">Our Recent projects</h2>
         <p className="text-md font-sans capitalize">

@@ -6,7 +6,7 @@ import ServiceSlider from "../Services/ServiceSlider";
 
 const Services = () => {
   return (
-    <div className="w-full md:max-w-7xl flex flex-col items-center justify-center container gap-12">
+    <div className="w-full md:max-w-7xl flex flex-col items-center justify-center gap-12">
       <div className="flex flex-col items-center justify-center gap-4">
         <h2 className="text-2xl md:text-4xl font-bold">Our Services</h2>
         <p className="text-md font-sans">
