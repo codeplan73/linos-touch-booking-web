@@ -10,7 +10,7 @@ const Card = ({
   text: string;
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 border border-slate-200 py-6 px-10">
+    <div className="flex flex-col items-center justify-center gap-2 border border-slate-200 py-16 px-10">
       <span className="border border-gray-200 rounded-full text-xs py-1 px-2 text-secondaryColor">
         {step}
       </span>

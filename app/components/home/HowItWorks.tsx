@@ -5,10 +5,10 @@ import HowItWorkCard from "./howItWorks/HowItWorkCard";
 const HowItWorks = () => {
   return (
     <div className="w-full flex flex-col py-8 items-center gap-8">
-      <h4 className="text-sm md:text-md uppercase text-gray4 font-thin font-sans">
+      <h4 className="text-md md:text-lg uppercase text-secondaryColor font-thin font-sans">
         how it works
       </h4>
-      <h1 className="font-sans font-semibold text-2xl md:text-4xl text-center">
+      <h1 className="font-sans font-semibold text-3xl md:text-6xl text-center">
         How to Get Our Service
       </h1>
       <p className="text-gray3 text-balance text-center text-">
@@ -37,7 +37,7 @@ const HowItWorks = () => {
 
       <Link
         href="/services"
-        className="text-secondaryColor bg-warningColor px-4 py-2 rounded-xl font-sans font-semibold hover:text-white hover:bg-secondaryColor"
+        className="text-secondaryColor bg-warningColor px-6 py-3 rounded-xl font-sans font-semibold hover:text-white hover:bg-secondaryColor"
       >
         Learn More
       </Link>

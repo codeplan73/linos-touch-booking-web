@@ -1,33 +1,19 @@
+"use client";
+
 import React from "react";
+import Link from "next/link";
+import ServiceSlider from "../Services/ServiceSlider";
 
 const Services = () => {
   return (
-    <div className="flex flex-col gap-52">
-      <h2 className="text-4xl font-bold">Servcies Section</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet error
-        animi fuga sint obcaecati, sit illum veritatis commodi iste
-        necessitatibus incidunt perspiciatis, nihil quos neque vero eveniet
-        molestiae culpa libero, numquam maxime laudantium quo aliquid quod. Sunt
-        rerum ipsa praesentium fuga accusamus omnis temporibus iure officia
-        dignissimos laborum, illum dolores.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet error
-        animi fuga sint obcaecati, sit illum veritatis commodi iste
-        necessitatibus incidunt perspiciatis, nihil quos neque vero eveniet
-        molestiae culpa libero, numquam maxime laudantium quo aliquid quod. Sunt
-        rerum ipsa praesentium fuga accusamus omnis temporibus iure officia
-        dignissimos laborum, illum dolores.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet error
-        animi fuga sint obcaecati, sit illum veritatis commodi iste
-        necessitatibus incidunt perspiciatis, nihil quos neque vero eveniet
-        molestiae culpa libero, numquam maxime laudantium quo aliquid quod. Sunt
-        rerum ipsa praesentium fuga accusamus omnis temporibus iure officia
-        dignissimos laborum, illum dolores.
-      </p>
+    <div className="w-full md:max-w-7xl flex flex-col items-center justify-center container gap-12">
+      <h2 className="text-4xl font-bold">Our Services</h2>
+      <p>we work many fields to clean your surrounding area</p>
+
+      <ServiceSlider />
+      <div>
+        <Link href="/services">{`See More >> `}</Link>
+      </div>
     </div>
   );
 };

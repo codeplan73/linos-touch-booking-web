@@ -21,7 +21,7 @@ export default function Home() {
         <About />
       </section>
 
-      <section className="container py-6 w-full px-6 md:px-32">
+      <section className="container py-12 w-full px-6 md:px-32">
         <div className="flex flex-col gap-10 items-start justify-center container">
           <h2 className="font-bold text-4xl">
             <span className="mr-2 border-4 border-t-white border-r-white border-l-white border-b-primaryColor">
@@ -38,9 +38,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <section>
+      <section className="container py-12 w-full px-6 md:px-32 bg-orange-50">
         <Services />
-      </section> */}
+      </section>
     </main>
   );
 }
