@@ -5,19 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { TiThMenu } from "react-icons/ti";
 import { CgMenuMotion } from "react-icons/cg";
+import classnames from "classnames";
+import { usePathname } from "next/navigation";
 
 const links = [
-  { label: "Home", link: "/" },
-  { label: "About Us", link: "/aboutUs" },
-  { label: "Our Services", link: "/services" },
-  { label: "Gallery", link: "/gallery" },
-  { label: "Appointment", link: "/appointment" },
-  { label: "Contact", link: "/contact" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Our Services", href: "/services" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Appointment", href: "/appointment" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
   const [open, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const currentPath = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,8 +42,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-secondaryColor bg-opacity-95" : "bg-transparent"
+      className={`fixed w-full top-0 z-50 transition-all duration-300  ${
+        isScrolled
+          ? "bg-secondaryColor bg-opacity-60 backdrop-blur-md"
+          : "bg-transparent"
       }`}
     >
       {/* Blur effect is applied to the background here */}
@@ -58,9 +63,16 @@ const Navbar = () => {
           <ul className="hidden md:flex items-center justify-start space-x-4">
             {links.map((link) => (
               <Link
-                key={link.link}
-                href={link.link}
-                className="hover:text-warningColor hover:bg-secondaryColor p-2 rounded-xl"
+                key={link.href}
+                href={link.href}
+                // className={`hover:text-warningColor hover:bg-secondaryColor p-2 rounded-xl`}
+                className={classnames({
+                  "text-white bg-secondaryColor p-2 rounded-xl":
+                    link.href === currentPath,
+                  "text-white": link.href !== currentPath,
+                  "transition-colors hover:text-warningColor hover:bg-secondaryColor p-2 rounded-xl":
+                    true,
+                })}
               >
                 {link.label}
               </Link>
@@ -103,9 +115,9 @@ const Navbar = () => {
         {open &&
           links.map((link) => (
             <Link
-              key={link.link}
-              href={link.link}
-              className="flex p-4 text-slate-700 w-full hover:bg-secondaryColor"
+              key={link.href}
+              href={link.href}
+              className="flex p-4 text-slate-700 w-full hover:bg-secondaryColor hover:text-white"
               onClick={() => setIsOpen(false)}
             >
               <span>{link.label}</span>

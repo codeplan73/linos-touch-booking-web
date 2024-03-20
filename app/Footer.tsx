@@ -108,7 +108,7 @@ const Footer = () => {
           </div>
         </div>
         <hr className="border border-slate-700 w-full" />
-        <div className="w-full flex-col md:flow-row flex items-center gap-4 md:items-start justify-between">
+        <div className="w-full flex flex-col md:flex-row items-center gap-4 md:items-start justify-between">
           <Link
             href="https://https://globeraven.vercel.app/"
             className="text-slate-500 text-sm"
