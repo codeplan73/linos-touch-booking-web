@@ -60,7 +60,7 @@ const Navbar = () => {
               className="h-14 w-14"
             />
           </Link>
-          <ul className="flex items-center gap-28">
+          <ul className="hidden md:flex items-center gap-28">
             <ul className="hidden md:flex items-center justify-start space-x-4">
               {links.map((link) => (
                 <Link
