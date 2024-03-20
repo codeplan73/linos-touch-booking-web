@@ -60,26 +60,28 @@ const Navbar = () => {
               className="h-14 w-14"
             />
           </Link>
-          <ul className="hidden md:flex items-center justify-start space-x-4">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                // className={`hover:text-warningColor hover:bg-secondaryColor p-2 rounded-xl`}
-                className={classnames({
-                  "text-white bg-secondaryColor p-2 rounded-xl":
-                    link.href === currentPath,
-                  "text-white": link.href !== currentPath,
-                  "transition-colors hover:text-warningColor hover:bg-secondaryColor p-2 rounded-xl":
-                    true,
-                })}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <ul className="flex items-center gap-28">
+            <ul className="hidden md:flex items-center justify-start space-x-4">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  // className={`hover:text-warningColor hover:bg-secondaryColor p-2 rounded-xl`}
+                  className={classnames({
+                    "text-warningColor p-2 rounded-xl":
+                      link.href === currentPath,
+                    "text-slate-300": link.href !== currentPath,
+                    "transition-colors hover:text-warningColor p-2 rounded-xl":
+                      true,
+                  })}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </ul>
             <Link
               href="/download"
-              className="bg-warningColor text-white px-4 py-2 rounded-xl space-x-12 hover:bg-secondaryColor"
+              className="bg-warningColor text-white px-4 py-2 rounded-xl hover:bg-secondaryColor"
             >
               Download app
             </Link>
