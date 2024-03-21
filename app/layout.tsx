@@ -5,6 +5,8 @@ import "./globals.css";
 import Head from "next/head";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const heebo = Heebo({ subsets: ["latin"] });
 
@@ -29,7 +31,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" sizes="any" />
 
-      <body className={`${heebo.className}`}>
+      <body className={`${heebo.className}, ${cn(fontSans.variable)}`}>
         <Navbar />
         <main className="w-full">{children}</main>
         <Footer />

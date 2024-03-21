@@ -32,16 +32,20 @@ export default function Home() {
       <section className="py-12 w-full px-6 md:px-32">
         <div className="container flex flex-col gap-10 items-start justify-center">
           <h2 className="font-bold text-4xl">
-            <span className="mr-2 border-4 border-t-white border-r-white border-l-white border-b-primaryColor">
+            <span className="mr-2 border-4 pb-4 border-t-white border-r-white border-l-white border-b-primaryColor">
               By the
             </span>
             numbers
           </h2>
-          <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-6">
-            <Counter title="Year" count={10} />
-            <Counter title="Employees" count={160} />
-            <Counter title="Award" count={20} />
-            <Counter title="Completed Projects" count={200} />
+          <div className="w-full flex flex-col md:flex-row items-start justify-between gap-6 ">
+            <div className="w-full md:w-6/12 flex justify-between md:justify-start md:gap-56 px-4 md:px-0">
+              <Counter title="Year" count={10} />
+              <Counter title="Employees" count={160} />
+            </div>
+            <div className="w-full md:w-6/12 flex md:ml-32 justify-between px-4 md:px-0">
+              <Counter title="Award" count={20} />
+              <Counter title="Completed Projects" count={200} />
+            </div>
           </div>
         </div>
       </section>

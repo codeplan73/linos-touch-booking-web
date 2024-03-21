@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import ServiceCard from "../Services/ServiceCard";
+import ServiceCard from "./ServiceCardHover";
 import { GiFloorPolisher } from "react-icons/gi";
 
 const ServiceSlider = () => {
