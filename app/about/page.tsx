@@ -5,6 +5,7 @@ import Card from "../components/about/Card";
 import { GrUserExpert } from "react-icons/gr";
 import { FaTools } from "react-icons/fa";
 import HireCard from "../components/about/HireCard";
+import Link from "next/link";
 
 const AboutPage = () => {
   return (
@@ -115,6 +116,71 @@ const AboutPage = () => {
             title="We Guarantee Our Work"
             text="LinosTouch Cleaning Services strive to provide the highest level if qulity, service and value to each and every customer, If you are not completely satisfied with our service, please inform us within 24 hours or your clean so we may resolve the sitaution."
           />
+        </div>
+      </section>
+
+      <section
+        className="relative w-full py-12 flex flex-col gap-10 md:gap-20 md:px-20 px-10 bg-no-repeat bg-center md:bg-center bg-cover overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/about/about-app-section-bg.jpeg",
+        }}
+      >
+        <div
+          className="absolute inset-0 bg-purple-900 opacity-40"
+          style={{ zIndex: 0 }}
+        ></div>
+
+        <div className="container flex items-center justify-center md:justify-between z-10 relative">
+          <div className="flex flex-col w-full md:w-6/12 text-white gap-6">
+            <h4 className="text-sm text-center md:text-left md:text-lg tracking-wider uppercase font-semibold">
+              GET STARTED
+            </h4>
+            <h2 className="text-center md: text-balance capitalize text-2xl md:text-5xl font-bold">
+              Download our APP Now!
+            </h2>
+            <p className="text-center md:text-left text-md">
+              For convenient and easy booking and re-booking service we offer
+              discounts and special offers when you download our app for free
+              today!
+            </p>
+            <Link
+              href="/appdownload"
+              className="bg-warningColor text-md px-10 py-3 w-72 text-center rounded-full"
+            >
+              Download App
+            </Link>
+
+            <div className="flex items-start justify-start gap-2 ml-3">
+              <Link href="/appdownload" className="overflow-hidden">
+                <Image
+                  src="/images/about/playstore.png"
+                  alt="playstore"
+                  height={1000}
+                  width={1000}
+                  className="h-10 w-32 rounded-2xl "
+                />
+              </Link>
+              <Link href="/appdownload" className="overflow-hidden">
+                <Image
+                  src="/images/about/appstore.png"
+                  alt="playstore"
+                  height={1000}
+                  width={1000}
+                  className="h-10 w-32 rounded-2xl"
+                />
+              </Link>
+            </div>
+          </div>
+
+          <div className="hidden md:flex absolute top-6 right-44">
+            <Image
+              src="/images/about/app.png"
+              alt="app image"
+              height={1000}
+              width={1000}
+              className="h-96 w-72 rounded-3xl"
+            />
+          </div>
         </div>
       </section>
     </>
