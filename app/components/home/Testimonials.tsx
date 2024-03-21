@@ -1,5 +1,5 @@
-import TestimonialCard from "@/app/testimonial/_components/TestimonialCard";
-import { testimonials } from "@/app/utils/domFiles";
+import TestimonialCard from "@/app/(client)/testimonial/_components/TestimonialCard";
+import { testimonials } from "@/app/(client)/utils/domFiles";
 import Link from "next/link";
 import React from "react";
 

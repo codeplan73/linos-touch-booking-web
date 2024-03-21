@@ -1,11 +1,11 @@
-import Hero from "./components/home/Hero";
-import Services from "./components/home/Services";
-import About from "./components/home/About";
-import TrustedCompanies from "./components/home/TrustedCompanies";
-import HowItWorks from "./components/home/HowItWorks";
-import Counter from "./components/Counter";
-import Projects from "./components/home/Projects";
-import Testimonials from "./components/home/Testimonials";
+import Hero from "../components/home/Hero";
+import Services from "../components/home/Services";
+import About from "../components/home/About";
+import TrustedCompanies from "../components/home/TrustedCompanies";
+import HowItWorks from "../components/home/HowItWorks";
+import Counter from "../components/Counter";
+import Projects from "../components/home/Projects";
+import Testimonials from "../components/home/Testimonials";
 
 export default function Home() {
   return (

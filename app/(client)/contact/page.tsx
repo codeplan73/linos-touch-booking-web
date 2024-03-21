@@ -1,6 +1,6 @@
 import React from "react";
-import PageBanner from "../components/PageBanner";
-import ContactCard from "../components/ContactCard";
+import PageBanner from "../../components/PageBanner";
+import ContactCard from "../../components/ContactCard";
 import { IoMdMail } from "react-icons/io";
 import { PiPhoneCallBold } from "react-icons/pi";
 import { FaMapLocation } from "react-icons/fa6";

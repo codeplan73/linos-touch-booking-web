@@ -1,5 +1,5 @@
 import React from "react";
-import PageBanner from "../components/PageBanner";
+import PageBanner from "../../components/PageBanner";
 import TestimonialCard from "./_components/TestimonialCard";
 import { testimonials } from "../utils/domFiles";
 

@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import Banner from "../components/about/Banner";
-import Card from "../components/about/Card";
+import Banner from "../../components/about/Banner";
+import Card from "../../components/about/Card";
 import { GrUserExpert } from "react-icons/gr";
 import { FaTools } from "react-icons/fa";
-import HireCard from "../components/about/HireCard";
+import HireCard from "../../components/about/HireCard";
 import Link from "next/link";
 
 const AboutPage = () => {

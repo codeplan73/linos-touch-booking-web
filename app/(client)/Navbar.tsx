@@ -14,6 +14,7 @@ const links = [
   { label: "Our Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "Contact", href: "/contact" },
+  { label: "Login", href: "/login" },
   { label: "Appointment", href: "/appointment" },
 ];
 
@@ -61,7 +62,7 @@ const Navbar = () => {
             />
           </Link>
           <ul className="hidden md:flex items-center gap-28">
-            <ul className="hidden md:flex items-center justify-start space-x-4">
+            <ul className="hidden md:flex items-center justify-start space-x-2">
               {links.map((link) => (
                 <Link
                   key={link.href}

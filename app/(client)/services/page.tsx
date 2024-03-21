@@ -1,8 +1,8 @@
 import React from "react";
-import PageBanner from "../components/PageBanner";
-import ServiceCard from "../components/Services/serviceCard";
+import PageBanner from "../../components/PageBanner";
+import ServiceCard from "../../components/Services/serviceCard";
 import { FaHouseChimney } from "react-icons/fa6";
-import Counter from "../components/Counter";
+import Counter from "../../components/Counter";
 
 const services = [
   {

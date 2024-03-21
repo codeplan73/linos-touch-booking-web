@@ -1,5 +1,5 @@
 import React from "react";
-import PageBanner from "../components/PageBanner";
+import PageBanner from "../../components/PageBanner";
 import "photoswipe/dist/photoswipe.css";
 import PhotoGallery from "@/app/components/PhotoGallery";
 
