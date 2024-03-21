@@ -9,7 +9,7 @@ import { FaMapLocation } from "react-icons/fa6";
 const links = [
   { label: "About us", link: "about" },
   { label: "Our Works", link: "projects" },
-  { label: "Services", link: "servcices" },
+  { label: "Services", link: "services" },
   { label: "Terms & Condition", link: "terms" },
   { label: "Privacy Policy", link: "policy" },
   { label: "Testimonials", link: "testimonial" },

@@ -1,4 +1,5 @@
 import TestimonialCard from "@/app/testimonial/_components/TestimonialCard";
+import { testimonials } from "@/app/utils/domFiles";
 import Link from "next/link";
 import React from "react";
 
@@ -26,42 +27,15 @@ const Testimonials = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <TestimonialCard
-          name="Walter Anderson"
-          rating="4.5/5"
-          text=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, sequi."
-          title="Faulty Wiring in my Kitcjen"
-        />
-        <TestimonialCard
-          name="Susan Torres"
-          rating="4.5/5"
-          text=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, sequi."
-          title="Circuit Breaker Tripping"
-        />
-        <TestimonialCard
-          name="John Davis"
-          rating="4.5/5"
-          text=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, sequi."
-          title="Flickering Lights in The Living Room"
-        />
-        <TestimonialCard
-          name="Melisa Rose"
-          rating="4.5/5"
-          text=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, sequi."
-          title="Installation of new electrical outlet"
-        />
-        <TestimonialCard
-          name="Brandon Millet"
-          rating="4.5/5"
-          text=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, sequi."
-          title="Power Outage troubleshooting."
-        />
-        <TestimonialCard
-          name="Gloria Williams"
-          rating="4.5/5"
-          text=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, sequi."
-          title="Installation of new electrical outlet"
-        />
+        {testimonials.map((test) => (
+          <TestimonialCard
+            key={test.id}
+            name={test.name}
+            rating={test.rating}
+            text={test.text}
+            title={test.title}
+          />
+        ))}
       </div>
 
       <Link
