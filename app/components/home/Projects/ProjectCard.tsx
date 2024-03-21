@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ProjectCard = ({ image, title }: { image: string; title: string }) => {
   return (
-    <div className="relative overflow-hidden rounded-2xl shadow-xl">
+    <div className="max-w-sm relative overflow-hidden rounded-2xl shadow-xl">
       <div className="absolute inset-0 bg-black opacity-40"></div>
       <div style={{ height: "250px" }}>
         <Image

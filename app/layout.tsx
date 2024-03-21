@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "photoswipe/dist/photoswipe.css";
 
 const heebo = Heebo({ subsets: ["latin"] });
 

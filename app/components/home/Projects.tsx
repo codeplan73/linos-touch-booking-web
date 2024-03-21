@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import ProjectCard from "./Projects/ProjectCard";
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 const Projects = () => {
   return (
@@ -24,7 +24,7 @@ const Projects = () => {
         <ProjectCard image="/images/project-6.jpeg" title="Deep Cleaning" />
       </div>
 
-      <Link href="/projects" className="text-right">
+      <Link href="/projects" className="text-right text-warningColor">
         {`See More >> `}
       </Link>
     </div>

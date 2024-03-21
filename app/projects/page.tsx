@@ -1,10 +1,17 @@
 import React from "react";
+import PageBanner from "../components/PageBanner";
+import "photoswipe/dist/photoswipe.css";
+import PhotoGallery from "@/app/components/PhotoGallery";
 
 const ProjectPage = () => {
   return (
-    <div>
-      <h4>ProjectPage</h4>
-    </div>
+    <>
+      <PageBanner link="projects" page="Projects" />
+
+      <div className="container py-10 md:py-20 px-10 md:px-20">
+        <PhotoGallery />
+      </div>
+    </>
   );
 };
 
