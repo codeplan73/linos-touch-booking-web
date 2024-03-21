@@ -13,8 +13,8 @@ const links = [
   { label: "About Us", href: "/about" },
   { label: "Our Services", href: "/services" },
   { label: "Projects", href: "/projects" },
-  { label: "Appointment", href: "/appointment" },
   { label: "Contact", href: "/contact" },
+  { label: "Appointment", href: "/appointment" },
 ];
 
 const Navbar = () => {

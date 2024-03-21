@@ -135,7 +135,7 @@ const AboutPage = () => {
             <h4 className="text-sm text-center md:text-left md:text-lg tracking-wider uppercase font-semibold">
               GET STARTED
             </h4>
-            <h2 className="text-center md: text-balance capitalize text-2xl md:text-5xl font-bold">
+            <h2 className="text-center md:text-left md:text-balance capitalize text-2xl md:text-5xl font-bold">
               Download our APP Now!
             </h2>
             <p className="text-center md:text-left text-md">

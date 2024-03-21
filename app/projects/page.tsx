@@ -8,7 +8,7 @@ const ProjectPage = () => {
     <>
       <PageBanner link="projects" page="Projects" />
 
-      <div className="container py-10 md:py-20 px-10 md:px-20">
+      <div className="container py-10 md:py-20  md:px-20">
         <PhotoGallery />
       </div>
     </>

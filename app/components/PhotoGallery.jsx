@@ -16,8 +16,8 @@ const images = [
 
 const PhotoGallery = () => (
   <Gallery>
-    <section className="bg-blur-50 p-4">
-      <div className="container mx-auto">
+    <section className="bg-blur-50">
+      <div className="mx-auto">
         {images.length === 1 ? (
           <Item
             original={images[0]}
