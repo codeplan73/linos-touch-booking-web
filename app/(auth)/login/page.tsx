@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import LoginForm from "./LoginForm";
+import Link from "next/link";
 
 const LoginPage = () => {
   return (
@@ -15,13 +16,15 @@ const LoginPage = () => {
         />
       </div>
       <div className="w-full md:w-7/12 z-10 md:h-screen bg-white flex flex-col gap-10 items-center md:items-start justify-center md:justify-start pt-32 md:pt-24 px-10 md:pl-28 ">
-        <Image
-          src={"/images/logo.png"}
-          alt="auth image"
-          width={1000}
-          height={1000}
-          className="w-20 h-20"
-        />
+        <Link href="/">
+          <Image
+            src={"/images/logo.png"}
+            alt="auth image"
+            width={1000}
+            height={1000}
+            className="w-20 h-20"
+          />
+        </Link>
 
         <div className="flex flex-col gap-2">
           <h4 className="text-center text-4xl font-bold text-warningColor">
