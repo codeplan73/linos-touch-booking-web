@@ -28,13 +28,6 @@ export const testimonials = [
     title: "Installation of new electrical outlet",
   },
   {
-    id: 4,
-    name: "Melisa Rose",
-    rating: "4.5/5",
-    text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, sequi.",
-    title: "Installation of new electrical outlet",
-  },
-  {
     id: 5,
     name: "Brandon Millet",
     rating: "4.5/5",

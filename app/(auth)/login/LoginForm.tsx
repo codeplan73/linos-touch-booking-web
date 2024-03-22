@@ -3,8 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,6 +12,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -39,7 +40,7 @@ const LoginForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 w-full md:w-8/12 md:p-10 p-6 shadow-lg rounded-xl border-2"
+        className="w-full md:w-8/12 space-y-6"
       >
         <FormField
           control={form.control}
@@ -72,7 +73,29 @@ const LoginForm = () => {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <div className="flex items-center justify-between">
+          <div className="items-top flex space-x-2">
+            <Checkbox
+              id="terms1"
+              className="bg-warningColor text-white checked:bg-warningColor border-warningColor"
+            />
+            <div className="grid gap-1.5 leading-none">
+              <label
+                htmlFor="terms1"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <Link href="/forgotpassword" className="text-warningColor">
+            Forgot Password
+          </Link>
+        </div>
+
+        <Button type="submit" className="w-full bg-warningColor">
+          Login
+        </Button>
       </form>
     </Form>
   );

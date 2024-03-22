@@ -14,7 +14,7 @@ const LoginPage = () => {
           objectFit="cover"
         />
       </div>
-      <div className="w-full md:w-7/12 z-10 md:h-screen bg-white flex flex-col gap-10 items-start justify-center px-10 pl-20 py-40">
+      <div className="w-full md:w-7/12 z-10 md:h-screen bg-white flex flex-col gap-10 items-center md:items-start justify-center md:justify-start pt-32 md:pt-24 px-10 md:pl-28 ">
         <Image
           src={"/images/logo.png"}
           alt="auth image"
