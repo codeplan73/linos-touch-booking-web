@@ -19,7 +19,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { toast } from "@/components/ui/use-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const FormSchema = z.object({
   pin: z.string().min(6, {
@@ -37,14 +37,15 @@ const OTPForm = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    toast.success("Here is your toast.");
+    // toast({
+    //   title: "You submitted the following values:",
+    //   description: (
+    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+    //     </pre>
+    //   ),
+    // });
   }
 
   return (
@@ -76,8 +77,10 @@ const OTPForm = () => {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Verify</Button>
       </form>
+
+      <Toaster position="bottom-right" />
     </Form>
   );
 };
