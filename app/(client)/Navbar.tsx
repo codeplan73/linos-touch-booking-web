@@ -15,7 +15,7 @@ const links = [
   { label: "Projects", href: "/projects" },
   { label: "Contact", href: "/contact" },
   { label: "Login", href: "/login" },
-  { label: "Appointment", href: "/appointment" },
+  { label: "Appointment", href: "/booking" },
 ];
 
 const Navbar = () => {

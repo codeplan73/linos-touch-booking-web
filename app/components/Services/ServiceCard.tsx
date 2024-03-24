@@ -1,7 +1,5 @@
 import React, { ReactNode } from "react";
 
-import { GiFloorPolisher } from "react-icons/gi";
-
 interface Props {
   image: ReactNode;
   title: string;
