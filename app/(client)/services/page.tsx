@@ -1,6 +1,6 @@
 import React from "react";
 import PageBanner from "../../components/PageBanner";
-import ServiceCard from "../../components/Services/serviceCard";
+import ServiceCard from "@/app/components/Services/serviceCard";
 import { FaHouseChimney } from "react-icons/fa6";
 import Counter from "../../components/Counter";
 
