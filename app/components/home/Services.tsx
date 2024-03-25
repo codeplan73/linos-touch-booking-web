@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import ServiceSlider from "../Services/ServiceSlider";
+import ServiceSlider from "../../(client)/services/_components/ServiceSlider";
 
 const Services = () => {
   return (

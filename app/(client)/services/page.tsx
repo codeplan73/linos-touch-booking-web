@@ -1,7 +1,7 @@
 import React from "react";
-import PageBanner from "../../components/PageBanner";
-import ServiceCard from "@/app/components/Services/serviceCard";
 import { FaHouseChimney } from "react-icons/fa6";
+import ServiceCard from "./_components/serviceCard";
+import PageBanner from "../../components/PageBanner";
 import Counter from "../../components/Counter";
 
 const services = [
@@ -114,22 +114,6 @@ const ServicesPage = () => {
             ))}
           </div>
         </div>
-
-        {/* <div className="flex flex-col py-20 gap-10">
-          <h2 className="font-bold text-4xl">
-            <span className="mr-2 border-4 pb-4 border-t-white border-r-white border-l-white border-b-primaryColor">
-              By the
-            </span>
-            numbers
-          </h2>
-          <div className="w-full flex items-start justify-between gap-6 ">
-            <Counter title="Year" count={10} />
-            <Counter title="Employees" count={160} />
-            <Counter title="Award" count={20} />
-            <Counter title="Projects implemented by Linostouch" count={200} />
-          </div>
-        </div> */}
-
         <div className=" flex flex-col gap-10 items-start justify-center py-20">
           <h2 className="font-bold text-4xl">
             <span className="mr-2 border-4 pb-4 border-t-white border-r-white border-l-white border-b-primaryColor">

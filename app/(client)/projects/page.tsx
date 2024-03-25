@@ -1,7 +1,7 @@
 import React from "react";
 import PageBanner from "../../components/PageBanner";
-import "photoswipe/dist/photoswipe.css";
-import PhotoGallery from "@/app/components/PhotoGallery";
+
+import PhotoGallery from "./PhotoGallery";
 
 const ProjectPage = () => {
   return (

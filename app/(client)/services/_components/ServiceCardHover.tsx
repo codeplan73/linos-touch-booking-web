@@ -8,7 +8,7 @@ interface Props {
   text: string;
 }
 
-const ServiceCard: React.FC<Props> = ({ image, title, text }) => {
+const ServiceCard = ({ image, title, text }: Props) => {
   return (
     <div className="flex flex-col items-start justify-start bg- max-w-md rounded-3xl gap-4 py-10 px-8 drop-shadow-sm bg-white hover:bg-warningColor transition-all hover:drop-shadow-xl">
       {image}
