@@ -17,13 +17,15 @@ const images = [
 const PhotoGallery = () => (
   <Gallery>
     <section className="bg-blur-50">
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {images.map((image, index) => (
           <Item
             key={image.link}
             original={image.image}
             thumbnail={image.link}
-            className="max-w-sm"
+            width="1024"
+            height="768"
+            caption="Foo"
           >
             {({ ref, open }) => (
               <Image
