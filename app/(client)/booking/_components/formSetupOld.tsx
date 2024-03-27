@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { ReactEventHandler, useState } from "react";
 import { motion } from "framer-motion";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -39,6 +39,12 @@ const steps = [
   { id: "04", name: "Payment info" },
 ];
 
+interface FormDetails {
+  rooms: string;
+  bathrooms: string;
+  clean_type: string;
+}
+
 export default function Form() {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
@@ -47,27 +53,27 @@ export default function Form() {
   // const [selectedRoom, setSelectedRoom] = useState("");
   // const [selectedBathRoom, setSelectedBathRoom] = useState("");
   // const [selectedCleanType, setSelectedCleanType] = useState("");
-  // const [selectedHours, setSelectedHours] = useState("");
-  // const [selectedRooms, setSelectedRooms] = useState("");
+  const [selectedHours, setSelectedHours] = useState("");
+  const [selectedRooms, setSelectedRooms] = useState("");
 
-  // const handleChange = (fieldName: string, value: any) => {
-  //   console.log("Field Name:", fieldName + " " + value); // Log field name to check which field is being updated
-  //   switch (fieldName) {
-  //     case "rooms":
-  //       setSelectedRoom(value);
-  //       break;
-  //     case "bathrooms":
-  //       setSelectedBathRoom(value);
-  //       break;
-  //     case "clean_type":
-  //       setSelectedCleanType(value);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
+  const [formDetails, setFormDetails] = useState<FormDetails>({
+    rooms: "",
+    bathrooms: "",
+    clean_type: "",
+  });
 
-  // const handleChange = (fieldName: string, value: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+
+    setFormDetails((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  console.log(formDetails);
+
+  // const handleChange = (value: any) => {
   //   setSelectedRoom(value); // Update selectedRoom state with the selected value
   //   setSelectedBathRoom(value); // Update selectedRoom state with the selected value
   //   setSelectedCleanType(value); // Update selectedRoom state with the selected value
@@ -83,10 +89,6 @@ export default function Form() {
   } = useForm<Inputs>({
     resolver: zodResolver(FormSchema),
   });
-
-  const selectedRooms = watch("rooms"); // Watch the "rooms" field to get the selected value
-  const selectedBathroom = watch("bathrooms"); // Watch the "bathroom" field to get the selected value
-  const selectedCleanType = watch("clean_type"); // Watch the "cleanType" field to get the selected value
 
   const processForm: SubmitHandler<Inputs> = (data) => {
     console.log(data);
@@ -202,11 +204,7 @@ export default function Form() {
                   {["Studio", "1", "2", "3", "4", "5"].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl p-4 px-10 text-slate-700 ${
-                        selectedRooms === value
-                          ? "border-primaryColor shadow-xl"
-                          : "border-gray-200"
-                      }`}
+                      className={`cursor-pointer border rounded-xl p-4 px-10 text-slate-700`}
                     >
                       <input
                         type="radio"
@@ -236,17 +234,17 @@ export default function Form() {
                   {["1", "2", "3", "4", "5"].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl p-4 px-10 text-slate-700 ${
-                        selectedBathroom === value
-                          ? "border-primaryColor shadow-xl"
-                          : "border-gray-200"
+                      className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                        formDetails.bathrooms === `${value}`
+                          ? "border-2 border-primaryColor shadow-xl drop-shadow-2xl"
+                          : "bg-white"
                       }`}
                     >
                       <input
                         type="radio"
                         className="hidden"
                         value={value}
-                        {...register("bathrooms")} // Register "bathroom" field
+                        {...register("bathrooms")}
                       />
                       {value}
                     </label>
@@ -265,6 +263,10 @@ export default function Form() {
                 >
                   Clean Type
                 </label>
+                <p className="text-slate-600 mb-4">
+                  Your cleaner will also clean your kitchen, lounge and common
+                  areas
+                </p>
 
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   {[
@@ -275,25 +277,21 @@ export default function Form() {
                   ].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl p-4 px-10 text-slate-700 ${
-                        selectedCleanType === value
-                          ? "border-primaryColor shadow-xl"
-                          : "border-gray-200"
+                      className={`cursor-pointer border rounded-xl px-10 py-4 justify-between text-slate-700 ${
+                        formDetails.clean_type === `${value}`
+                          ? "border-2 border-primaryColor shadow-xl drop-shadow-2xl"
+                          : "bg-white"
                       }`}
                     >
                       <input
                         type="radio"
                         className="hidden"
                         value={value}
-                        {...register("clean_type")} // Register "cleanType" field
+                        {...register("clean_type")}
                       />
                       {value}
                     </label>
                   ))}
-                  <p className="text-slate-600">
-                    Your cleaner will also clean your kitchen, lounge and common
-                    areas
-                  </p>
                 </div>
                 {errors.bathrooms?.message && (
                   <p className="mt-2 text-sm text-red-400">
@@ -302,7 +300,7 @@ export default function Form() {
                 )}
               </div>
 
-              <div className="sm:col-span-3">
+              {/* <div className="sm:col-span-3">
                 <label
                   htmlFor="firstName"
                   className="block text-sm font-medium leading-6 text-gray-900"
@@ -367,7 +365,7 @@ export default function Form() {
                     </p>
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         )}

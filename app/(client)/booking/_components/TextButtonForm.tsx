@@ -87,9 +87,6 @@ const RadioButtonTiles = () => {
           />
           1h
         </label>
-
-        {/* Other radio button tiles for Hours of Work, Number of Rooms, and Clean Type */}
-        {/* Implement similar labels and input elements as above for remaining fields */}
       </div>
       <button
         type="submit"

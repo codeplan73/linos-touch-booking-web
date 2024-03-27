@@ -32,7 +32,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" sizes="any" />
 
-      <body className={`${heebo.className}, ${cn(fontSans.variable)}`}>
+      {/* <body className={`${heebo.className}, ${cn(fontSans.variable)}`}> */}
+      <body className={`${heebo.className}`}>
         <Navbar />
         <main className="w-full">{children}</main>
         <Footer />
