@@ -3,21 +3,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
-import { FormSchema } from "@/lib/schema";
+import { bookingSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import RadioGroup from "./RadioGroup";
 
-type Inputs = z.infer<typeof FormSchema>;
+type Inputs = z.infer<typeof bookingSchema>;
 
 const steps = [
   {
     id: "01",
     name: "Get your quote",
     fields: [
-      "post_code",
+      "postcode",
       "bathrooms",
       "rooms",
       "clean_type",
@@ -44,7 +44,7 @@ const steps = [
       "email",
       "address",
       "city",
-      "post_code",
+      "postcode",
     ],
   },
   { id: "04", name: "Payment info" },
@@ -62,7 +62,7 @@ export default function Form() {
     trigger,
     formState: { errors },
   } = useForm<Inputs>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(bookingSchema),
   });
 
   const selectedRooms = watch("rooms");
@@ -166,14 +166,14 @@ export default function Form() {
                   Your Postcode
                 </label>
                 <Input
-                  {...register("post_code")}
+                  {...register("postcode")}
                   className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
                   placeholder="Enter your postcode"
                 />
 
-                {errors.post_code?.message && (
+                {errors.postcode?.message && (
                   <p className="mt-2 text-sm text-red-400">
-                    {errors.post_code.message}
+                    {errors.postcode.message}
                   </p>
                 )}
               </div>

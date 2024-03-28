@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-export const FormSchema = z.object({
-  post_code: z.string().min(1, "Postcode is required"),
+export const bookingSchema = z.object({
+  postcode: z.string().min(1, "Postcode is required"),
   rooms: z.string().min(1, "Bathrooms is required"),
   bathrooms: z.string().min(1, "Bathrooms is required"),
   clean_type: z.string().min(1, "deep_clean is required"),
@@ -22,5 +22,5 @@ export const FormSchema = z.object({
   address: z.string().min(3, "Address is required"),
   city: z.string().min(1, "City is required"),
   amount: z.number().min(1, "Amount is required"),
-  payment_status: z.number().min(1, "Amount is required"),
+  // payment_status: z.number().min(1, "Amount is required"),
 });

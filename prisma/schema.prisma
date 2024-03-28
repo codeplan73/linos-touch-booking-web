@@ -15,10 +15,11 @@ datasource db {
 
 model Booking {
   id               Int            @id @default(autoincrement())
-  postal_code      String         @db.VarChar(50)
+  postcode         String         @db.VarChar(50)
   rooms            String         @db.VarChar(20)
   bathrooms        String         @db.VarChar(20)
   clean_type       String         @db.VarChar(50)
+  extra_task       String?        @db.VarChar(250)
   hours            String         @db.VarChar(10)
   cleaning_product String         @db.VarChar(50)
   frequency        String         @db.VarChar(50)
