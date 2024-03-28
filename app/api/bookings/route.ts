@@ -4,7 +4,6 @@ import { bookingSchema } from "@/lib/schema";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  console.log(body);
 
   const {
     postcode,
@@ -19,7 +18,7 @@ export async function POST(request: NextRequest) {
     house_access,
     pets,
     notes,
-    pets_type,
+    pet_type,
     booking_date,
     booking_time,
     fullname,
@@ -35,12 +34,6 @@ export async function POST(request: NextRequest) {
   if (!validate.success)
     return NextResponse.json(validate.error.format(), { status: 400 });
 
-  // const newBooking = await prisma.booking.create({
-  //   data: {
-  //     postcode
-  //   },
-  // });
-
   const newBooking = await prisma.booking.create({
     data: {
       postcode,
@@ -55,7 +48,7 @@ export async function POST(request: NextRequest) {
       house_access,
       pets,
       notes,
-      pets_type,
+      pet_type,
       booking_date,
       booking_time,
       fullname,
@@ -66,6 +59,8 @@ export async function POST(request: NextRequest) {
       amount,
     },
   });
+
+  return NextResponse.json(newBooking, { status: 200 });
 }
 
 export async function GET(response: NextResponse) {
