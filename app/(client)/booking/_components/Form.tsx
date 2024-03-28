@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
 import { z } from "zod";
 import { FormSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import RadioGroup from "./RadioGroup";
 
 type Inputs = z.infer<typeof FormSchema>;
 
@@ -18,24 +17,36 @@ const steps = [
     id: "01",
     name: "Get your quote",
     fields: [
-      "firstName",
-      "lastName",
-      "email",
-      "rooms",
       "post_code",
       "bathrooms",
-      "standard",
-      "deep_clean",
-      "moving",
-      "post_construction",
+      "rooms",
+      "clean_type",
+      "extra_tash",
+      "hours",
+      "cleaning_product",
+      "frequency",
+      "pets",
+      "notes",
+      "pet_type",
     ],
   },
   {
     id: "2",
     name: "Choose Time",
-    fields: ["country", "state", "city", "street", "zip"],
+    fields: ["access_type", "house_access", "booking_date", "booking_time"],
   },
-  { id: "03", name: "Your Details" },
+  {
+    id: "03",
+    name: "Your Details",
+    fields: [
+      "fullname",
+      "phone_number",
+      "email",
+      "address",
+      "city",
+      "post_code",
+    ],
+  },
   { id: "04", name: "Payment info" },
 ];
 
@@ -43,36 +54,6 @@ export default function Form() {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const delta = currentStep - previousStep;
-
-  // const [selectedRoom, setSelectedRoom] = useState("");
-  // const [selectedBathRoom, setSelectedBathRoom] = useState("");
-  // const [selectedCleanType, setSelectedCleanType] = useState("");
-  // const [selectedHours, setSelectedHours] = useState("");
-  // const [selectedRooms, setSelectedRooms] = useState("");
-
-  // const handleChange = (fieldName: string, value: any) => {
-  //   console.log("Field Name:", fieldName + " " + value); // Log field name to check which field is being updated
-  //   switch (fieldName) {
-  //     case "rooms":
-  //       setSelectedRoom(value);
-  //       break;
-  //     case "bathrooms":
-  //       setSelectedBathRoom(value);
-  //       break;
-  //     case "clean_type":
-  //       setSelectedCleanType(value);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  // const handleChange = (fieldName: string, value: any) => {
-  //   setSelectedRoom(value); // Update selectedRoom state with the selected value
-  //   setSelectedBathRoom(value); // Update selectedRoom state with the selected value
-  //   setSelectedCleanType(value); // Update selectedRoom state with the selected value
-  // };
-
   const {
     register,
     handleSubmit,
@@ -84,11 +65,19 @@ export default function Form() {
     resolver: zodResolver(FormSchema),
   });
 
-  const selectedRooms = watch("rooms"); // Watch the "rooms" field to get the selected value
-  const selectedBathroom = watch("bathrooms"); // Watch the "bathroom" field to get the selected value
-  const selectedCleanType = watch("clean_type"); // Watch the "cleanType" field to get the selected value
+  const selectedRooms = watch("rooms");
+  const selectedBathroom = watch("bathrooms");
+  const selectedCleanType = watch("clean_type");
+  // const selectedExtraTask = watch("extra_task");
+  const selectedHours = watch("hours");
+  const selectedFrequency = watch("frequency");
+  const selectedCleaningProduct = watch("cleaning_product");
+  const selectedAccessType = watch("access_type");
+  const selectedPets = watch("pets");
+  const selectedExtraTasks = watch("extra_task") || [];
 
   const processForm: SubmitHandler<Inputs> = (data) => {
+    console.log(selectedHours, selectedRooms);
     console.log(data);
     // reset();
   };
@@ -168,8 +157,7 @@ export default function Form() {
               Customize your clean
             </h2>
 
-            {/* <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-12"> */}
-            <div className="mt-10 flex flex-col gap-8">
+            <div className="mt-10 flex flex-col gap-12">
               <div className="flex flex-col space-y-2">
                 <label
                   htmlFor="postal_code"
@@ -179,7 +167,7 @@ export default function Form() {
                 </label>
                 <Input
                   {...register("post_code")}
-                  className="placeholder:text-slate-400 text-slate"
+                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
                   placeholder="Enter your postcode"
                 />
 
@@ -224,6 +212,7 @@ export default function Form() {
                   </p>
                 )}
               </div>
+
               <div className="flex flex-wrap flex-col gap-4">
                 <label
                   htmlFor="number_of_bedrooms"
@@ -236,7 +225,7 @@ export default function Form() {
                   {["1", "2", "3", "4", "5"].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl p-4 px-10 text-slate-700 ${
+                      className={`cursor-pointer border rounded-xl py-4 px-12 text-slate-700 ${
                         selectedBathroom === value
                           ? "border-primaryColor shadow-xl"
                           : "border-gray-200"
@@ -258,6 +247,7 @@ export default function Form() {
                   </p>
                 )}
               </div>
+
               <div className="flex flex-wrap flex-col gap-4">
                 <label
                   htmlFor="number_of_bedrooms"
@@ -265,8 +255,12 @@ export default function Form() {
                 >
                   Clean Type
                 </label>
+                <p className="text-slate-400 -mt-2 text-sm ">
+                  Your cleaner will also clean your kitchen, lounge and common
+                  areas
+                </p>
 
-                <div className="flex flex-wrap items-start justify-between gap-2">
+                <div className="flex relative flex-wrap items-start justify-between gap-4">
                   {[
                     "Standard",
                     "Deep Clean",
@@ -275,7 +269,7 @@ export default function Form() {
                   ].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl p-4 px-10 text-slate-700 ${
+                      className={`cursor-pointer border rounded-xl py-4 px-12 text-slate-700 ${
                         selectedCleanType === value
                           ? "border-primaryColor shadow-xl"
                           : "border-gray-200"
@@ -290,83 +284,254 @@ export default function Form() {
                       {value}
                     </label>
                   ))}
-                  <p className="text-slate-600">
-                    Your cleaner will also clean your kitchen, lounge and common
-                    areas
-                  </p>
                 </div>
-                {errors.bathrooms?.message && (
+                {errors.clean_type?.message && (
                   <p className="mt-2 text-sm text-red-400">
-                    {errors.bathrooms.message}
+                    {errors.clean_type.message}
                   </p>
                 )}
               </div>
 
-              <div className="sm:col-span-3">
+              <div className="flex flex-wrap flex-col gap-4">
                 <label
-                  htmlFor="firstName"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  htmlFor="number_of_bedrooms"
+                  className="block text-md font-medium semibold leading-6 text-gray-900"
                 >
-                  First name
+                  Extra tasks (optional)
                 </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="firstName"
-                    {...register("firstName")}
-                    autoComplete="given-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.firstName?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.firstName.message}
-                    </p>
-                  )}
+
+                <div className="flex relative flex-wrap items-start justify-start gap-4">
+                  {[
+                    "Ironing",
+                    "Laundry",
+                    "Inside Window",
+                    "Inside Fridge",
+                    "Inside Oven",
+                  ].map((value) => (
+                    <label
+                      key={value}
+                      className={`cursor-pointer border rounded-xl py-4 px-12 text-slate-700 ${
+                        selectedExtraTasks.includes(value)
+                          ? "border-primaryColor shadow-xl"
+                          : "border-gray-200"
+                      }`}
+                    >
+                      <input
+                        type="checkbox" // Change input type to "checkbox"
+                        className="hidden"
+                        value={value}
+                        {...register("extra_task")}
+                      />
+                      {value}
+                    </label>
+                  ))}
                 </div>
+                {errors.extra_task?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.extra_task.message}
+                  </p>
+                )}
               </div>
-              <div className="sm:col-span-3">
+
+              <div className="flex flex-wrap flex-col gap-4">
                 <label
-                  htmlFor="lastName"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  htmlFor="number_of_bedrooms"
+                  className="block text-md font-medium semibold leading-6 text-gray-900"
                 >
-                  Last name
+                  We recommend selection{" "}
+                  <span className="ffont-bold">3.0 hours</span>
                 </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="lastName"
-                    {...register("lastName")}
-                    autoComplete="family-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.lastName?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.lastName.message}
-                    </p>
-                  )}
+                <p className="text-slate-400 -mt-2 text-sm ">
+                  Based on your Bedrooms, bathroom and extra tasks
+                </p>
+
+                <div className="flex relative flex-wrap items-start justify-start gap-4">
+                  {[
+                    "2.0",
+                    "2.5",
+                    "3.0",
+                    "3.5",
+                    "4.0",
+                    "4.5",
+                    "5.0",
+                    "5.5",
+                    "6.0",
+                    "6.5",
+                    "7.0",
+                    "7.5",
+                    "8.0",
+                  ].map((value) => (
+                    <label
+                      key={value}
+                      className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                        selectedHours === value
+                          ? "border-primaryColor shadow-xl"
+                          : "border-gray-200"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        className="hidden"
+                        value={value}
+                        {...register("hours")} // Register "cleanType" field
+                      />
+                      {value}
+                    </label>
+                  ))}
                 </div>
+                {errors.hours?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.hours.message}
+                  </p>
+                )}
               </div>
-              <div className="sm:col-span-4">
+
+              <div className="flex flex-wrap flex-col gap-4">
                 <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  htmlFor="number_of_bedrooms"
+                  className="block text-md font-medium semibold leading-6 text-gray-900"
                 >
-                  Email address
+                  Cleaning Product
                 </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    type="email"
-                    {...register("email")}
-                    autoComplete="email"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.email?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.email.message}
-                    </p>
+                <p className="text-slate-400 -mt-2 text-sm ">
+                  Includes sprays and cloths. Your housekeeper cannot bring a
+                  vacuum, mop or bucket
+                </p>
+
+                <div className="flex relative flex-wrap items-start justify-start gap-4">
+                  {["Bring cleaning products (+7.00)", "I will provide"].map(
+                    (value) => (
+                      <label
+                        key={value}
+                        className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                          selectedCleaningProduct === value
+                            ? "border-primaryColor shadow-xl"
+                            : "border-gray-200"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          className="hidden"
+                          value={value}
+                          {...register("cleaning_product")} // Register "cleanType" field
+                        />
+                        {value}
+                      </label>
+                    )
                   )}
                 </div>
+                {errors.cleaning_product?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.cleaning_product.message}
+                  </p>
+                )}
+              </div>
+
+              <hr />
+
+              <div className="flex flex-wrap flex-col gap-4">
+                <label
+                  htmlFor="number_of_bedrooms"
+                  className="block text-md font-medium semibold leading-6 text-gray-900"
+                >
+                  Select Frequency
+                </label>
+                <p className="text-slate-400 -mt-2 text-sm ">
+                  Book{" "}
+                  <span>LinosTouch recurring plan and save 20% annually</span>
+                </p>
+
+                <div className="flex relative flex-wrap items-start justify-start gap-4">
+                  {["Onetime", "Weekly", "Every 2 Weeks", "Every 5 Weeks"].map(
+                    (value) => (
+                      <label
+                        key={value}
+                        className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                          selectedFrequency === value
+                            ? "border-primaryColor shadow-xl"
+                            : "border-gray-200"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          className="hidden"
+                          value={value}
+                          {...register("frequency")} // Register "cleanType" field
+                        />
+                        {value}
+                      </label>
+                    )
+                  )}
+                </div>
+                {errors.frequency?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.frequency.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-wrap flex-col gap-4">
+                <label
+                  htmlFor="number_of_bedrooms"
+                  className="block text-md font-medium semibold leading-6 text-gray-900"
+                >
+                  Any Pets?
+                </label>
+
+                <div className="flex relative flex-wrap items-start justify-start gap-4">
+                  {["Yes", "No"].map((value) => (
+                    <label
+                      key={value}
+                      className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                        selectedPets === value
+                          ? "border-primaryColor shadow-xl"
+                          : "border-gray-200"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        className="hidden"
+                        value={value}
+                        {...register("pets")} // Register "cleanType" field
+                      />
+                      {value}
+                    </label>
+                  ))}
+                </div>
+
+                {selectedPets === "Yes" && ( // Conditionally render based on selectedPets value
+                  <Input
+                    {...register("pet_type")}
+                    className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                    placeholder="What types of pets? Some of our cleaners have pet allergies."
+                  />
+                )}
+
+                {errors.pets?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.pets.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col space-y-2">
+                <label
+                  htmlFor="postal_code"
+                  className="block text-md font-medium semibold leading-6 text-gray-900"
+                >
+                  Additional Notes
+                </label>
+                <Textarea
+                  {...register("notes")}
+                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                  placeholder="I would like Sophie to be my cleaner. Please change my sheets (Fresh bedding is on the bed) and empty the dishwasher."
+                />
+
+                {errors.notes?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.notes.message}
+                  </p>
+                )}
               </div>
             </div>
           </motion.div>
@@ -378,127 +543,94 @@ export default function Form() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Address
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Address where you can receive mail.
-            </p>
-
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
+            <div className="mt-10 flex flex-col gap-12">
+              <div className="flex flex-wrap flex-col gap-4">
                 <label
-                  htmlFor="country"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  htmlFor="number_of_bedrooms"
+                  className="block text-md font-medium semibold leading-6 text-gray-900"
                 >
-                  Country
+                  How do we get in?
                 </label>
-                <div className="mt-2">
-                  <select
-                    id="country"
-                    {...register("country")}
-                    autoComplete="country-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                  >
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
-                  </select>
-                  {errors.country?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.country.message}
-                    </p>
+
+                <div className="flex relative flex-wrap items-start justify-start gap-4">
+                  {["Someone is Home", "Doorman", "Hidden Key", "Others"].map(
+                    (value) => (
+                      <label
+                        key={value}
+                        className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                          selectedAccessType === value
+                            ? "border-primaryColor shadow-xl"
+                            : "border-gray-200"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          className="hidden"
+                          value={value}
+                          {...register("access_type")} // Register "cleanType" field
+                        />
+                        {value}
+                      </label>
+                    )
                   )}
                 </div>
+                {errors.access_type?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.access_type.message}
+                  </p>
+                )}
               </div>
 
-              <div className="col-span-full">
+              <div className="flex flex-col space-y-2">
                 <label
-                  htmlFor="street"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  htmlFor="postal_code"
+                  className="block text-md font-medium semibold leading-6 text-gray-900"
                 >
-                  Street address
+                  House Access
                 </label>
-                <div className="mt-2">
+                <Textarea
+                  {...register("house_access")}
+                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                  placeholder="e.g 1234"
+                />
+
+                {errors.house_access?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.house_access.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-wrap flex-col gap-4">
+                <label
+                  htmlFor="number_of_bedrooms"
+                  className="block text-md font-medium semibold leading-6 text-gray-900"
+                >
+                  When Would You Like Your Clean
+                </label>
+                <p className="text-slate-500 text-sm">
+                  Cleaners work from 07:00 - 20:00, Monday - Sunday
+                </p>
+
+                <div className="flex relative flex-wrap items-start justify-start gap-4">
                   <input
-                    type="text"
-                    id="street"
-                    {...register("street")}
-                    autoComplete="street-address"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    type="date"
+                    {...register("booking_date")}
+                    className="w-full rounded-md border px-4 py-4"
                   />
-                  {errors.street?.message && (
+                  {errors.booking_date?.message && (
                     <p className="mt-2 text-sm text-red-400">
-                      {errors.street.message}
+                      {errors.booking_date.message}
                     </p>
                   )}
-                </div>
-              </div>
-
-              <div className="sm:col-span-2 sm:col-start-1">
-                <label
-                  htmlFor="city"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  City
-                </label>
-                <div className="mt-2">
                   <input
-                    type="text"
-                    id="city"
-                    {...register("city")}
-                    autoComplete="address-level2"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    type="time"
+                    {...register("booking_time")}
+                    className="w-full rounded-md border px-4 py-4"
                   />
-                  {errors.city?.message && (
+                  {errors.booking_time?.message && (
                     <p className="mt-2 text-sm text-red-400">
-                      {errors.city.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="state"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  State / Province
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="state"
-                    {...register("state")}
-                    autoComplete="address-level1"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.state?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.state.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="zip"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  ZIP / Postal code
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="zip"
-                    {...register("zip")}
-                    autoComplete="postal-code"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.zip?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.zip.message}
+                      {errors.booking_time.message}
                     </p>
                   )}
                 </div>
@@ -513,12 +645,103 @@ export default function Form() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Confim Data
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Review Data before submitting
-            </p>
+            <div className="mt-10 flex flex-col gap-12">
+              <div className="flex flex-col space-y-2">
+                <label
+                  htmlFor="fullname"
+                  className="block text-md font-medium semibold leading-6 text-gray-700"
+                >
+                  Full Name
+                </label>
+                <Input
+                  {...register("fullname")}
+                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                />
+
+                {errors.fullname?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.fullname.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col space-y-2">
+                <label
+                  htmlFor="phone_number"
+                  className="block text-md font-medium semibold leading-6 text-gray-700"
+                >
+                  Phone Number
+                </label>
+                <Input
+                  {...register("phone_number")}
+                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                />
+
+                {errors.phone_number?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.phone_number.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col space-y-2">
+                <label
+                  htmlFor="email"
+                  className="block text-md font-medium semibold leading-6 text-gray-700"
+                >
+                  Email
+                </label>
+                <Input
+                  type="email"
+                  {...register("email")}
+                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                />
+
+                {errors.email?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col space-y-2">
+                <label
+                  htmlFor="address"
+                  className="block text-md font-medium semibold leading-6 text-gray-700"
+                >
+                  Address
+                </label>
+                <Input
+                  {...register("address")}
+                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                />
+
+                {errors.address?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.address.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col space-y-2">
+                <label
+                  htmlFor="city"
+                  className="block text-md font-medium semibold leading-6 text-gray-700"
+                >
+                  City
+                </label>
+                <Input
+                  {...register("city")}
+                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                />
+
+                {errors.city?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.city.message}
+                  </p>
+                )}
+              </div>
+            </div>
           </motion.div>
         )}
 
@@ -565,7 +788,7 @@ export default function Form() {
             disabled={currentStep === steps.length - 1}
             className="rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {currentStep === steps.length - 1 ? (
+            {currentStep === steps.length - 2 ? (
               "Submit Data"
             ) : (
               <svg
