@@ -14,8 +14,58 @@ datasource db {
 }
 
 model Booking {
-  id String @id @default(cuid())
-  postal_code String
+  id               Int            @id @default(autoincrement())
+  postal_code      String         @db.VarChar(50)
+  rooms            String         @db.VarChar(20)
+  bathrooms        String         @db.VarChar(20)
+  clean_type       String         @db.VarChar(50)
+  hours            String         @db.VarChar(10)
+  cleaning_product String         @db.VarChar(50)
+  frequency        String         @db.VarChar(50)
+  access_type      String         @db.VarChar(50)
+  house_access     String         @db.VarChar(50)
+  pets             String         @db.VarChar(30)
+  pet_type         String?
+  notes            String?        @db.Text
+  booking_date     String         @db.VarChar(20)
+  booking_time     String         @db.VarChar(20)
+  fullname         String         @db.VarChar(100)
+  phone_number     String         @db.VarChar(20)
+  email            String         @db.VarChar(50)
+  address          String         @db.VarChar(255)
+  city             String         @db.VarChar(50)
+  amount           Int            @default(100)
+  payment_status   PaymentStatus  @default(PENDING)
+  booking_status   BookingStatus  @default(PENDING)
+  cleaning_status  CleaningStatus @default(PENDING)
+  assigned_status  AssignedStatus @default(UNASSIGNED)
+  assignedToUserId String?        @db.VarChar(255)
+  assignedToUser   User?          @relation(fields: [assignedToUserId], references: [id])
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESSFULL
+  FAILED
+}
+
+enum BookingStatus {
+  PENDING
+  SUCCESSFULL
+  CANCELED
+}
+
+enum CleaningStatus {
+  PENDING
+  COMPLETED
+  CANCELED
+}
+
+enum AssignedStatus {
+  UNASSIGNED
+  ASSIGNED
 }
 
 model Account {
@@ -47,13 +97,16 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
+  email         String    @unique
   emailVerified DateTime?
+  fullname      String    @db.VarChar(100)
+  phone_number  String    @db.VarChar(20)
+  address       String    @db.VarChar(255)
+  city          String    @db.VarChar(50)
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // assignedIssues Issue[]
+  assignedTasks Booking[]
 }
 
 model VerificationToken {

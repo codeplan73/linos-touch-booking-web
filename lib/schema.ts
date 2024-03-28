@@ -2,8 +2,8 @@ import { z } from "zod";
 
 export const FormSchema = z.object({
   post_code: z.string().min(1, "Postcode is required"),
-  bathrooms: z.string().min(1, "Bathrooms is required"),
   rooms: z.string().min(1, "Bathrooms is required"),
+  bathrooms: z.string().min(1, "Bathrooms is required"),
   clean_type: z.string().min(1, "deep_clean is required"),
   extra_task: z.array(z.string()).optional(),
   hours: z.string().min(1, "hours is required"),
@@ -21,5 +21,6 @@ export const FormSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email address"),
   address: z.string().min(3, "Address is required"),
   city: z.string().min(1, "City is required"),
-  price: z.number().min(1, "Amount is required"),
+  amount: z.number().min(1, "Amount is required"),
+  payment_status: z.number().min(1, "Amount is required"),
 });
