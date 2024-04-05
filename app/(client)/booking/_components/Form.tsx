@@ -2,13 +2,22 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
 import { z } from "zod";
 import { bookingSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import RadioGroup from "./RadioGroup";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+
+// import {
+//   PaymentElement,
+//   CardElement,
+//   useElements,
+//   useStripe,
+// } from "@stripe/react-stripe-js";
 
 type Inputs = z.infer<typeof bookingSchema>;
 
@@ -51,6 +60,8 @@ const steps = [
 ];
 
 export default function Form() {
+  const router = useRouter();
+  const [formData, setFormData] = useState<Partial<Inputs>>({});
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const delta = currentStep - previousStep;
@@ -65,21 +76,22 @@ export default function Form() {
     resolver: zodResolver(bookingSchema),
   });
 
+  // const stripe = useStripe();
+  // const elements = useElements();
+
   const selectedRooms = watch("rooms");
   const selectedBathroom = watch("bathrooms");
   const selectedCleanType = watch("clean_type");
-  // const selectedExtraTask = watch("extra_task");
   const selectedHours = watch("hours");
   const selectedFrequency = watch("frequency");
   const selectedCleaningProduct = watch("cleaning_product");
   const selectedAccessType = watch("access_type");
   const selectedPets = watch("pets");
-  const selectedExtraTasks = watch("extra_task") || [];
+  // const selectedExtraTasks = watch("extra_task") || [];
 
-  const processForm: SubmitHandler<Inputs> = (data) => {
-    console.log(selectedHours, selectedRooms);
-    console.log(data);
-    // reset();
+  const processForm: SubmitHandler<Inputs> = async (data) => {
+    const parsedHours = parseInt(selectedHours);
+    const passedRooms = parseInt(selectedRooms);
   };
 
   type FieldName = keyof Inputs;
@@ -92,7 +104,20 @@ export default function Form() {
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
-        await handleSubmit(processForm)();
+        try {
+          // console.log("process form called from next");
+          const requestData = {
+            ...watch(),
+            // extra_task: selectedExtraTasks, // Convert array to string separated by comma
+          };
+          // await axios.post("/api/bookings", requestData);
+          // toast.success("Booking submitted successfully.");
+          toast("Proceed to payment.");
+          console.log(requestData);
+        } catch (error) {
+          console.log(error);
+          toast.error("An error occurred while submitting the booking.");
+        }
       }
       setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
@@ -106,10 +131,17 @@ export default function Form() {
     }
   };
 
+  // const paymentElementOptions: PaymentElementProps = {
+  //   layout: "tabs",
+  // };
+
   return (
-    <section className="w-full md:w-8/12 inset-0 flex flex-col justify-between">
+    <section className="relative w-full md:w-8/12 inset-0 flex flex-col justify-between">
       {/* steps */}
-      <nav aria-label="Progress">
+      {/* <nav
+        aria-label="Progress"
+        className="sticky top-20 md:bg-white drop-shadow-lg z-10 px-2 py-5 mb-6"
+      >
         <ol role="list" className="space-y-4 md:flex md:space-x-8 md:space-y-0">
           {steps.map((step, index) => (
             <li key={step.name} className="md:flex-1">
@@ -143,10 +175,10 @@ export default function Form() {
             </li>
           ))}
         </ol>
-      </nav>
+      </nav> */}
 
       {/* Form */}
-      <form className="mt-12 py-12" onSubmit={handleSubmit(processForm)}>
+      <form className="" onSubmit={handleSubmit(processForm)}>
         {currentStep === 0 && (
           <motion.div
             initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
@@ -167,7 +199,7 @@ export default function Form() {
                 </label>
                 <Input
                   {...register("postcode")}
-                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                  className="placeholder:text-slate-400 text-lg py-8 focus:border-blue-700"
                   placeholder="Enter your postcode"
                 />
 
@@ -187,10 +219,10 @@ export default function Form() {
                 </label>
 
                 <div className="flex flex-wrap items-start justify-between gap-4">
-                  {["Studio", "1", "2", "3", "4", "5"].map((value) => (
+                  {["1", "2", "3", "4", "5", "6", "7", "8"].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl p-4 px-10 text-slate-700 ${
+                      className={`cursor-pointer border rounded-xl py-4 px-8 text-center flex-1 text-slate-700 ${
                         selectedRooms === value
                           ? "border-primaryColor shadow-xl"
                           : "border-gray-200"
@@ -206,6 +238,7 @@ export default function Form() {
                     </label>
                   ))}
                 </div>
+
                 {errors.rooms?.message && (
                   <p className="mt-2 text-sm text-red-400">
                     {errors.rooms.message}
@@ -222,10 +255,10 @@ export default function Form() {
                 </label>
 
                 <div className="flex flex-wrap items-start justify-between gap-4">
-                  {["1", "2", "3", "4", "5"].map((value) => (
+                  {["1", "2", "3", "4", "5", "6", "7", "8"].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl py-4 px-12 text-slate-700 ${
+                      className={`cursor-pointer border rounded-xl py-4 px-8 flex-1 text-slate-700 ${
                         selectedBathroom === value
                           ? "border-primaryColor shadow-xl"
                           : "border-gray-200"
@@ -269,7 +302,7 @@ export default function Form() {
                   ].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl py-4 px-12 text-slate-700 ${
+                      className={`cursor-pointer border rounded-xl py-4 px-6 text-center text-slate-700 w-full md:flex-1 ${
                         selectedCleanType === value
                           ? "border-primaryColor shadow-xl"
                           : "border-gray-200"
@@ -292,7 +325,7 @@ export default function Form() {
                 )}
               </div>
 
-              <div className="flex flex-wrap flex-col gap-4">
+              {/* <div className="flex flex-wrap flex-col gap-4">
                 <label
                   htmlFor="number_of_bedrooms"
                   className="block text-md font-medium semibold leading-6 text-gray-900"
@@ -331,7 +364,7 @@ export default function Form() {
                     {errors.extra_task.message}
                   </p>
                 )}
-              </div>
+              </div> */}
 
               <div className="flex flex-wrap flex-col gap-4">
                 <label
@@ -363,7 +396,7 @@ export default function Form() {
                   ].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                      className={`cursor-pointer border rounded-xl p-4 px-8 flex-1 text-center text-slate-700 ${
                         selectedHours === value
                           ? "border-primaryColor shadow-xl"
                           : "border-gray-200"
@@ -403,7 +436,7 @@ export default function Form() {
                     (value) => (
                       <label
                         key={value}
-                        className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                        className={`cursor-pointer border rounded-xl p-4 px-4 w-full md:flex-1 text-center text-slate-700 ${
                           selectedCleaningProduct === value
                             ? "border-primaryColor shadow-xl"
                             : "border-gray-200"
@@ -429,6 +462,8 @@ export default function Form() {
 
               <hr />
 
+              <input type="text" {...register("amount")} value="500" id="" />
+
               <div className="flex flex-wrap flex-col gap-4">
                 <label
                   htmlFor="number_of_bedrooms"
@@ -446,7 +481,7 @@ export default function Form() {
                     (value) => (
                       <label
                         key={value}
-                        className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                        className={`cursor-pointer border rounded-xl p-4 px-8 text-center flex-1 text-slate-700 ${
                           selectedFrequency === value
                             ? "border-primaryColor shadow-xl"
                             : "border-gray-200"
@@ -482,7 +517,7 @@ export default function Form() {
                   {["Yes", "No"].map((value) => (
                     <label
                       key={value}
-                      className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                      className={`cursor-pointer border rounded-xl p-4 px-12 flex-1 text-center text-slate-700 ${
                         selectedPets === value
                           ? "border-primaryColor shadow-xl"
                           : "border-gray-200"
@@ -552,12 +587,12 @@ export default function Form() {
                   How do we get in?
                 </label>
 
-                <div className="flex relative flex-wrap items-start justify-start gap-4">
+                <div className="flex relative flex-wrap items-start gap-3">
                   {["Someone is Home", "Doorman", "Hidden Key", "Others"].map(
                     (value) => (
                       <label
                         key={value}
-                        className={`cursor-pointer border rounded-xl p-4 px-12 text-slate-700 ${
+                        className={`cursor-pointer border rounded-xl py-4  text-center w-44 md:flex-1 text-slate-700 ${
                           selectedAccessType === value
                             ? "border-primaryColor shadow-xl"
                             : "border-gray-200"
@@ -655,7 +690,7 @@ export default function Form() {
                 </label>
                 <Input
                   {...register("fullname")}
-                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                  className="placeholder:text-slate-400 text-lg py-8 focus:border-blue-700"
                 />
 
                 {errors.fullname?.message && (
@@ -674,7 +709,7 @@ export default function Form() {
                 </label>
                 <Input
                   {...register("phone_number")}
-                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                  className="placeholder:text-slate-400 text-lg py-8 focus:border-blue-700"
                 />
 
                 {errors.phone_number?.message && (
@@ -694,7 +729,7 @@ export default function Form() {
                 <Input
                   type="email"
                   {...register("email")}
-                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                  className="placeholder:text-slate-400 text-lg py-8 focus:border-blue-700"
                 />
 
                 {errors.email?.message && (
@@ -713,7 +748,7 @@ export default function Form() {
                 </label>
                 <Input
                   {...register("address")}
-                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                  className="placeholder:text-slate-400 text-lg py-8 focus:border-blue-700"
                 />
 
                 {errors.address?.message && (
@@ -732,7 +767,7 @@ export default function Form() {
                 </label>
                 <Input
                   {...register("city")}
-                  className="placeholder:text-slate-400 text-lg py-6 focus:border-blue-700"
+                  className="placeholder:text-slate-400 text-lg py-8 focus:border-blue-700"
                 />
 
                 {errors.city?.message && (
@@ -758,6 +793,7 @@ export default function Form() {
       </form>
 
       {/* Navigation */}
+
       <div className="mt-8 pt-5">
         <div className="flex justify-between">
           <button
@@ -781,6 +817,12 @@ export default function Form() {
               />
             </svg>
           </button>
+          {/* <PaymentElement
+            id="payment-element"
+            options={paymentElementOptions}
+          /> */}
+
+          {/* <PaymentElement id="payment-element" /> */}
 
           <button
             type="button"
@@ -789,7 +831,7 @@ export default function Form() {
             className="rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {currentStep === steps.length - 2 ? (
-              "Submit Data"
+              "Proceed to Payment"
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -809,6 +851,8 @@ export default function Form() {
           </button>
         </div>
       </div>
+
+      <Toaster position="top-right" reverseOrder={false} />
     </section>
   );
 }

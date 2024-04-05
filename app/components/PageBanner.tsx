@@ -3,7 +3,7 @@ import React from "react";
 
 const PageBanner = ({ page, link }: { page: string; link: string }) => {
   return (
-    <div className="w-full h-[20vh] md:h-[50vh] flex flex-col items-center justify-center bg-amber-50 gap-4">
+    <div className="w-full h-[40vh] md:h-[50vh] flex flex-col items-center justify-center bg-amber-50 gap-4">
       <h4 className="text-3xl md:text-5xl font-bold z-20  text-slate-950">
         {page}
       </h4>

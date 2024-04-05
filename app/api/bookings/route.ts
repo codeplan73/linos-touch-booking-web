@@ -5,12 +5,15 @@ import { bookingSchema } from "@/lib/schema";
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
+  console.log(body);
+
+  const validate = bookingSchema.safeParse(body);
+
   const {
     postcode,
     rooms,
     bathrooms,
     clean_type,
-    extra_task,
     hours,
     cleaning_product,
     frequency,
@@ -29,8 +32,6 @@ export async function POST(request: NextRequest) {
     amount,
   } = body;
 
-  const validate = bookingSchema.safeParse(body);
-
   if (!validate.success)
     return NextResponse.json(validate.error.format(), { status: 400 });
 
@@ -40,7 +41,6 @@ export async function POST(request: NextRequest) {
       rooms,
       bathrooms,
       clean_type,
-      extra_task,
       hours,
       cleaning_product,
       frequency,

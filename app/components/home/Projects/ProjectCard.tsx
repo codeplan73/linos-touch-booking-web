@@ -11,8 +11,8 @@ const ProjectCard = ({ image, title }: { image: string; title: string }) => {
           alt=""
           width={1000}
           height={1000}
-          objectFit="cover" // Cover the container without stretching the image
-          className="rounded-2xl h-full"
+          // objectFit="cover" // Cover the container without stretching the image
+          className="rounded-2xl h-full object-cover"
         />
       </div>
       <p className="absolute bottom-4 left-6 text-white font-semibold text-lg">

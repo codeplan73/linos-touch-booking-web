@@ -19,7 +19,7 @@ model Booking {
   rooms            String         @db.VarChar(20)
   bathrooms        String         @db.VarChar(20)
   clean_type       String         @db.VarChar(50)
-  extra_task       String?        @db.VarChar(250)
+  // extra_task       String?        @db.VarChar(250)
   hours            String         @db.VarChar(10)
   cleaning_product String         @db.VarChar(50)
   frequency        String         @db.VarChar(50)
@@ -99,11 +99,12 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
+  password      String    @db.VarChar(255)
   emailVerified DateTime?
   fullname      String    @db.VarChar(100)
-  phone_number  String    @db.VarChar(20)
-  address       String    @db.VarChar(255)
-  city          String    @db.VarChar(50)
+  phone_number  String?    @db.VarChar(20)
+  address       String?    @db.VarChar(255)
+  city          String?   @db.VarChar(50)
   image         String?
   accounts      Account[]
   sessions      Session[]

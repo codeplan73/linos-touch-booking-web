@@ -12,8 +12,9 @@ const ForgotPasswordPage = () => {
         <Image
           src={"/images/auth.jpeg"}
           alt="auth image"
-          layout="fill"
-          objectFit="cover"
+          height={1000}
+          width={1000}
+          className="w-full h-full object-fill"
         />
       </div>
       <div className="w-full md:w-7/12 z-10 md:h-screen bg-white flex flex-col gap-10  items-start justify-center pt-56 md:pt-24 px-10 md:pl-28 ">
