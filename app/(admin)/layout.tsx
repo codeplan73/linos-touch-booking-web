@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { Inter as FontSans, Heebo } from "next/font/google";
-// import  useTriot  from './fonts/font'
 import "../globals.css";
-import Head from "next/head";
+import { cn } from "@/lib/utils";
+import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
 
 const heebo = Heebo({ subsets: ["latin"] });
-
-import { cn } from "@/lib/utils";
-
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -27,7 +25,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <body className={`${heebo.className}, ${cn(fontSans.variable)}`}>
-        <main className="w-full">{children}</main>
+        <div className="w-full">
+          <Sidebar />
+
+          <div className="w-full md:pl-56 flex flex-col">
+            <Navbar />
+            <main className="p-6 bg-slate-100">{children}</main>
+          </div>
+        </div>
       </body>
     </html>
   );
