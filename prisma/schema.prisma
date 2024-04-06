@@ -101,7 +101,7 @@ model User {
   email         String    @unique
   password      String    @db.VarChar(255)
   emailVerified DateTime?
-  fullname      String    @db.VarChar(100)
+  name          String    @db.VarChar(100)
   phone_number  String?    @db.VarChar(20)
   address       String?    @db.VarChar(255)
   city          String?   @db.VarChar(50)

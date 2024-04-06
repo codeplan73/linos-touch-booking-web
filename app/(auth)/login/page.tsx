@@ -3,7 +3,13 @@ import Image from "next/image";
 import LoginForm from "./LoginForm";
 import Link from "next/link";
 
-const LoginPage = () => {
+interface Props {
+  searchParams: {
+    callbackUrl?: string;
+  };
+}
+
+const LoginPage = ({ searchParams }: Props) => {
   return (
     <div className="flex items-start relative">
       <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -11,18 +17,19 @@ const LoginPage = () => {
         <Image
           src={"/images/auth.jpeg"}
           alt="auth image"
-          layout="fill"
-          objectFit="cover"
+          height={1000}
+          width={1000}
+          className="w-full h-full object-fill"
         />
       </div>
       <div className="w-full md:w-7/12 z-10 md:h-screen bg-white flex flex-col gap-10 items-center md:items-start justify-center md:justify-start pt-32 md:pt-24 px-10 md:pl-28 ">
         <Link href="/">
           <Image
-            src={"/images/auth.jpeg"}
+            src={"/images/logo.png"}
             alt="auth image"
-            height={1000}
             width={1000}
-            className="w-full h-full object-fill"
+            height={1000}
+            className="w-20 h-20"
           />
         </Link>
 
@@ -33,7 +40,7 @@ const LoginPage = () => {
           <p className="text-md">Please login here</p>
         </div>
 
-        <LoginForm />
+        <LoginForm callbackUrl={searchParams.callbackUrl} />
       </div>
     </div>
   );

@@ -15,13 +15,22 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { signIn, useSession } from "next-auth/react";
+
+interface Props {
+  callbackUrl?: string;
+}
 
 const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
-  password: z.string().min(11, "Please enter Phone number"),
+  password: z.string().min(6, "Please enter password"),
 });
 
-const LoginForm = () => {
+const LoginForm = (props: Props) => {
+  const router = useRouter();
+  const { data: session } = useSession();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,10 +39,21 @@ const LoginForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  console.log({ session });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const result = await signIn("credentials", {
+      redirect: false,
+      username: values.email,
+      password: values.password,
+    });
+    if (!result?.ok) {
+      toast.error(result?.error);
+      return;
+    }
+    toast.success("Welcome Next AppAthentication");
+    // router.push(props.callbackUrl ? props.callbackUrl : "/");
+    router.push(props.callbackUrl ? "/contact" : "/about");
   }
 
   return (

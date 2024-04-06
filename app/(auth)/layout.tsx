@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter as FontSans, Heebo } from "next/font/google";
-// import  useTriot  from './fonts/font'
 import "../globals.css";
-import Head from "next/head";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import AuthProvider from "./AuthProvider";
 
 const heebo = Heebo({ subsets: ["latin"] });
 
@@ -27,7 +28,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <body className={`${heebo.className}, ${cn(fontSans.variable)}`}>
-        <main className="w-full">{children}</main>
+        <AuthProvider>
+          <main className="w-full">{children}</main>
+          <ToastContainer />
+        </AuthProvider>
       </body>
     </html>
   );
