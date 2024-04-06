@@ -53,7 +53,8 @@ const LoginForm = (props: Props) => {
     }
     toast.success("Welcome Next AppAthentication");
     // router.push(props.callbackUrl ? props.callbackUrl : "/");
-    router.push(props.callbackUrl ? "/contact" : "/about");
+    // router.push(props.callbackUrl ? "/contact" : "/about");
+    router.push("/dashboard");
   }
 
   return (

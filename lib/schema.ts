@@ -27,7 +27,7 @@ export const bookingSchema = z.object({
 
 export const userSchema = z
   .object({
-    fullname: z.string().min(3, "Please enter your fullname"),
+    name: z.string().min(3, "Please enter your fullname"),
     phone_number: z.string().min(3, "Please enter phone number"),
     address: z.string().min(3, "Please enter your address"),
     city: z.string().min(3, "Please enter your city"),

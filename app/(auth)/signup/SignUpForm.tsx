@@ -23,7 +23,7 @@ const SignUpForm = () => {
   const form = useForm<z.infer<typeof userSchema>>({
     resolver: zodResolver(userSchema),
     defaultValues: {
-      fullname: "",
+      name: "",
       email: "",
       phone_number: "",
       city: "",
@@ -35,7 +35,7 @@ const SignUpForm = () => {
 
   async function onSubmit(values: z.infer<typeof userSchema>) {
     const { confirmPassword, ...data } = values;
-    await axios.post("/api/auth/signup", data);
+    await axios.post("/api/signup", data);
     toast.success("Account Created Successfully.");
     router.push("/login");
   }
@@ -48,12 +48,12 @@ const SignUpForm = () => {
       >
         <FormField
           control={form.control}
-          name="fullname"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Full Name</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="Enter FullName" {...field} />
+                <Input type="text" placeholder="Enter Fullname" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
