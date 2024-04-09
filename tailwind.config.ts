@@ -1,17 +1,13 @@
-import type { Config } from "tailwindcss";
-const { fontFamily } = require("tailwindcss/defaultTheme");
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+import type { Config } from "tailwindcss"
 
 const config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+	],
   prefix: "",
   theme: {
     container: {
@@ -23,23 +19,6 @@ const config = {
     },
     extend: {
       colors: {
-        primaryColor: "#F2994A",
-        secondaryColor: "#092C4C",
-        secondaryColor2: "#141414",
-        infoColor: "#2F80ED",
-        successColor: "#27AE60",
-        warningColor: "#E2B93B",
-        errorColor: "#EB5757",
-        errorAscent: "#EB5757",
-        black1: "#000000",
-        black2: "#1D1D1D",
-        black3: "#282828",
-        white: "#FFFFFF",
-        gray1: "#333333",
-        gray2: "#4F4F4F",
-        gray3: "#828282",
-        gray4: "#BDBDBD",
-        gray5: "#EOEOEO",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -88,39 +67,14 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "caret-blink": {
-          "0%,70%,100%": { opacity: "1" },
-          "20%,50%": { opacity: "0" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "caret-blink": "caret-blink 1.25s ease-out infinite",
-      },
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), addVariablesForColors],
-  // plugins: [
-  //   require("tailwindcss-animate"),
-  //   addVariablesForColors,
-  //   require("@tailwindcss/form"),
-  // ],
-} satisfies Config;
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config
 
-// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
-function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme("colors"));
-  let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
-
-  addBase({
-    ":root": newVars,
-  });
-}
-
-export default config;
+export default config
