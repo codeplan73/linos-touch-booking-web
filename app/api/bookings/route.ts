@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/prisma/client";
+import { db } from "@/lib/db";
 import { bookingSchema } from "@/schemas";
 
 export async function POST(request: NextRequest) {
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
   if (!validate.success)
     return NextResponse.json(validate.error.format(), { status: 400 });
 
-  const newBooking = await prisma.booking.create({
+  const newBooking = await db.booking.create({
     data: {
       postcode,
       rooms,
@@ -64,6 +64,6 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(response: NextResponse) {
-  const bookings = await prisma.booking.findMany({});
+  const bookings = await db.booking.findMany({});
   return NextResponse.json(bookings);
 }
