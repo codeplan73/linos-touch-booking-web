@@ -1,20 +1,17 @@
 import React from "react";
 import Image from "next/image";
-// import SignUpForm from "./SignUpForm";
 import Link from "next/link";
 
 interface CardWrapperProps {
   children: React.ReactNode;
   headerLabel: string;
-  backButtonLabel: string;
-  backButtonHref: string;
+  textLabel: string;
 }
 
-const LoginPage = ({
+const AuthCardWrapper = ({
   children,
   headerLabel,
-  backButtonLabel,
-  backButtonHref,
+  textLabel,
 }: CardWrapperProps) => {
   return (
     <div className="flex items-start relative">
@@ -43,13 +40,12 @@ const LoginPage = ({
           <h4 className="text-center text-4xl font-bold text-warningColor">
             {headerLabel}
           </h4>
-          <p className="text-md">Create Account Here</p>
+          <p className="text-md">{textLabel}</p>
         </div>
-
         {children}
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default AuthCardWrapper;

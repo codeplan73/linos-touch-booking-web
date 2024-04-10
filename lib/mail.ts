@@ -1,3 +1,4 @@
+import { VerificationEmailTemplate } from "@/components/mail/Varification-mail-template";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -31,6 +32,9 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     from: "mail@auth-masterclass-tutorial.com",
     to: email,
     subject: "Confirm your email",
-    html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
+    react: VerificationEmailTemplate({ confirmLink: confirmLink }),
+    text: "", // Add an empty string as the value for the 'text' property.
+
+    // html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
   });
 };

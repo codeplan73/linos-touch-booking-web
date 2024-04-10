@@ -12,13 +12,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
-// import {
-//   PaymentElement,
-//   CardElement,
-//   useElements,
-//   useStripe,
-// } from "@stripe/react-stripe-js";
-
 type Inputs = z.infer<typeof bookingSchema>;
 
 const steps = [

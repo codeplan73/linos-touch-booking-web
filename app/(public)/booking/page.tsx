@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import PageBanner from "@/components/PageBanner";
 import Form from "./_components/Form";
 import Summary from "./_components/Summary";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
 
 const BookingPage = () => {
   // const [clientSecret, setClientSecret] = useState("");
