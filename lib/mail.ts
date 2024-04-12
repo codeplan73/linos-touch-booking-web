@@ -32,8 +32,9 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     from: "mail@auth-masterclass-tutorial.com",
     to: email,
     subject: "Confirm your email",
-    react: VerificationEmailTemplate({ confirmLink: confirmLink }),
-    text: "", // Add an empty string as the value for the 'text' property.
+    html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
+    // react: VerificationEmailTemplate({ confirmLink: confirmLink }),
+    // text: "", // Add an empty string as the value for the 'text' property.
 
     // html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
   });

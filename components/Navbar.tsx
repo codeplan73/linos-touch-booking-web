@@ -14,7 +14,8 @@ const links = [
   { label: "Our Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "Contact", href: "/contact" },
-  { label: "Login", href: "/login" },
+  { label: "Login", href: "/auth/login" },
+  { label: "SignUp", href: "/auth/register" },
   { label: "Appointment", href: "/booking" },
 ];
 

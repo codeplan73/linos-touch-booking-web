@@ -37,11 +37,11 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
     });
 
-    const verificationToken = await generateVerificationToken(email);
-    await sendVerificationEmail(
-      verificationToken.email,
-      verificationToken.token
-    );
+    // const verificationToken = await generateVerificationToken(email);
+    // await sendVerificationEmail(
+    //   verificationToken.email,
+    //   verificationToken.token
+    // );
 
     return NextResponse.json({
       message: "Account created successfully",

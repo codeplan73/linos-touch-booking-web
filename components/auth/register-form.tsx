@@ -50,8 +50,10 @@ const RegisterForm = () => {
       setSubmitting(true);
       await axios.post("/api/auth/register", values);
       setSuccess("Account created successfully, confirmation email sent!");
-      toast.success("confirmation email sent!");
+      toast.success("confirmation email sent, please verify your account!");
       setSubmitting(false);
+      router.refresh();
+      router.push("/auth/login");
     } catch (error: any) {
       setSubmitting(false);
       setError(error.response.data.message);
