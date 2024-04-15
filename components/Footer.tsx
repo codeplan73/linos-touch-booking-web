@@ -17,13 +17,13 @@ const links = [
 ];
 
 const servcices = [
-  { label: "House Cleaning", link: "services" },
-  { label: "Office Cleaning", link: "services" },
-  { label: "Kitchen Cleaning", link: "services" },
-  { label: "Bedroom Cleaning", link: "services" },
-  { label: "Plumbing Service", link: "services" },
-  { label: "Residential Service", link: "services" },
-  { label: "Window Cleaning", link: "services" },
+  { label: "House Cleaning", link: "services", id: 1 },
+  { label: "Office Cleaning", link: "services", id: 2 },
+  { label: "Kitchen Cleaning", link: "services", id: 3 },
+  { label: "Bedroom Cleaning", link: "services", id: 4 },
+  { label: "Plumbing Service", link: "services", id: 5 },
+  { label: "Residential Service", link: "services", id: 6 },
+  { label: "Window Cleaning", link: "services", id: 7 },
 ];
 
 const Footer = () => {
@@ -80,7 +80,7 @@ const Footer = () => {
 
               {servcices.map((link) => (
                 <Link
-                  key={link.link}
+                  key={link.id}
                   href={link.link}
                   className="text-slate-500 hover:text-white whitespace-nowrap"
                 >

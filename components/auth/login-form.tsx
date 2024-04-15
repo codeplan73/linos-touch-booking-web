@@ -1,7 +1,7 @@
 "use client";
 
 import { z } from "zod";
-import { useState, useTransition } from "react";
+import { BaseSyntheticEvent, useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,9 +21,6 @@ import AuthCardWrapper from "./AuthCardWrapper";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { toast } from "react-toastify";
-import { signIn } from "next-auth/react";
-import { login } from "@/actions/login";
 
 const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -45,60 +42,62 @@ const LoginForm = () => {
     },
   });
 
-  // const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof LoginSchema>,
+    callbackUrl: BaseSyntheticEvent<object, any, any> | undefined
+  ) => {
+    setError("");
+    setSuccess("");
+
+    startTransition(async () => {
+      try {
+        const response = await axios.post("/api/auth/login", values, {
+          params: {
+            callbackUrl: callbackUrl?.toString(),
+          },
+        });
+        const data = response.data;
+        if (data?.error) {
+          form.reset();
+          setError(data.error);
+        }
+        if (data?.success) {
+          form.reset();
+          setSuccess(data.success);
+        }
+      } catch (error) {
+        setError("Something went wrong");
+      }
+    });
+  };
+
+  //   values: z.infer<typeof LoginSchema>,
+  //   callbackUrl: BaseSyntheticEvent<object, any, any> | undefined
+  // ) => {
   //   setError("");
   //   setSuccess("");
 
-  //   startTransition(() => {
-  //     login(values, callbackUrl)
-  //       .then((data) => {
-  //         if (data?.error) {
-  //           form.reset();
-  //           setError(data.error);
-  //         }
-
-  //         if (data?.success) {
-  //           form.reset();
-  //           setSuccess(data.success);
-  //         }
-  //       })
-  //       .catch(() => setError("Something went wrong"));
+  //   startTransition(async () => {
+  //     try {
+  //       const response = await axios.post("/api/auth/login", values, {
+  //         params: {
+  //           callbackUrl: callbackUrl?.toString(),
+  //         },
+  //       });
+  //       const data = response.data;
+  //       if (data?.error) {
+  //         form.reset();
+  //         setError(data.error);
+  //       }
+  //       if (data?.success) {
+  //         form.reset();
+  //         setSuccess(data.success);
+  //       }
+  //     } catch (error) {
+  //       setError("Something went wrong");
+  //     }
   //   });
   // };
-
-  const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
-    try {
-      await axios.post("/api/auth/login", values);
-    } catch (error) {
-      console.log(error);
-    }
-
-    // startTransition(async () => {
-    //   console.log(values, callbackUrl);
-
-    //   try {
-
-    //     // const data = response.data;
-
-    //     // if (response.status !== 200) {
-    //     //   form.reset();
-    //     //   setError(data.error);
-    //     //   return;
-    //     // }
-
-    //     // if (data.success) {
-    //     //   form.reset();
-    //     //   setSuccess(data.success);
-    //     // }
-
-    //     // if (data.twoFactor) {
-    //     //   setShowTwoFactor(true);
-    //     // }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // });
-  };
 
   return (
     <AuthCardWrapper textLabel="Please Login Here" headerLabel="Welcome">
@@ -114,7 +113,12 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="Enter Email" {...field} />
+                  <Input
+                    type="email"
+                    disabled={isPending}
+                    placeholder="Enter Email"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -129,6 +133,7 @@ const LoginForm = () => {
                 <FormControl>
                   <Input
                     type="password"
+                    disabled={isPending}
                     placeholder="Enter Password"
                     {...field}
                   />
@@ -158,7 +163,11 @@ const LoginForm = () => {
             </Link>
           </div>
 
-          <Button type="submit" className="w-full bg-warningColor">
+          <Button
+            type="submit"
+            disabled={isPending}
+            className="w-full bg-warningColor"
+          >
             Login
           </Button>
         </form>

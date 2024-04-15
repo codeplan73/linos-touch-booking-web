@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
   return NextResponse.json(newBooking, { status: 200 });
 }
 
-export async function GET(response: NextResponse) {
+export async function GET(request: NextRequest) {
   const bookings = await db.booking.findMany({});
   return NextResponse.json(bookings);
 }

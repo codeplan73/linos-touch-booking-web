@@ -2,15 +2,14 @@
 
 import Link from "next/link";
 import { IoMenuSharp } from "react-icons/io5";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { IoMailOutline } from "react-icons/io5";
 import { FaRegBell } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "@/auth";
+import { useSession } from "next-auth/react";
 import { menuLinks } from "./_components/menuLinks";
 import classnames from "classnames";
 import { usePathname } from "next/navigation";
@@ -21,9 +20,12 @@ const Navbar = () => {
   const router = useRouter();
   const [open, setIsOpen] = useState(false);
   const currentPath = usePathname();
-  //   const session = await getServerSession(authOptions);
-  //   const user = session?.user;
-  const { data: session } = useSession();
+
+  const session = useSession();
+
+  const logout = async () => {
+    await signOut();
+  };
 
   return (
     <nav className="w-full mx-auto px-5 py-5 flex items-center space-x-2  shadow-xl z-10 sticky top-0 bg-white">
@@ -33,24 +35,24 @@ const Navbar = () => {
           onClick={() => setIsOpen(!open)}
         />
         <Link href="/profile" className="block md:hidden">
-          {session?.user?.image ? (
+          {session?.data?.user?.image ? (
             <div className="flex items-center justify-start space-x-2">
               <Image
-                src={session?.user?.image}
-                alt={session?.user?.name!}
+                src={session?.data?.user?.image}
+                alt={session?.data?.user?.name!}
                 className="text-4xl rounded-full border-2 border-slate-500 drop-shadow-xl p-1"
               />
               <div className="flex flex-col items-start text-sm ">
-                <span className="font-bold">{session?.user?.name}</span>
-                <span>{session?.user?.email}</span>
+                <span className="font-bold">{session?.data?.user?.name}</span>
+                <span>{session?.data?.user?.email}</span>
               </div>
             </div>
           ) : (
             <div className="flex items-center justify-start space-x-2">
               <CiUser className="text-4xl hover:bg-warningColor hover:text-white hover:border-warningColor rounded-full border border-slate-500 drop-shadow-xl p-1" />
               <div className="flex flex-col items-start text-sm ">
-                <span className="font-bold">{session?.user?.name}</span>
-                <span>{session?.user?.email}</span>
+                <span className="font-bold">{session?.data?.user?.name}</span>
+                <span>{session?.data?.user?.email}</span>
               </div>
             </div>
           )}
@@ -65,18 +67,18 @@ const Navbar = () => {
         </Link>
         <Separator orientation="vertical" />
         <Link href="/profile">
-          {session?.user?.image ? (
+          {session?.data?.user?.image ? (
             <Image
-              src={session?.user?.image}
-              alt={session?.user?.name!}
+              src={session?.data?.user?.image}
+              alt={session?.data?.user?.name!}
               className="text-4xl rounded-full border-2 border-slate-500 drop-shadow-xl p-1"
             />
           ) : (
             <div className="flex items-center justify-start space-x-2">
               <CiUser className="text-4xl hover:bg-warningColor hover:text-white hover:border-warningColor rounded-full border border-slate-500 drop-shadow-xl p-1" />
               <div className="flex flex-col items-start text-sm ">
-                <span className="font-bold">{session?.user?.name}</span>
-                <span>{session?.user?.email}</span>
+                <span className="font-bold">{session?.data?.user?.name}</span>
+                <span>{session?.data?.user?.email}</span>
               </div>
             </div>
           )}
@@ -116,14 +118,15 @@ const Navbar = () => {
         <Link
           href="/"
           className="flex items-center space-x-3 hover:text-white hover:bg-blue-700 py-2 px-2 rounded-xl text-slate-900 hover:shadow-lg hover:drop-shadow-lg w-full"
-          onClick={(e) => {
-            e.preventDefault();
-            signOut({ callbackUrl: "/" });
-          }}
+          onClick={(e) => logout()}
+          // onClick={(e) => {
+          //   e.preventDefault();
+          //   signOut({ callbackUrl: "/" });
+          // }}
         >
-          {/* <span>
-              <LuLogOut />
-            </span> */}
+          <span>
+            <LuLogOut />
+          </span>
           <span>Logout</span>
         </Link>
       </ul>
