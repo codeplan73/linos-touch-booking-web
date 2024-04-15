@@ -32,17 +32,17 @@ export default async function RootLayout({
 }>) {
   const session = await auth();
   return (
-    // <SessionProvider session={session}>
-    <html lang="en" suppressHydrationWarning>
-      <link rel="icon" href="/favicon.ico" sizes="any" />
+    <SessionProvider session={session}>
+      <html lang="en" suppressHydrationWarning>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
 
-      {/* <body className={`${heebo.className}, ${cn(fontSans.variable)}`}> */}
-      <body className={`${heebo.className}`}>
-        <Navbar />
-        <main className="w-full">{children}</main>
-        <Footer />
-      </body>
-    </html>
-    // </SessionProvider>
+        {/* <body className={`${heebo.className}, ${cn(fontSans.variable)}`}> */}
+        <body className={`${heebo.className}`}>
+          <Navbar />
+          <main className="w-full">{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </SessionProvider>
   );
 }

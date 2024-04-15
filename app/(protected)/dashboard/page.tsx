@@ -2,11 +2,10 @@ import { auth } from "@/auth";
 
 const DashboardPage = async () => {
   const session = await auth();
-  const user = session?.user;
   return (
     <div>
       <h4>Welcome To Admin Dashboard page</h4>
-      {user?.name && <p>{user.role}</p>}
+      {session?.user?.name && <p>{session?.user.role}</p>}
 
       {session?.user?.email}
 

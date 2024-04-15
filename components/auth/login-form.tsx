@@ -21,6 +21,7 @@ import AuthCardWrapper from "./AuthCardWrapper";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { login } from "@/actions/login";
 
 const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -42,35 +43,7 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = async (
-    values: z.infer<typeof LoginSchema>,
-    callbackUrl: BaseSyntheticEvent<object, any, any> | undefined
-  ) => {
-    setError("");
-    setSuccess("");
-
-    startTransition(async () => {
-      try {
-        const response = await axios.post("/api/auth/login", values, {
-          params: {
-            callbackUrl: callbackUrl?.toString(),
-          },
-        });
-        const data = response.data;
-        if (data?.error) {
-          form.reset();
-          setError(data.error);
-        }
-        if (data?.success) {
-          form.reset();
-          setSuccess(data.success);
-        }
-      } catch (error) {
-        setError("Something went wrong");
-      }
-    });
-  };
-
+  // const onSubmit = async (
   //   values: z.infer<typeof LoginSchema>,
   //   callbackUrl: BaseSyntheticEvent<object, any, any> | undefined
   // ) => {
@@ -98,6 +71,31 @@ const LoginForm = () => {
   //     }
   //   });
   // };
+
+  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+    setError("");
+    setSuccess("");
+
+    startTransition(() => {
+      login(values, callbackUrl)
+        .then((data) => {
+          if (data?.error) {
+            form.reset();
+            setError(data.error);
+          }
+
+          if (data?.success) {
+            form.reset();
+            setSuccess(data.success);
+          }
+
+          //  if (data?.twoFactor) {
+          //    setShowTwoFactor(true);
+          //  }
+        })
+        .catch(() => setError("Something went wrong"));
+    });
+  };
 
   return (
     <AuthCardWrapper textLabel="Please Login Here" headerLabel="Welcome">

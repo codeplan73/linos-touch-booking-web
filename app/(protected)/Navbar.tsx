@@ -8,7 +8,6 @@ import { CiUser } from "react-icons/ci";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import { signOut } from "@/auth";
 import { useSession } from "next-auth/react";
 import { menuLinks } from "./_components/menuLinks";
 import classnames from "classnames";
@@ -23,8 +22,12 @@ const Navbar = () => {
 
   const session = useSession();
 
+  // In your Navbar component
   const logout = async () => {
-    await signOut();
+    const res = await fetch("/api/logout", { method: "POST" });
+    if (res.ok) {
+      router.push("/");
+    }
   };
 
   return (
@@ -115,20 +118,15 @@ const Navbar = () => {
               <span>{link.label}</span>
             </Link>
           ))}
-        <Link
-          href="/"
+        <button
           className="flex items-center space-x-3 hover:text-white hover:bg-blue-700 py-2 px-2 rounded-xl text-slate-900 hover:shadow-lg hover:drop-shadow-lg w-full"
           onClick={(e) => logout()}
-          // onClick={(e) => {
-          //   e.preventDefault();
-          //   signOut({ callbackUrl: "/" });
-          // }}
         >
           <span>
             <LuLogOut />
           </span>
           <span>Logout</span>
-        </Link>
+        </button>
       </ul>
     </nav>
   );
