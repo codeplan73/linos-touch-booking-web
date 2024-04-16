@@ -37,7 +37,7 @@ export const menuLinks = [
     icon: <PiUsersThreeLight />,
   },
   {
-    id: 5,
+    id: 6,
     label: "Settings",
     link: "/settings",
     icon: <RiSettings5Line />,

@@ -9,7 +9,7 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { menuLinks } from "./_components/menuLinks";
+import { menuLinks } from "./menuLinks";
 import classnames from "classnames";
 import { usePathname } from "next/navigation";
 import { LuLogOut } from "react-icons/lu";
@@ -22,7 +22,6 @@ const Navbar = () => {
 
   const session = useSession();
 
-  // In your Navbar component
   const logout = async () => {
     const res = await fetch("/api/logout", { method: "POST" });
     if (res.ok) {
@@ -31,7 +30,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full mx-auto px-5 py-5 flex items-center space-x-2  shadow-xl z-10 sticky top-0 bg-white">
+    <nav className="w-full mx-auto px-5 py-5 flex items-center space-x-2  shadow-md z-10 bg-white">
       <ul className="flex md:hidden items-center justify-between w-full space-x-4">
         <IoMenuSharp
           className="block md:hidden cursor-pointer text-2xl"
@@ -119,8 +118,11 @@ const Navbar = () => {
             </Link>
           ))}
         <button
-          className="flex items-center space-x-3 hover:text-white hover:bg-blue-700 py-2 px-2 rounded-xl text-slate-900 hover:shadow-lg hover:drop-shadow-lg w-full"
-          onClick={(e) => logout()}
+          className="flex items-center space-x-3flex text-lg space-x-4 w-full hover:bg-amber-50 py-4 px-4"
+          onClick={(e) => {
+            logout();
+            setIsOpen(false);
+          }}
         >
           <span>
             <LuLogOut />
