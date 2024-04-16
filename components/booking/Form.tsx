@@ -69,9 +69,6 @@ export default function Form() {
     resolver: zodResolver(bookingSchema),
   });
 
-  // const stripe = useStripe();
-  // const elements = useElements();
-
   const selectedRooms = watch("rooms");
   const selectedBathroom = watch("bathrooms");
   const selectedCleanType = watch("clean_type");
@@ -82,9 +79,31 @@ export default function Form() {
   const selectedPets = watch("pets");
   // const selectedExtraTasks = watch("extra_task") || [];
 
+  // const processForm: SubmitHandler<Inputs> = async (data) => {
+  //   const parsedHours = parseInt(selectedHours);
+  //   const passedRooms = parseInt(selectedRooms);
+  // };
+
   const processForm: SubmitHandler<Inputs> = async (data) => {
-    const parsedHours = parseInt(selectedHours);
-    const passedRooms = parseInt(selectedRooms);
+    console.log("Form data:", data); // Add this line
+    try {
+      const response = await axios.post("/api/bookings", data);
+
+      if (response.data) {
+        if (response.data.success && response.data.booking) {
+          toast.success("Booking submitted successfully.");
+          toast("Proceed to payment.");
+          console.log(response.data);
+        } else {
+          toast.error("Unexpected response from the server.");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error occurred while submitting the booking.");
+    }
+    console.log(data);
+    reset();
   };
 
   type FieldName = keyof Inputs;
@@ -98,18 +117,23 @@ export default function Form() {
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
         try {
-          // console.log("process form called from next");
+          const formValues = watch();
           const requestData = {
-            ...watch(),
-            // extra_task: selectedExtraTasks, // Convert array to string separated by comma
+            ...formValues,
+            amount: "5.43",
           };
-          // await axios.post("/api/bookings", requestData);
-          // toast.success("Booking submitted successfully.");
-          toast("Proceed to payment.");
-          console.log(requestData);
+
+          const response = await axios.post("/api/bookings", requestData);
+
+          if (response.data) {
+            console.log(response);
+            if (response.data.message) {
+              toast.success(response.data.message);
+            }
+          }
         } catch (error) {
           console.log(error);
-          toast.error("An error occurred while submitting the booking.");
+          toast.error((error as Error).message);
         }
       }
       setPreviousStep(currentStep);
@@ -124,13 +148,8 @@ export default function Form() {
     }
   };
 
-  // const paymentElementOptions: PaymentElementProps = {
-  //   layout: "tabs",
-  // };
-
   return (
     <section className="relative w-full md:w-8/12 inset-0 flex flex-col justify-between">
-      {/* steps */}
       {/* <nav
         aria-label="Progress"
         className="sticky top-20 md:bg-white drop-shadow-lg z-10 px-2 py-5 mb-6"
@@ -452,10 +471,6 @@ export default function Form() {
                   </p>
                 )}
               </div>
-
-              <hr />
-
-              <input type="text" {...register("amount")} value="500" id="" />
 
               <div className="flex flex-wrap flex-col gap-4">
                 <label

@@ -25,7 +25,6 @@ export async function POST(
   const { email, password } = validatedFields.data;
 
   const existingUser = await getUserByEmail(email);
-  // const existingUser = await db.user.findUnique({ where: { email } });
 
   if (!existingUser || !existingUser.email || !existingUser.password) {
     return NextResponse.json(
@@ -33,6 +32,7 @@ export async function POST(
       { status: 400 }
     );
   }
+
   // if (!existingUser.emailVerified) {
   //   const verificationToken = await generateVerificationToken(
   //     existingUser.email

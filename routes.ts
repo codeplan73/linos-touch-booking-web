@@ -12,7 +12,8 @@ export const publicRoutes = [
   "/projects",
   "/services",
   "/terms",
-  "testimonial",
+  "/testimonial",
+  "/api/bookings",
 ];
 
 /**
@@ -27,6 +28,8 @@ export const authRoutes = [
   "/auth/reset",
   "/auth/new-password",
 ];
+
+export const protectedRoutes = [];
 
 /**
  * The prefix for API authentication routes

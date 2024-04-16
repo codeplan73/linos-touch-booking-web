@@ -21,7 +21,7 @@ export const bookingSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email address"),
   address: z.string().min(3, "Address is required"),
   city: z.string().min(1, "City is required"),
-  amount: z.number().min(1, "Amount is required"),
+  amount: z.string().min(1, "Amount is required"),
   // payment_status: z.number().min(1, "Amount is required"),
 });
 
