@@ -118,7 +118,7 @@ const Navbar = () => {
             </Link>
           ))}
         <button
-          className="flex items-center space-x-3flex text-lg space-x-4 w-full hover:bg-amber-50 py-4 px-4"
+          className="flex items-center text-lg space-x-4 w-full hover:bg-amber-50 py-4 px-4"
           onClick={(e) => {
             logout();
             setIsOpen(false);

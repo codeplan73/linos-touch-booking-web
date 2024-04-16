@@ -6,9 +6,18 @@ import Image from "next/image";
 import classnames from "classnames";
 import { usePathname } from "next/navigation";
 import { menuLinks } from "./menuLinks";
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
   const currentPath = usePathname();
+  const router = useRouter();
+
+  const logout = async () => {
+    const res = await fetch("/api/logout", { method: "POST" });
+    if (res.ok) {
+      router.push("/");
+    }
+  };
 
   return (
     <aside className="bg-white hidden h-full md:flex md:w-56 md:flex-col md:fixed md:inset-y-0 px-4 py-6 gap-6 shadow-lg z-10">
@@ -40,7 +49,12 @@ const Sidebar = () => {
         </ul>
 
         <div className="flex flex-col items-start space-y-2">
-          <button className="flex items-center space-x-3 hover:text-white hover:bg-blue-700 py-2 px-2 rounded-xl text-slate-900 hover:shadow-lg hover:drop-shadow-lg w-full">
+          <button
+            onClick={(e) => {
+              logout();
+            }}
+            className="flex items-center text-lg space-x-4 w-full hover:bg-amber-50 py-2 px-2"
+          >
             <span>
               <LuLogOut />
             </span>
