@@ -42,7 +42,7 @@ const TasksPage = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 overflow-x-auto">
         <h4 className="text-xl text-slate-400">Task List</h4>
         <TasksTab />
       </div>
