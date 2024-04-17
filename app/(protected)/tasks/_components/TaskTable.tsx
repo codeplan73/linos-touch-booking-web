@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import { Booking } from "@prisma/client";
 
 import {
   Table,
