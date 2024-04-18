@@ -70,3 +70,9 @@ export const LoginSchema = z.object({
   }),
   code: z.optional(z.string()),
 });
+
+export enum CleaningStatus {
+  PENDING = "PENDING",
+  COMPLETED = "COMPLETED",
+  CANCELED = "CANCELED",
+}

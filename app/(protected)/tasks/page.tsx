@@ -3,11 +3,12 @@ import DashboardCard from "../_components/DashboardCard";
 import { IoBriefcaseOutline } from "react-icons/io5";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import TasksTab from "./_components/TasksTab";
+import CardWrapper from "@/components/card-wrapper";
 
 const TasksPage = () => {
   return (
     <div className="flex flex-col gap-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <CardWrapper>
         <DashboardCard
           icon={
             <IoBriefcaseOutline className="bg-purple-100 text-4xl text-purple-950 p-2 rounded-xl" />
@@ -40,7 +41,7 @@ const TasksPage = () => {
           date="April, 5th 2024"
           chart="12"
         />
-      </div>
+      </CardWrapper>
 
       <div className="flex flex-col gap-4 overflow-x-auto">
         <h4 className="text-xl text-slate-400">Task List</h4>

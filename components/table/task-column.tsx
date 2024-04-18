@@ -14,14 +14,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// export type Payment = Booking;
+import { z } from "zod";
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
+type Payment = Booking;
 
 export const columns: ColumnDef<Payment>[] = [
   {
@@ -47,8 +42,8 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "fullname",
+    header: "FullName",
   },
   {
     accessorKey: "email",
@@ -77,6 +72,32 @@ export const columns: ColumnDef<Payment>[] = [
       return <div className="text-right font-medium">{formatted}</div>;
     },
   },
+
+  {
+    accessorKey: "clean_type",
+    header: "CleanType",
+  },
+  {
+    accessorKey: "hours",
+    header: "Hours",
+  },
+  {
+    accessorKey: "cleaning_status",
+    header: "CleanStatus",
+  },
+  {
+    accessorKey: "payment_status",
+    header: "PaymentStatus",
+  },
+  {
+    accessorKey: "assigned_status",
+    header: "AssignedStatus",
+  },
+  {
+    accessorKey: "assignedToUser",
+    header: "AssignedToUser",
+  },
+
   {
     id: "actions",
     cell: ({ row }) => {
@@ -92,18 +113,11 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() =>
-                navigator.clipboard.writeText(payment.id.toString())
-              }
-            >
-              Copy payment ID
-            </DropdownMenuItem>
+
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>View Booking Details</DropdownMenuItem>
             <DropdownMenuItem className="text-red-500">
-              Delete Payment
+              Delete Booking
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

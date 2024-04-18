@@ -1,12 +1,6 @@
 import { Payment, columns } from "@/components/table/columns";
 import { DataTable } from "@/components/table/data-table";
 
-export enum CleaningStatus {
-  PENDING = "PENDING",
-  COMPLETED = "COMPLETED",
-  CANCELED = "CANCELED",
-}
-
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
   return [
@@ -98,13 +92,6 @@ async function getData(): Promise<Payment[]> {
 }
 
 const PaymentPage = async () => {
-  // const PaymentPage = async ({ status }: { status: CleaningStatus }) => {
-  // const tasks = await db.booking.findMany({
-  //   where: {
-  //     cleaning_status: status,
-  //   },
-  // });
-
   const data = await getData();
 
   return (
