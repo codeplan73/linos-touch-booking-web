@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { z } from "zod";
+import Link from "next/link";
 
 type Payment = Booking;
 
@@ -115,7 +116,9 @@ export const columns: ColumnDef<Payment>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View Booking Details</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/bookings/${payment.id}`}>View Details</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem className="text-red-500">
               Delete Booking
             </DropdownMenuItem>

@@ -20,8 +20,8 @@ export const menuLinks = [
   },
   {
     id: 3,
-    label: "All Tasks",
-    link: "/tasks",
+    label: "All Bookings",
+    link: "/bookings",
     icon: <LuClipboardList />,
   },
   {
