@@ -6,6 +6,7 @@ import Sidebar from "./_components/Sidebar";
 import Navbar from "./_components/Navbar";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import QueryClientProvider from "./QueryClientProvider";
 
 const heebo = Heebo({ subsets: ["latin"] });
 const fontSans = FontSans({
@@ -25,21 +26,23 @@ export default async function ProtectedLayout({
 }>) {
   const session = await auth();
   return (
-    <SessionProvider session={session}>
-      <html lang="en" suppressHydrationWarning>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <body className={`${heebo.className}, ${cn(fontSans.variable)}`}>
-          <div className="w-full flex flex-col">
-            <Sidebar />
-            <div className="md:ml-56 flex flex-col">
-              <Navbar />
-              <main className="p-6 bg-slate-100 overflow-y-auto">
-                {children}
-              </main>
+    <QueryClientProvider>
+      <SessionProvider session={session}>
+        <html lang="en" suppressHydrationWarning>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+          <body className={`${heebo.className}, ${cn(fontSans.variable)}`}>
+            <div className="w-full flex flex-col">
+              <Sidebar />
+              <div className="md:ml-56 flex flex-col">
+                <Navbar />
+                <main className="p-6 bg-slate-100 overflow-y-auto">
+                  {children}
+                </main>
+              </div>
             </div>
-          </div>
-        </body>
-      </html>
-    </SessionProvider>
+          </body>
+        </html>
+      </SessionProvider>
+    </QueryClientProvider>
   );
 }

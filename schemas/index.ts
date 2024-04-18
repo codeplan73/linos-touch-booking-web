@@ -25,6 +25,31 @@ export const bookingSchema = z.object({
   // payment_status: z.number().min(1, "Amount is required"),
 });
 
+export const UpdateBookingSchema = z.object({
+  postcode: z.string().min(1, "Postcode is required"),
+  rooms: z.string().min(1, "Bathrooms is required"),
+  bathrooms: z.string().min(1, "Bathrooms is required"),
+  clean_type: z.string().min(1, "deep_clean is required"),
+  // extra_task: z.string().optional(),
+  hours: z.string().min(1, "hours is required"),
+  cleaning_product: z.string().min(1, "cleaning product is required"),
+  frequency: z.string().min(1, "frequency is required"),
+  access_type: z.string().min(1, "house access type is required"),
+  house_access: z.string().min(1, "house access is required"),
+  pets: z.string().min(1, "specify if you have any pet"),
+  notes: z.string().optional(),
+  pet_type: z.string().optional(),
+  booking_date: z.string().min(1, "cleaning date is required"),
+  booking_time: z.string().min(1, "Time is required"),
+  fullname: z.string().min(1, "Full Name is required"),
+  phone_number: z.string().min(1, "Phone number is required"),
+  email: z.string().min(1, "Email is required").email("Invalid email address"),
+  address: z.string().min(3, "Address is required"),
+  city: z.string().min(1, "City is required"),
+  amount: z.string().min(1, "Amount is required"),
+  assignedToUserId: z.string().min(1, "Assign to user is required"),
+});
+
 export const RegisterSchema = z
   .object({
     name: z.string().min(1, {

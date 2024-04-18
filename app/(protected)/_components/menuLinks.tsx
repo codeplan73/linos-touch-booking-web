@@ -27,7 +27,7 @@ export const menuLinks = [
   {
     id: 4,
     label: "All Staff",
-    link: "/staffs",
+    link: "/users",
     icon: <FiUsers />,
   },
   {
