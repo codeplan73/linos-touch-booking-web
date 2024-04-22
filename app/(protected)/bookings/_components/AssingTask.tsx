@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,10 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Select,
   SelectContent,
@@ -22,77 +20,63 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { number, z } from "zod";
-import axios from "axios";
-import { UpdateBookingSchema } from "@/schemas";
 import { User, Booking } from "@prisma/client";
 
-interface AssingTaskProps {
-  id: number;
-}
+const AssignTask = ({ id }: { id: number }) => {
+  const [selectedUser, setSelectedUser] = useState<string | null>(null);
 
-export type UpdateBookingSchema = z.infer<typeof UpdateBookingSchema>;
+  // Fetch users using React Query
+  const { data: users, error, isLoading } = useUsers();
 
-const AssingTask = ({ id }: AssingTaskProps) => {
-  const [users, setUsers] = useState([] as User[]);
-  const [user, setUser] = useState("");
-
-  useEffect(() => {
-    fetch("/api/users")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setUsers(data);
-      });
-  }, []);
-
-  const {
-    register,
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<UpdateBookingSchema>({
-    resolver: zodResolver(UpdateBookingSchema),
-  });
-
+  // Function to assign a task
   const assignTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // alert(`Assigning Task to ${selectedUser}`);
+    console.log(selectedUser, id);
     // try {
-    //   const response = await axios.patch("/api/bookings/" + id);
+    //   // Assuming you have an API endpoint for updating task assignment
+    //   const response = await axios.patch(`/api/bookings/${id}`, {
+    //     userId: selectedUser,
+    //   });
+    //   // Handle response as needed
     // } catch (error) {
-    //   console.log(error);
+    //   console.error("Error assigning task:", error);
     // }
   };
 
+  // Render the component
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button className="bg-primaryColor" variant="outline">
-          Assign Task To Staff
+          Assign Task To Staff {id}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Assign New Task {id}</DialogTitle>
+          <DialogTitle>Assign New Task</DialogTitle>
         </DialogHeader>
         <div className="flex items-center space-x-2">
-          <form className="grid flex-1 gap-4">
+          <form onSubmit={assignTask} className="grid flex-1 gap-4">
             <Select>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select User" />
               </SelectTrigger>
               <SelectContent>
-                {users &&
-                  users.map((user) => (
-                    <SelectItem key={user.id} value={user.email}>
-                      {user.name}
-                    </SelectItem>
-                  ))}
+                {users?.map((user: User) => (
+                  <SelectItem
+                    key={user.id}
+                    value={user.id}
+                    onClick={() => {
+                      console.log("User ID:", user.id);
+                      setSelectedUser(user.id);
+                    }}
+                  >
+                    {user.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
-
             <Button type="submit">Assign Task</Button>
           </form>
         </div>
@@ -108,4 +92,12 @@ const AssingTask = ({ id }: AssingTaskProps) => {
   );
 };
 
-export default AssingTask;
+const useUsers = () =>
+  useQuery<User[]>({
+    queryKey: ["users"],
+    queryFn: () => axios.get("/api/users").then((res) => res.data),
+    staleTime: 60 * 1000, //60s
+    retry: 3,
+  });
+
+export default AssignTask;

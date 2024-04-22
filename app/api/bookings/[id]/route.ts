@@ -6,4 +6,6 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   const body = await request.json();
+
+  console.log(body);
 }
