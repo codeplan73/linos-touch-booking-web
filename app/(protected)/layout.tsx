@@ -7,6 +7,8 @@ import Navbar from "./_components/Navbar";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import QueryClientProvider from "./QueryClientProvider";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const heebo = Heebo({ subsets: ["latin"] });
 const fontSans = FontSans({
@@ -40,6 +42,7 @@ export default async function ProtectedLayout({
                 </main>
               </div>
             </div>
+            <ToastContainer />
           </body>
         </html>
       </SessionProvider>

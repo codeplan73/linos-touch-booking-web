@@ -50,6 +50,10 @@ export const UpdateBookingSchema = z.object({
   assignedToUserId: z.string().min(1, "Assign to user is required"),
 });
 
+export const assignedToUserIdSchema = z.object({
+  userId: z.string().min(36, { message: "UserId is required" }),
+});
+
 export const RegisterSchema = z
   .object({
     name: z.string().min(1, {
