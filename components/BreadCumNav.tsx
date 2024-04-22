@@ -22,7 +22,7 @@ const BreadCumNav = ({ dashboard, currentPage, currentSection }: Props) => {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={`/${currentSection}`}>
+          <BreadcrumbLink href={`/${currentPage}`}>
             {currentPage}
           </BreadcrumbLink>
         </BreadcrumbItem>

@@ -74,6 +74,45 @@ export const RegisterSchema = z
     path: ["confirmPassword"],
   });
 
+export const RegisterStaffSchema = z
+  .object({
+    name: z.string().min(1, {
+      message: "Name is required",
+    }),
+    phone_number: z.string().min(3, { message: "Please enter phone number" }),
+    address: z.string().min(3, { message: "Please enter your address" }),
+    city: z.string().min(3, { message: "Please enter your city" }),
+    email: z.string().email({
+      message: "Email is required",
+    }),
+    dob: z.string().min(3, { message: "Please enter your date of birth" }),
+    marita_status: z
+      .string()
+      .min(3, { message: "Please enter your marital status" }),
+    gender: z.string().min(3, { message: "Please select gender" }),
+    zip_code: z.string().min(3, { message: "Please enter your zip code" }),
+    employee_id: z
+      .string()
+      .min(3, { message: "Please enter your employee id" }),
+    employment_type: z
+      .string()
+      .min(3, { message: "Please enter your employment type" }),
+    joining_date: z
+      .string()
+      .min(3, { message: "Please enter your joining date" }),
+    password: z.string().min(6, {
+      message: "Minimum 6 characters required",
+    }),
+    confirmPassword: z
+      .string()
+      .min(6, "Enter confirm password")
+      .max(50, "Password must be less than 50 characters"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Password and confirm password doesn't match!",
+    path: ["confirmPassword"],
+  });
+
 export const NewPasswordSchema = z.object({
   password: z.string().min(6, {
     message: "Minimum of 6 characters required",

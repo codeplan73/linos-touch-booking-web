@@ -29,6 +29,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Link from "next/link";
+import { FaPlus } from "react-icons/fa";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -66,7 +68,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex justify-between items-center py-4">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -76,7 +78,7 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
 
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
               Columns
@@ -101,7 +103,15 @@ export function DataTable<TData, TValue>({
                 );
               })}
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
+
+        <Link
+          href="/users/new"
+          className="bg-primaryColor text-md px-4 py-2 rounded-lg flex space-x-2 items-center text-white"
+        >
+          <FaPlus />
+          <span>Add New Staff</span>
+        </Link>
       </div>
       <div className="rounded-md border">
         <Table>
