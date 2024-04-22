@@ -42,6 +42,12 @@ enum AssignedStatus {
   UNASSIGNED
   ASSIGNED
 }
+enum ClientApproval {
+  PENDING
+  SATISFIED
+  COMPLETED
+  NOT_SATISFIED
+}
 
 model Booking {
   id               Int            @id @default(autoincrement())
@@ -64,12 +70,14 @@ model Booking {
   email            String         @db.VarChar(50)
   address          String         @db.VarChar(255)
   city             String         @db.VarChar(50)
+  review           String?         @db.LongText()
   amount           Int            @default(100)
   payment_status   PaymentStatus  @default(PENDING)
+  client_approval  ClientApproval  @default(PENDING)
   booking_status   BookingStatus  @default(PENDING)
   cleaning_status  CleaningStatus @default(PENDING)
   assigned_status  AssignedStatus @default(UNASSIGNED)
-  assigneeName     String         @db.VarChar(100)
+  assigneeName     String?         @db.VarChar(100)
   assignedToUserId String?        @db.VarChar(255)
   assignedToUser   User?          @relation(fields: [assignedToUserId], references: [id])
   createdAt        DateTime       @default(now())

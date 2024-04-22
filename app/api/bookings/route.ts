@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
-  console.log(body);
+  // console.log(body);
 
   const validate = bookingSchema.safeParse(body);
 
@@ -98,6 +98,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: error, status: 400 });
   }
 }
+
 export async function GET(request: NextRequest) {
   const bookings = await db.booking.findMany({});
   return NextResponse.json(bookings);

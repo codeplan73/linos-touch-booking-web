@@ -22,6 +22,7 @@ export const bookingSchema = z.object({
   address: z.string().min(3, "Address is required"),
   city: z.string().min(1, "City is required"),
   amount: z.string().min(1, "Amount is required"),
+  review: z.optional(z.string()),
   // payment_status: z.number().min(1, "Amount is required"),
 });
 
