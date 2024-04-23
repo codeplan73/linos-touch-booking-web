@@ -42,6 +42,7 @@ enum AssignedStatus {
   UNASSIGNED
   ASSIGNED
 }
+
 enum ClientApproval {
   PENDING
   SATISFIED
@@ -70,14 +71,14 @@ model Booking {
   email            String         @db.VarChar(50)
   address          String         @db.VarChar(255)
   city             String         @db.VarChar(50)
-  review           String?         @db.LongText()
+  review           String?        @db.LongText()
   amount           Int            @default(100)
   payment_status   PaymentStatus  @default(PENDING)
-  client_approval  ClientApproval  @default(PENDING)
+  client_approval  ClientApproval @default(PENDING)
   booking_status   BookingStatus  @default(PENDING)
   cleaning_status  CleaningStatus @default(PENDING)
   assigned_status  AssignedStatus @default(UNASSIGNED)
-  assigneeName     String?         @db.VarChar(100)
+  assigneeName     String?        @db.VarChar(100)
   assignedToUserId String?        @db.VarChar(255)
   assignedToUser   User?          @relation(fields: [assignedToUserId], references: [id])
   createdAt        DateTime       @default(now())
@@ -105,16 +106,25 @@ model Account {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  password      String    @db.VarChar(255)
-  emailVerified DateTime?
-  name          String    @db.VarChar(100)
-  phone_number  String?   @db.VarChar(20)
-  address       String?   @db.VarChar(255)
-  city          String?   @db.VarChar(50)
-  image         String?
-
+  id              String    @id @default(cuid())
+  email           String    @unique
+  password        String    @db.VarChar(255)
+  emailVerified   DateTime?
+  name            String    @db.VarChar(100)
+  phone_number    String?   @db.VarChar(20)
+  address         String?   @db.VarChar(255)
+  city            String?   @db.VarChar(50)
+  marital_status  String?
+  nationality     String?
+  dob             String?
+  gender          String?
+  postal_code     String?
+  employee_id     String?
+  employment_date String?
+  employment_type        String?   @db.VarChar(50)
+  working_days    String?
+  status          String?   @db.VarChar(50)
+  image           String?
   assignedTasks         Booking[]
   role                  UserRole               @default(CLIENT)
   accounts              Account[]

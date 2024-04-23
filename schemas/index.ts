@@ -81,33 +81,34 @@ export const RegisterSchema = z
 
 export const RegisterStaffSchema = z
   .object({
+    email: z.string().email({
+      message: "Email is required",
+    }),
     name: z.string().min(1, {
       message: "Name is required",
+    }),
+    password: z.string().min(6, {
+      message: "Minimum 6 characters required",
     }),
     phone_number: z.string().min(3, { message: "Please enter phone number" }),
     address: z.string().min(3, { message: "Please enter your address" }),
     city: z.string().min(3, { message: "Please enter your city" }),
-    email: z.string().email({
-      message: "Email is required",
-    }),
-    dob: z.string().min(3, { message: "Please enter your date of birth" }),
-    marita_status: z
+    marital_status: z
       .string()
-      .min(3, { message: "Please enter your marital status" }),
-    gender: z.string().min(3, { message: "Please select gender" }),
-    zip_code: z.string().min(3, { message: "Please enter your zip code" }),
-    employee_id: z
+      .min(3, { message: "marital status is required" }),
+    nationality: z.string().min(3, { message: "Nationality is required" }),
+    dob: z.string().min(3, { message: "Date of birth is required" }),
+    gender: z.string().min(3, { message: "Please select your gender" }),
+    postal_code: z.string().min(3, { message: "Please enter your Postcode" }),
+    employee_id: z.string().min(3, { message: "Employee ID is required" }),
+    employment_date: z
       .string()
-      .min(3, { message: "Please enter your employee id" }),
+      .min(3, { message: "Please enter your joining date" }),
     employment_type: z
       .string()
       .min(3, { message: "Please enter your employment type" }),
-    joining_date: z
-      .string()
-      .min(3, { message: "Please enter your joining date" }),
-    password: z.string().min(6, {
-      message: "Minimum 6 characters required",
-    }),
+    working_days: z.string().min(3, { message: "Working days required" }),
+    status: z.string().min(3, { message: "Please enter Work status" }),
     confirmPassword: z
       .string()
       .min(6, "Enter confirm password")

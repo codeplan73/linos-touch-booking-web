@@ -18,39 +18,37 @@ import { z } from "zod";
 import Link from "next/link";
 
 type Payment = Booking;
-// type Payment = Booking & {
-//   assigned_status: "ASSIGNED" | "UNASSIGNED" | string; // Add other possible values if they exist
-// };
-// type Payment = Booking & {
-//   assigned_status: "ASSIGNED" | "UNASSIGNED" | string; // Add other possible values if they exist
-// };
 
 export const columns: ColumnDef<Payment>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
+    accessorKey: "postcode",
+    header: "Postal Code",
   },
   {
     accessorKey: "fullname",
-    header: "FullName",
+    header: "Client Name",
   },
   {
     accessorKey: "email",
@@ -67,6 +65,10 @@ export const columns: ColumnDef<Payment>[] = [
     },
   },
   {
+    accessorKey: "clean_type",
+    header: "Task Type",
+  },
+  {
     accessorKey: "amount",
     header: () => <div className="text-right">Amount</div>,
     cell: ({ row }) => {
@@ -79,18 +81,13 @@ export const columns: ColumnDef<Payment>[] = [
       return <div className="text-right font-medium">{formatted}</div>;
     },
   },
-
   {
-    accessorKey: "clean_type",
-    header: "CleanType",
-  },
-  {
-    accessorKey: "hours",
-    header: "Hours",
+    accessorKey: "booking_date",
+    header: "Date",
   },
   {
     accessorKey: "cleaning_status",
-    header: "CleanStatus",
+    header: "Status",
     cell: ({ row }) => {
       const status = row.getValue("cleaning_status");
       let bgColor = "";
@@ -117,34 +114,34 @@ export const columns: ColumnDef<Payment>[] = [
       );
     },
   },
-  {
-    accessorKey: "assigned_status",
-    header: "AssignedStatus",
-    cell: ({ row }) => {
-      const status = row.getValue("assigned_status");
-      let bgColor = "";
+  // {
+  //   accessorKey: "assigned_status",
+  //   header: "AssignedStatus",
+  //   cell: ({ row }) => {
+  //     const status = row.getValue("assigned_status");
+  //     let bgColor = "";
 
-      switch (status) {
-        case "ASSIGNED":
-          bgColor = "bg-green-700 text-white text-center";
-          break;
-        case "UNASSIGNED":
-          bgColor = "bg-yellow-500";
-          break;
-        default:
-          bgColor = "bg-gray-500"; // Add a default color for unknown statuses
-          break;
-      }
+  //     switch (status) {
+  //       case "ASSIGNED":
+  //         bgColor = "bg-green-700 text-white text-center";
+  //         break;
+  //       case "UNASSIGNED":
+  //         bgColor = "bg-yellow-500";
+  //         break;
+  //       default:
+  //         bgColor = "bg-gray-500"; // Add a default color for unknown statuses
+  //         break;
+  //     }
 
-      return (
-        <div className={`px-2 py-1 rounded ${bgColor}`}>{status as string}</div>
-      );
-    },
-  },
-  {
-    accessorKey: "assigneeName",
-    header: "Assignee",
-  },
+  //     return (
+  //       <div className={`px-2 py-1 rounded ${bgColor}`}>{status as string}</div>
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey: "assigneeName",
+  //   header: "Assignee",
+  // },
 
   {
     id: "actions",
