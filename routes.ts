@@ -13,7 +13,12 @@ export const publicRoutes = [
   "/services",
   "/terms",
   "/testimonial",
+
   "/api/bookings",
+  "/api/users",
+  "/api/users/id",
+  "/api/users/staff",
+  "/api/users/customers",
 ];
 
 /**

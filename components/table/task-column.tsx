@@ -18,6 +18,12 @@ import { z } from "zod";
 import Link from "next/link";
 
 type Payment = Booking;
+// type Payment = Booking & {
+//   assigned_status: "ASSIGNED" | "UNASSIGNED" | string; // Add other possible values if they exist
+// };
+// type Payment = Booking & {
+//   assigned_status: "ASSIGNED" | "UNASSIGNED" | string; // Add other possible values if they exist
+// };
 
 export const columns: ColumnDef<Payment>[] = [
   {
@@ -85,18 +91,59 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "cleaning_status",
     header: "CleanStatus",
-  },
-  {
-    accessorKey: "payment_status",
-    header: "PaymentStatus",
+    cell: ({ row }) => {
+      const status = row.getValue("cleaning_status");
+      let bgColor = "";
+
+      switch (status) {
+        case "PENDING":
+          bgColor = "bg-red-700";
+          break;
+        case "ONGOING":
+          bgColor = "bg-yellow-500";
+          break;
+        case "COMPLETED":
+          bgColor = "bg-green-700";
+          break;
+        default:
+          bgColor = "bg-gray-500"; // Add a default color for unknown statuses
+          break;
+      }
+
+      return (
+        <div className={`px-2 py-1 rounded text-white text-center ${bgColor}`}>
+          {status as string}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "assigned_status",
     header: "AssignedStatus",
+    cell: ({ row }) => {
+      const status = row.getValue("assigned_status");
+      let bgColor = "";
+
+      switch (status) {
+        case "ASSIGNED":
+          bgColor = "bg-green-700 text-white text-center";
+          break;
+        case "UNASSIGNED":
+          bgColor = "bg-yellow-500";
+          break;
+        default:
+          bgColor = "bg-gray-500"; // Add a default color for unknown statuses
+          break;
+      }
+
+      return (
+        <div className={`px-2 py-1 rounded ${bgColor}`}>{status as string}</div>
+      );
+    },
   },
   {
-    accessorKey: "assignedToUser",
-    header: "AssignedToUser",
+    accessorKey: "assigneeName",
+    header: "Assignee",
   },
 
   {

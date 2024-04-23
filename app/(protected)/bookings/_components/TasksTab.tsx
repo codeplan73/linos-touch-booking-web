@@ -32,21 +32,17 @@ const TasksTab = async () => {
     <Tabs defaultValue="pending" className="w-full bg-white px-6 pb-8">
       <TabsList>
         <TabsTrigger value="pending">Pending Task</TabsTrigger>
-        {/* <TabsTrigger value="ongoingTask">Ongoing Task</TabsTrigger> */}
-        <TabsTrigger value="canceledTask">Canceled Task</TabsTrigger>
+        <TabsTrigger value="ongoingTask">Ongoing Task</TabsTrigger>
         <TabsTrigger value="completedTask">Completed Task</TabsTrigger>
+        <TabsTrigger value="canceledTask">Canceled Task</TabsTrigger>
       </TabsList>
 
       <TabsContent value="pending">
         <DataTable columns={columns} data={pendingTasks} />
       </TabsContent>
-      {/* <TabsContent value="ongoingTask">
-        <DataTable
-          columns={columns}
-          data={tasks}
-          status={CleaningStatus.PENDING}
-        />
-      </TabsContent> */}
+      <TabsContent value="ongoingTask">
+        <DataTable columns={columns} data={ongoingTasks} />
+      </TabsContent>
       <TabsContent value="canceledTask">
         <DataTable columns={columns} data={canceledTasks} />
       </TabsContent>

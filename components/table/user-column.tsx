@@ -59,6 +59,10 @@ export const columns: ColumnDef<Payment>[] = [
       );
     },
   },
+  {
+    accessorKey: "role",
+    header: "Role",
+  },
 
   {
     accessorKey: "phone_number",

@@ -15,13 +15,11 @@ export async function PATCH(
 
   const { userId } = body;
 
-  if (userId) {
-    const user = await db.user.findUnique({
-      where: { id: userId },
-    });
-    if (!user)
-      return NextResponse.json({ error: "Invalid user." }, { status: 404 });
-  }
+  const user = await db.user.findUnique({
+    where: { id: userId },
+  });
+  if (!user)
+    return NextResponse.json({ error: "Invalid user." }, { status: 404 });
 
   const booking = await db.booking.findUnique({
     where: { id: parseInt(params.id) },
@@ -35,6 +33,7 @@ export async function PATCH(
     data: {
       assignedToUserId: userId,
       assigned_status: "ASSIGNED",
+      assigneeName: user.name,
     },
   });
 

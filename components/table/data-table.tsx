@@ -77,41 +77,6 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu> */}
-
-        <Link
-          href="/users/new"
-          className="bg-primaryColor text-md px-4 py-2 rounded-lg flex space-x-2 items-center text-white"
-        >
-          <FaPlus />
-          <span>Add New Staff</span>
-        </Link>
       </div>
       <div className="rounded-md border">
         <Table>

@@ -1,24 +1,50 @@
 import React from "react";
 import { Booking } from "@prisma/client";
 import AssingTask from "./AssingTask";
+import { Bokor } from "next/font/google";
 
 const BookingDetails = (booking: Booking) => {
+  const getCleaningStatusColor = () => {
+    if (booking.cleaning_status === "PENDING") {
+      return "bg-red-500";
+    } else if (booking.cleaning_status === "ONGOING") {
+      return "bg-yellow-500";
+    } else if (booking.cleaning_status === "COMPLETED") {
+      return "bg-green-700";
+    } else {
+      return "";
+    }
+  };
+
   return (
     <div className="flex flex-col gap-8 bg-white rounded-lg p-8">
       <div className="flex flex-col gap-8">
         <div className="w-full flex justify-between items-start">
           <div className="flex space-x-2 items-center">
             <span>Cleaning Status:</span>
-            <span className="text-xs text-slate-500 bg-orange-100 rounded-lg p-2 ">
+            <span
+              className={`text-xs rounded-lg px-2 py-1 ml-2 text-white ${getCleaningStatusColor()}`}
+            >
               {booking.cleaning_status}
             </span>
           </div>
 
-          <div className="flex space-x-2 items-center">
-            <span>Assign Status:</span>
-            <span className="text-xs text-slate-500 bg-orange-100 rounded-lg p-2 ">
-              {booking.assigned_status}
-            </span>
+          <div className="flex flex-col space-y-2 space-x-2 items-center">
+            <div>
+              <span>Assign Status:</span>
+              <span
+                className={`text-xs rounded-lg px-2 py-1 ml-2 text-white ${
+                  booking.assigned_status === "ASSIGNED"
+                    ? "bg-green-700"
+                    : "bg-red-500"
+                }`}
+              >
+                {booking.assigned_status}
+              </span>
+            </div>
+            {booking.assigned_status === "ASSIGNED" && (
+              <span className="">Assignee: {booking.assigneeName}</span>
+            )}
           </div>
         </div>
 
@@ -121,9 +147,13 @@ const BookingDetails = (booking: Booking) => {
         </p>
       </div>
 
-      <div>
-        <AssingTask id={booking.id} />
-      </div>
+      {booking.assigned_status === "UNASSIGNED" ? (
+        <div>
+          <AssingTask id={booking.id} />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
