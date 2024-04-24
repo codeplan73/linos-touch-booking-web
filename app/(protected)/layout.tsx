@@ -37,7 +37,7 @@ export default async function ProtectedLayout({
               <Sidebar />
               <div className="md:ml-56 flex flex-col">
                 <Navbar />
-                <main className="p-6 bg-slate-100 overflow-y-auto">
+                <main className="py-6 px-12 bg-slate-100 overflow-y-auto">
                   {children}
                 </main>
               </div>

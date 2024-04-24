@@ -4,7 +4,7 @@ import NewUserForm from "../_component/NewUserForm";
 
 const page = () => {
   return (
-    <div>
+    <div className="">
       <BreadCumNav
         dashboard="dashboard"
         currentPage="users"

@@ -8,15 +8,29 @@ import { generateVerificationToken } from "@/lib/tokens";
 
 export async function POST(request: NextRequest, response: NextResponse) {
   const body = await request.json();
-  const validatedFields = RegisterStaffSchema.safeParse(body);
 
-  console.log(validatedFields);
+  const validatedFields = RegisterStaffSchema.safeParse(body);
 
   if (!validatedFields.success)
     return NextResponse.json(validatedFields.error.format(), { status: 400 });
 
-  const { name, email, password, phone_number, city, address } =
-    validatedFields.data;
+  const {
+    name,
+    phone_number,
+    address,
+    city,
+    email,
+    password,
+    marital_status,
+    nationality,
+    dob,
+    gender,
+    postal_code,
+    employee_id,
+    employment_date,
+    employment_type,
+    working_days,
+  } = validatedFields.data;
 
   const existingUser = await getUserByEmail(email);
 
@@ -31,10 +45,19 @@ export async function POST(request: NextRequest, response: NextResponse) {
     const newUser = await db.user.create({
       data: {
         name,
-        email,
         phone_number,
-        city,
         address,
+        city,
+        email,
+        marital_status,
+        nationality,
+        dob,
+        gender,
+        postal_code,
+        employee_id,
+        employment_date,
+        employment_type,
+        working_days,
         password: hashedPassword,
         role: "USER",
       },
