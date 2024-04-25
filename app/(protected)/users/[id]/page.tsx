@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import EditForm from "../_component/EditForm";
 
 interface Props {
   params: { id: number };
@@ -7,11 +8,13 @@ interface Props {
 const page = async ({ params }: Props) => {
   const user = await db.user.findUnique({ where: { id: String(params.id) } });
 
-  return (
-    <div>
-      <pre>{user?.email}</pre>
-    </div>
-  );
+  if (!user) {
+    return { notFound: true };
+  }
+
+  return <EditForm user={user} />;
 };
+
+export const revalidate = 10;
 
 export default page;

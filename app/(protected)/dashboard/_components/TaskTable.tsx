@@ -8,7 +8,7 @@ import Link from "next/link";
 const TaskTable = async () => {
   const newTask = await db.booking.findMany({
     where: {
-      cleaning_status: "PENDING",
+      cleaning_status: "NEW",
     },
   });
 

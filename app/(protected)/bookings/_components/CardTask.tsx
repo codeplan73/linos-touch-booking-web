@@ -20,7 +20,7 @@ const CardTask = async () => {
         icon={
           <IoBriefcaseOutline className="bg-purple-100 text-4xl text-purple-950 p-2 rounded-xl" />
         }
-        amount={allTasks.length}
+        amount={allTasks.length.toString()}
         heading="Total Task"
         inconChart={<TiArrowSortedUp className="text-green-500" />}
         date="April, 5th 2024"
@@ -31,7 +31,7 @@ const CardTask = async () => {
         icon={
           <IoBriefcaseOutline className="bg-purple-100 text-4xl text-purple-950 p-2 rounded-xl" />
         }
-        amount={ongoingTask.length}
+        amount={ongoingTask.length.toString()}
         heading="Ongoing Task"
         inconChart={<TiArrowSortedDown className="text-red-500" />}
         date="April, 5th 2024"
@@ -42,7 +42,7 @@ const CardTask = async () => {
         icon={
           <IoBriefcaseOutline className="bg-purple-100 text-4xl text-purple-950 p-2 rounded-xl" />
         }
-        amount={completedTask.length}
+        amount={completedTask.length.toString()}
         heading="Completed Task"
         inconChart={<TiArrowSortedUp className="text-green-500" />}
         date="April, 5th 2024"

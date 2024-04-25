@@ -1,6 +1,6 @@
 import BreadCumNav from "@/components/BreadCumNav";
 import React from "react";
-import NewUserForm from "../_component/NewUserForm";
+import NewForm from "../_component/NewForm";
 
 const page = () => {
   return (
@@ -11,7 +11,7 @@ const page = () => {
         currentSection="Add New User"
       />
       <div>
-        <NewUserForm />
+        <NewForm />
       </div>
     </div>
   );

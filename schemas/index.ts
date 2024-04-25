@@ -113,3 +113,27 @@ export const RegisterStaffSchema = z
     message: "Password and confirm password doesn't match!",
     path: ["confirmPassword"],
   });
+
+const baseUpdateSchema = {
+  name: baseRegisterSchema.name,
+  phone_number: baseRegisterSchema.phone_number,
+  address: baseRegisterSchema.address,
+  city: baseRegisterSchema.city,
+  email: baseRegisterSchema.email,
+  marital_status: z.string().min(3, { message: "marital status is required" }),
+  nationality: z.string().min(3, { message: "Nationality is required" }),
+  dob: z.string().min(3, { message: "Date of birth is required" }),
+  gender: z.string().min(3, { message: "Please select your gender" }),
+  postal_code: z.string().min(3, { message: "Please enter your Postcode" }),
+  employee_id: z.string().min(3, { message: "Employee ID is required" }),
+  employment_date: z
+    .string()
+    .min(3, { message: "Please enter your joining date" }),
+  employment_type: z
+    .string()
+    .min(3, { message: "Please enter your employment type" }),
+  working_days: z.string().min(3, { message: "Working days required" }),
+  // status: z.string().min(3, { message: "Please enter Work status" }),
+};
+
+export const UpdateStaffSchema = z.object(baseUpdateSchema);

@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 const TasksTab = async () => {
   const pendingTasks = await db.booking.findMany({
     where: {
-      cleaning_status: "PENDING",
+      cleaning_status: "NEW",
     },
   });
 

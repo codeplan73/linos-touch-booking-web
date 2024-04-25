@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+
 import { Booking } from "@prisma/client";
 
 import {
@@ -20,28 +20,6 @@ import Link from "next/link";
 type Payment = Booking;
 
 export const columns: ColumnDef<Payment>[] = [
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
   {
     accessorKey: "postcode",
     header: "Postal Code",
@@ -93,7 +71,7 @@ export const columns: ColumnDef<Payment>[] = [
       let bgColor = "";
 
       switch (status) {
-        case "PENDING":
+        case "NEW":
           bgColor = "bg-yellow-200 text-yellow-700";
           break;
         case "ONGOING":
@@ -114,35 +92,6 @@ export const columns: ColumnDef<Payment>[] = [
       );
     },
   },
-  // {
-  //   accessorKey: "assigned_status",
-  //   header: "AssignedStatus",
-  //   cell: ({ row }) => {
-  //     const status = row.getValue("assigned_status");
-  //     let bgColor = "";
-
-  //     switch (status) {
-  //       case "ASSIGNED":
-  //         bgColor = "bg-green-700 text-white text-center";
-  //         break;
-  //       case "UNASSIGNED":
-  //         bgColor = "bg-yellow-500";
-  //         break;
-  //       default:
-  //         bgColor = "bg-gray-500"; // Add a default color for unknown statuses
-  //         break;
-  //     }
-
-  //     return (
-  //       <div className={`px-2 py-1 rounded ${bgColor}`}>{status as string}</div>
-  //     );
-  //   },
-  // },
-  // {
-  //   accessorKey: "assigneeName",
-  //   header: "Assignee",
-  // },
-
   {
     id: "actions",
     cell: ({ row }) => {

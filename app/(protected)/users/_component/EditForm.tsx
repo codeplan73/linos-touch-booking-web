@@ -10,30 +10,16 @@ import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { RegisterStaffSchema } from "@/schemas";
+import { UpdateStaffSchema } from "@/schemas";
 import InputField from "@/components/form-fields/InputField";
 import InputFieldWrapper from "@/components/form-fields/InputFieldWrapper";
 import SelectField from "@/components/form-fields/SelectField";
+import { User } from "@prisma/client";
 
-export type RegisterStaffFormData = z.infer<typeof RegisterStaffSchema>;
+export type RegisterStaffFormData = z.infer<typeof UpdateStaffSchema>;
 
-const NewUserForm = () => {
-  const [newEmployeeId, setNewEmployeeId] = useState<string>("");
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
+const EditForm = ({ user }: { user: User }) => {
   const [isPending, setSubmitting] = useState(false);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("/users/getlastemployeeid")
-  //     .then((response) => {
-  //       setNewEmployeeId(response.data.new_employee_id);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch new employee ID:", error);
-  //     });
-  //   console.log("New Employee ID:", newEmployeeId);
-  // }, [newEmployeeId]);
 
   const {
     register,
@@ -42,26 +28,25 @@ const NewUserForm = () => {
     reset,
     formState: { errors },
   } = useForm<RegisterStaffFormData>({
-    resolver: zodResolver(RegisterStaffSchema),
+    resolver: zodResolver(UpdateStaffSchema),
   });
-
-  const router = useRouter();
 
   const handleRegisterStaff = async (data: RegisterStaffFormData) => {
     try {
-      // const { confirmPassword, ...dataWithoutConfirmPassword } = data;
       setSubmitting(true);
-      const response = await axios.post("/api/users/staff", data);
-      toast.success("Staff registered successfully!");
-      router.refresh();
-      router.push("/users");
-      console.log(response.data);
-      setSubmitting(false);
+      const response = await axios.patch("/api/users/staff/" + user.id, data);
+      if (response.status === 200) {
+        toast.success("Staff details updated successfully!");
+        router.refresh();
+        router.push("/users");
+        setSubmitting(false);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
+  const router = useRouter();
   return (
     <form
       onSubmit={handleSubmit(handleRegisterStaff)}
@@ -76,6 +61,7 @@ const NewUserForm = () => {
           errors={errors}
           name="name"
           disabled={isPending}
+          value={user?.name}
         />
         <InputField
           label="Phone Number"
@@ -84,12 +70,17 @@ const NewUserForm = () => {
           errors={errors}
           name="phone_number"
           disabled={isPending}
+          value={user?.phone_number ?? ""}
         />
       </InputFieldWrapper>
       <InputFieldWrapper>
         <SelectField
           register={register}
           options={[
+            {
+              value: user?.marital_status ?? "",
+              label: user?.marital_status ?? "",
+            },
             { value: "Single", label: "Single" },
             { value: "Married", label: "Married" },
             { value: "Widow", label: "Widow" },
@@ -104,6 +95,10 @@ const NewUserForm = () => {
         <SelectField
           register={register}
           options={[
+            {
+              value: user?.gender ?? "",
+              label: user?.gender ?? "",
+            },
             { value: "Male", label: "Male" },
             { value: "Female", label: "Female" },
           ]}
@@ -120,6 +115,7 @@ const NewUserForm = () => {
           errors={errors}
           name="email"
           disabled={isPending}
+          value={user?.email ?? ""}
         />
         <InputField
           label="Date of Birth"
@@ -128,6 +124,7 @@ const NewUserForm = () => {
           errors={errors}
           name="dob"
           disabled={isPending}
+          value={user?.dob ?? ""}
         />
       </InputFieldWrapper>
       <InputFieldWrapper>
@@ -138,6 +135,7 @@ const NewUserForm = () => {
           errors={errors}
           name="address"
           disabled={isPending}
+          value={user?.address ?? ""}
         />
       </InputFieldWrapper>
       <InputFieldWrapper>
@@ -148,6 +146,7 @@ const NewUserForm = () => {
           errors={errors}
           name="city"
           disabled={isPending}
+          value={user?.city ?? ""}
         />
         <InputField
           label="Postal Code"
@@ -156,6 +155,7 @@ const NewUserForm = () => {
           errors={errors}
           name="postal_code"
           disabled={isPending}
+          value={user?.postal_code ?? ""}
         />
         <InputField
           label="Nationality"
@@ -164,6 +164,7 @@ const NewUserForm = () => {
           errors={errors}
           name="nationality"
           disabled={isPending}
+          value={user?.nationality ?? ""}
         />
       </InputFieldWrapper>
       <InputFieldWrapper>
@@ -174,11 +175,16 @@ const NewUserForm = () => {
           errors={errors}
           name="employee_id"
           disabled={isPending}
+          value={user?.employee_id ?? ""}
         />
 
         <SelectField
           register={register}
           options={[
+            {
+              value: user?.employment_type ?? "",
+              label: user?.employment_type ?? "",
+            },
             { value: "Full-time", label: "Full-time" },
             { value: "Part-time", label: "Part-time" },
             { value: "Contract", label: "Contract" },
@@ -195,11 +201,16 @@ const NewUserForm = () => {
           type="date"
           errors={errors}
           name="employment_date"
+          value={user?.employment_date ?? ""}
           disabled={isPending}
         />
         <SelectField
           register={register}
           options={[
+            {
+              value: user?.working_days ?? "",
+              label: user?.working_days ?? "",
+            },
             { value: "Daily", label: "Daily" },
             { value: "Monday - Friday", label: "Monday - Friday" },
             { value: "Monday - Saturday", label: "Monday - Saturday" },
@@ -211,24 +222,6 @@ const NewUserForm = () => {
           errors={errors}
         />
       </InputFieldWrapper>
-      <InputFieldWrapper>
-        <InputField
-          label="Password"
-          register={register}
-          type="password"
-          errors={errors}
-          name="password"
-          disabled={isPending}
-        />
-        <InputField
-          label="Confirm Password"
-          register={register}
-          type="password"
-          errors={errors}
-          name="confirmPassword"
-          disabled={isPending}
-        />
-      </InputFieldWrapper>
 
       <Button disabled={isPending} className="bg-warningColor" type="submit">
         {isPending && <Spinner />}
@@ -238,4 +231,4 @@ const NewUserForm = () => {
   );
 };
 
-export default NewUserForm;
+export default EditForm;

@@ -5,7 +5,7 @@ import { Bokor } from "next/font/google";
 
 const BookingDetails = (booking: Booking) => {
   const getCleaningStatusColor = () => {
-    if (booking.cleaning_status === "PENDING") {
+    if (booking.cleaning_status === "NEW") {
       return "bg-yellow-200 text-yellow-900";
     } else if (booking.cleaning_status === "ONGOING") {
       return "bg-purple-200 text-purple-900";

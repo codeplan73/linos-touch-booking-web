@@ -4,19 +4,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { User } from "@prisma/client";
-
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -88,10 +75,6 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "employment_type",
     header: "Type",
   },
-  // {
-  //   accessorKey: "status",
-  //   header: "Status",
-  // },
   {
     accessorKey: "status",
     header: "Status",
@@ -107,7 +90,7 @@ export const columns: ColumnDef<Payment>[] = [
           bgColor = "bg-yellow-200 text-yellow-900";
           break;
         default:
-          bgColor = "bg-gray-500"; // Add a default color for unknown statuses
+          bgColor = "bg-gray-500";
           break;
       }
 
@@ -139,27 +122,6 @@ export const columns: ColumnDef<Payment>[] = [
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link href={`/users/${payment.id}`}>View Staff Details</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-red-500">
-                <AlertDialog>
-                  <AlertDialogTrigger>Open</AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Are you absolutely sure?
-                      </AlertDialogTitle>
-                      <AlertDialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your account and remove your data from our
-                        servers.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction>Continue</AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
