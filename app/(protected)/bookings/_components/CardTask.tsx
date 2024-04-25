@@ -2,7 +2,7 @@ import CardWrapper from "@/components/card-wrapper";
 import React from "react";
 import { IoBriefcaseOutline } from "react-icons/io5";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
-import DashboardCard from "../../_components/DashboardCard";
+import Card from "../../_components/Card";
 import { db } from "@/lib/db";
 
 const CardTask = async () => {
@@ -16,7 +16,7 @@ const CardTask = async () => {
 
   return (
     <CardWrapper>
-      <DashboardCard
+      <Card
         icon={
           <IoBriefcaseOutline className="bg-purple-100 text-4xl text-purple-950 p-2 rounded-xl" />
         }
@@ -27,7 +27,7 @@ const CardTask = async () => {
         chart="5"
       />
 
-      <DashboardCard
+      <Card
         icon={
           <IoBriefcaseOutline className="bg-purple-100 text-4xl text-purple-950 p-2 rounded-xl" />
         }
@@ -38,7 +38,7 @@ const CardTask = async () => {
         chart="8"
       />
 
-      <DashboardCard
+      <Card
         icon={
           <IoBriefcaseOutline className="bg-purple-100 text-4xl text-purple-950 p-2 rounded-xl" />
         }

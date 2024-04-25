@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { columns } from "@/components/table/task-column";
-import { DataTable } from "@/components/table/data-table";
+import { DataTable } from "@/components/table/data-table-filter";
 import { db } from "@/lib/db";
 
 const TasksTab = async () => {

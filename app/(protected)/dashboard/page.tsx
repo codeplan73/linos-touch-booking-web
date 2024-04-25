@@ -1,20 +1,14 @@
 import { auth } from "@/auth";
+import DashboardCard from "./_components/DashboardCard";
+import TaskTable from "./_components/TaskTable";
 
 const DashboardPage = async () => {
   const session = await auth();
   return (
-    <div>
-      <h4>Welcome To Admin Dashboard page</h4>
-      {session?.user?.name && <p>{session?.user.role}</p>}
+    <div className="flex flex-col gap-8">
+      <DashboardCard />
 
-      {session?.user?.email}
-
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis
-        autem eos minus ex rerum voluptates, consequatur accusantium esse
-        corrupti dolor repellat eius pariatur. Quia voluptate in id dignissimos
-        consequuntur rerum.
-      </p>
+      <TaskTable />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { IoBriefcaseOutline } from "react-icons/io5";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 
-interface DashboardCardProps {
+interface CardProps {
   icon: ReactNode;
   heading: string;
   amount: number;
@@ -11,15 +11,15 @@ interface DashboardCardProps {
   date?: string;
 }
 
-const DashboardCard = ({
+const Card = ({
   icon,
   heading,
   amount,
   inconChart,
   chart,
   date,
-}: DashboardCardProps) => {
-  // const DashboardCard = () => {
+}: CardProps) => {
+  // const Card = () => {
   return (
     <div className="flex flex-col max-w-md bg-white rounded-lg shadow-lg border">
       <div className="px-4 py-4 flex flex-col gap-4">
@@ -36,11 +36,13 @@ const DashboardCard = ({
         </div>
       </div>
       <hr />
-      <p className="py-2 px-4 text-sm font-sans text-slate-400">
-        Updated: {date}
-      </p>
+      {date && (
+        <p className="py-2 px-4 text-sm font-sans text-slate-400">
+          Updated: {date}
+        </p>
+      )}
     </div>
   );
 };
 
-export default DashboardCard;
+export default Card;
