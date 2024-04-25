@@ -5,7 +5,7 @@ import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 interface CardProps {
   icon: ReactNode;
   heading: string;
-  amount: number;
+  amount: string;
   inconChart: ReactNode;
   chart: string;
   date?: string;

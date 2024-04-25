@@ -5,8 +5,10 @@ import TaskTable from "./_components/TaskTable";
 const DashboardPage = async () => {
   const session = await auth();
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-12">
       <DashboardCard />
+
+      <hr />
 
       <TaskTable />
     </div>
