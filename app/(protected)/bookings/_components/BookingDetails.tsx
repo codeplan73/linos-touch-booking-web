@@ -1,7 +1,6 @@
 import React from "react";
 import { Booking } from "@prisma/client";
 import AssingTask from "./AssingTask";
-import { Bokor } from "next/font/google";
 
 const BookingDetails = (booking: Booking) => {
   const getCleaningStatusColor = () => {
