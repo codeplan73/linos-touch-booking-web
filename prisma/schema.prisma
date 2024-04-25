@@ -50,6 +50,11 @@ enum ClientApproval {
   NOT_SATISFIED
 }
 
+enum UserStatus {
+  AVAILABLE
+  ASSIGNED
+}
+
 model Booking {
   id               Int            @id @default(autoincrement())
   postcode         String         @db.VarChar(50)
@@ -106,25 +111,25 @@ model Account {
 }
 
 model User {
-  id              String    @id @default(cuid())
-  email           String    @unique
-  password        String    @db.VarChar(255)
-  emailVerified   DateTime?
-  name            String    @db.VarChar(100)
-  phone_number    String?   @db.VarChar(20)
-  address         String?   @db.VarChar(255)
-  city            String?   @db.VarChar(50)
-  marital_status  String?
-  nationality     String?
-  dob             String?
-  gender          String?
-  postal_code     String?
-  employee_id     String?
-  employment_date String?
-  employment_type        String?   @db.VarChar(50)
-  working_days    String?
-  status          String?   @db.VarChar(50)
-  image           String?
+  id                    String                 @id @default(cuid())
+  email                 String                 @unique
+  password              String                 @db.VarChar(255)
+  emailVerified         DateTime?
+  name                  String                 @db.VarChar(100)
+  phone_number          String?                @db.VarChar(20)
+  address               String?                @db.VarChar(255)
+  city                  String?                @db.VarChar(50)
+  marital_status        String?
+  nationality           String?
+  dob                   String?
+  gender                String?
+  postal_code           String?
+  employee_id           String?
+  employment_date       String?
+  employment_type       String?                @db.VarChar(50)
+  working_days          String?
+  status                UserStatus             @default(AVAILABLE)
+  image                 String?
   assignedTasks         Booking[]
   role                  UserRole               @default(CLIENT)
   accounts              Account[]

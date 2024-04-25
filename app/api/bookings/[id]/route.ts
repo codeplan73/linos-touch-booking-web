@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { assignedToUserIdSchema } from "@/schemas";
+// import { assignedToUserIdSchema } from "@/schemas";
 
 export async function PATCH(
   request: NextRequest,
@@ -37,5 +37,10 @@ export async function PATCH(
     },
   });
 
-  return NextResponse.json(updatedBooking, { status: 200 });
+  const assignedUser = await db.user.update({
+    where: { id: user.id },
+    data: { status: "ASSIGNED" },
+  });
+
+  return NextResponse.json({ updatedBooking, assignedUser }, { status: 200 });
 }

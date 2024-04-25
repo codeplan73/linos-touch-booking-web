@@ -15,4 +15,6 @@ const TaskTable = async () => {
   );
 };
 
+export const revalidate = 10;
+
 export default TaskTable;

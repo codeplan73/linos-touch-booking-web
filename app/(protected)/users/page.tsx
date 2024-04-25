@@ -10,7 +10,7 @@ const page = () => {
           <h4 className="text-xl text-slate-400">Staff List</h4>
           <Link
             href="/users/new"
-            className="bg-white p-2 rounded-lg shadow-xl hover:bg-slate-600 hover:text-white"
+            className="bg-warningColor text-white p-2 rounded-lg shadow-xl hover:bg-slate-700 hover:text-white transition-all duration-300 ease-in-out"
           >
             Add New Staff
           </Link>

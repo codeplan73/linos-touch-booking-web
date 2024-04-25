@@ -53,7 +53,7 @@ const AssignTask = ({ id }: { id: number }) => {
     <Dialog>
       <DialogTrigger asChild>
         <Button className="bg-primaryColor" variant="outline">
-          Assign Task To Staff {id}
+          Assign Task To Staff
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">

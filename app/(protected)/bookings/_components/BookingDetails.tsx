@@ -6,11 +6,11 @@ import { Bokor } from "next/font/google";
 const BookingDetails = (booking: Booking) => {
   const getCleaningStatusColor = () => {
     if (booking.cleaning_status === "PENDING") {
-      return "bg-red-500";
+      return "bg-yellow-200 text-yellow-900";
     } else if (booking.cleaning_status === "ONGOING") {
-      return "bg-yellow-500";
+      return "bg-purple-200 text-purple-900";
     } else if (booking.cleaning_status === "COMPLETED") {
-      return "bg-green-700";
+      return "bg-green-200 text-green-900";
     } else {
       return "";
     }
@@ -23,7 +23,7 @@ const BookingDetails = (booking: Booking) => {
           <div className="flex space-x-2 items-center">
             <span>Cleaning Status:</span>
             <span
-              className={`text-xs rounded-lg px-2 py-1 ml-2 text-white ${getCleaningStatusColor()}`}
+              className={`text-xs rounded-lg px-2 py-1 ml-2 ${getCleaningStatusColor()}`}
             >
               {booking.cleaning_status}
             </span>
@@ -33,10 +33,10 @@ const BookingDetails = (booking: Booking) => {
             <div>
               <span>Assign Status:</span>
               <span
-                className={`text-xs rounded-lg px-2 py-1 ml-2 text-white ${
+                className={`text-xs rounded-lg px-2 py-1 ml-2 ${
                   booking.assigned_status === "ASSIGNED"
-                    ? "bg-green-700"
-                    : "bg-red-500"
+                    ? "bg-green-200 text-green-900"
+                    : "bg-yellow-200 text-yellow-900"
                 }`}
               >
                 {booking.assigned_status}
@@ -157,5 +157,7 @@ const BookingDetails = (booking: Booking) => {
     </div>
   );
 };
+
+export const revalidate = 10;
 
 export default BookingDetails;

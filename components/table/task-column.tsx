@@ -94,13 +94,13 @@ export const columns: ColumnDef<Payment>[] = [
 
       switch (status) {
         case "PENDING":
-          bgColor = "bg-red-700";
+          bgColor = "bg-yellow-200 text-yellow-700";
           break;
         case "ONGOING":
-          bgColor = "bg-yellow-500";
+          bgColor = "bg-purple-200 text-purple-700";
           break;
         case "COMPLETED":
-          bgColor = "bg-green-700";
+          bgColor = "bg-green-200 text-green-700";
           break;
         default:
           bgColor = "bg-gray-500"; // Add a default color for unknown statuses
