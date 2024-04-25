@@ -50,6 +50,10 @@ const baseBookingSchema = {
   city: z.string().min(1, "City is required"),
   amount: z.string().min(1, "Amount is required"),
   review: z.optional(z.string()),
+  payment_intent: z.optional(z.string()),
+  payment_method: z.optional(z.string()),
+  payment_currency: z.optional(z.string()),
+  payment_date: z.optional(z.string()),
 };
 
 export const bookingSchema = z.object(baseBookingSchema);

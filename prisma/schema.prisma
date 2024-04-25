@@ -56,29 +56,28 @@ enum UserStatus {
 }
 
 model Booking {
-  id               Int            @id @default(autoincrement())
-  postcode         String         @db.VarChar(50)
-  rooms            String         @db.VarChar(20)
-  bathrooms        String         @db.VarChar(20)
-  clean_type       String         @db.VarChar(50)
-  hours            String         @db.VarChar(10)
-  cleaning_product String         @db.VarChar(50)
-  frequency        String         @db.VarChar(50)
-  access_type      String         @db.VarChar(50)
-  house_access     String         @db.VarChar(50)
-  pets             String         @db.VarChar(30)
+  id               Int     @id @default(autoincrement())
+  postcode         String  @db.VarChar(50)
+  rooms            String  @db.VarChar(20)
+  bathrooms        String  @db.VarChar(20)
+  clean_type       String  @db.VarChar(50)
+  hours            String  @db.VarChar(10)
+  cleaning_product String  @db.VarChar(50)
+  frequency        String  @db.VarChar(50)
+  access_type      String  @db.VarChar(50)
+  house_access     String  @db.VarChar(50)
+  pets             String  @db.VarChar(30)
   pet_type         String?
-  notes            String?        @db.Text
-  booking_date     String         @db.VarChar(20)
-  booking_time     String         @db.VarChar(20)
-  fullname         String         @db.VarChar(100)
-  phone_number     String         @db.VarChar(20)
-  email            String         @db.VarChar(50)
-  address          String         @db.VarChar(255)
-  city             String         @db.VarChar(50)
-  review           String?        @db.LongText()
-  amount           Int            @default(100)
-  payment_status   PaymentStatus  @default(PENDING)
+  notes            String? @db.Text
+  booking_date     String  @db.VarChar(20)
+  booking_time     String  @db.VarChar(20)
+  fullname         String  @db.VarChar(100)
+  phone_number     String  @db.VarChar(20)
+  email            String  @db.VarChar(50)
+  address          String  @db.VarChar(255)
+  city             String  @db.VarChar(50)
+  review           String? @db.LongText()
+
   client_approval  ClientApproval @default(PENDING)
   booking_status   BookingStatus  @default(PENDING)
   cleaning_status  CleaningStatus @default(NEW)
@@ -86,8 +85,17 @@ model Booking {
   assigneeName     String?        @db.VarChar(100)
   assignedToUserId String?        @db.VarChar(255)
   assignedToUser   User?          @relation(fields: [assignedToUserId], references: [id])
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
+
+  amount           Int           @default(100)
+  payment_status   PaymentStatus @default(PENDING)
+  payment_id       String?       @db.VarChar(255)
+  payment_intent   String?       @db.VarChar(255)
+  payment_method   String?       @db.VarChar(255)
+  payment_currency String?       @db.VarChar(10)
+  payment_date     String?       @db.VarChar(20)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   // extra_task       String?        @db.VarChar(250)
 }
 

@@ -8,6 +8,7 @@ type InputFieldProps = React.ComponentProps<typeof Input> & {
   label?: string;
   name: string;
   type?: string;
+  disabled?: boolean;
 };
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -16,6 +17,7 @@ const InputField: React.FC<InputFieldProps> = ({
   register,
   name,
   type,
+  disabled,
 }) => (
   <div className="w-full space-y-1">
     <label htmlFor={label}>{label}</label>
@@ -23,6 +25,7 @@ const InputField: React.FC<InputFieldProps> = ({
       {...register(name)}
       type={type}
       className={`text-lg p-4   ${errors[name] ? "border-red-500" : ""}`}
+      disabled={disabled}
     />
     <p className="text-red-600 text-xs font-extralight">
       {errors[name]?.message}

@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { z } from "zod";
+import Spinner from "@/components/spinner";
 
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
@@ -49,11 +50,13 @@ const NewUserForm = () => {
   const handleRegisterStaff = async (data: RegisterStaffFormData) => {
     try {
       // const { confirmPassword, ...dataWithoutConfirmPassword } = data;
+      setSubmitting(true);
       const response = await axios.post("/api/users/staff", data);
       toast.success("Staff registered successfully!");
       router.refresh();
       router.push("/users");
       console.log(response.data);
+      setSubmitting(false);
     } catch (error) {
       console.error(error);
     }
@@ -72,6 +75,7 @@ const NewUserForm = () => {
           type="text"
           errors={errors}
           name="name"
+          disabled={isPending}
         />
         <InputField
           label="Phone Number"
@@ -79,6 +83,7 @@ const NewUserForm = () => {
           type="text"
           errors={errors}
           name="phone_number"
+          disabled={isPending}
         />
       </InputFieldWrapper>
       <InputFieldWrapper>
@@ -114,6 +119,7 @@ const NewUserForm = () => {
           type="email"
           errors={errors}
           name="email"
+          disabled={isPending}
         />
         <InputField
           label="Date of Birth"
@@ -121,6 +127,7 @@ const NewUserForm = () => {
           type="date"
           errors={errors}
           name="dob"
+          disabled={isPending}
         />
       </InputFieldWrapper>
       <InputFieldWrapper>
@@ -130,6 +137,7 @@ const NewUserForm = () => {
           type="text"
           errors={errors}
           name="address"
+          disabled={isPending}
         />
       </InputFieldWrapper>
       <InputFieldWrapper>
@@ -139,6 +147,7 @@ const NewUserForm = () => {
           type="text"
           errors={errors}
           name="city"
+          disabled={isPending}
         />
         <InputField
           label="Postal Code"
@@ -146,6 +155,7 @@ const NewUserForm = () => {
           type="text"
           errors={errors}
           name="postal_code"
+          disabled={isPending}
         />
         <InputField
           label="Nationality"
@@ -153,6 +163,7 @@ const NewUserForm = () => {
           type="text"
           errors={errors}
           name="nationality"
+          disabled={isPending}
         />
       </InputFieldWrapper>
       <InputFieldWrapper>
@@ -162,6 +173,7 @@ const NewUserForm = () => {
           type="text"
           errors={errors}
           name="employee_id"
+          disabled={isPending}
         />
 
         <SelectField
@@ -183,6 +195,7 @@ const NewUserForm = () => {
           type="date"
           errors={errors}
           name="employment_date"
+          disabled={isPending}
         />
         <SelectField
           register={register}
@@ -205,6 +218,7 @@ const NewUserForm = () => {
           type="password"
           errors={errors}
           name="password"
+          disabled={isPending}
         />
         <InputField
           label="Confirm Password"
@@ -212,10 +226,14 @@ const NewUserForm = () => {
           type="password"
           errors={errors}
           name="confirmPassword"
+          disabled={isPending}
         />
       </InputFieldWrapper>
 
-      <Button type="submit">Submit</Button>
+      <Button disabled={isPending} className="bg-warningColor" type="submit">
+        {isPending && <Spinner />}
+        <span className="ml-1"> Submit</span>
+      </Button>
     </form>
   );
 };
