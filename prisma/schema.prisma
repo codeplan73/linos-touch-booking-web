@@ -180,3 +180,19 @@ model TwoFactorConfirmation {
 
   @@unique([userId])
 }
+
+model Pricing {
+  id                      Int      @id @default(autoincrement())
+  hourly_rate             Int
+  bedroom_count           Int
+  bathroom_count          Int
+  standard                Int
+  deep_clean              Int
+  move_in_out             Int
+  post_construction       Int
+  extra_task              Int
+  bring_our_own_materials Int
+  price                   Int
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+}
