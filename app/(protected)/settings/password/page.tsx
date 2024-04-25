@@ -30,15 +30,27 @@ const PasswordPage = () => {
             <div className="grid w-full items-center gap-8">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Current Password</Label>
-                <Input id="name" placeholder="Enter your current password" />
+                <Input
+                  id="name"
+                  type="password"
+                  placeholder="Enter your current password"
+                />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">New Password</Label>
-                <Input id="name" placeholder="Enter new password" />
+                <Input
+                  id="name"
+                  type="password"
+                  placeholder="Enter new password"
+                />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Confirm New Password</Label>
-                <Input id="name" placeholder="Confirm New Passwords" />
+                <Input
+                  id="name"
+                  type="password"
+                  placeholder="Confirm New Passwords"
+                />
               </div>
             </div>
             <Button type="submit" className="bg-warningColor mt-6">
