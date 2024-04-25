@@ -39,7 +39,7 @@ const NewForm = ({ user }: { user?: User }) => {
     try {
       setSubmitting(true);
       await axios.post("/api/users/staff", data);
-      toast.success("Staff Details Updated successfully!");
+      toast.success("Staff Created successfully!");
       router.refresh();
       router.push("/users");
       setSubmitting(false);

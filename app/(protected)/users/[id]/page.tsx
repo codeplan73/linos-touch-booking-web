@@ -15,6 +15,6 @@ const page = async ({ params }: Props) => {
   return <EditForm user={user} />;
 };
 
-export const revalidate = 10;
+export const revalidate = 1;
 
 export default page;

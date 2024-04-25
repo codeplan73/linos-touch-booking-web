@@ -34,56 +34,22 @@ export const columns: ColumnDef<Client>[] = [
     },
   },
   {
-    accessorKey: "employee_id",
-    header: "Employee ID",
-  },
-  {
-    accessorKey: "phone_number",
-    header: "Phone Number",
+    accessorKey: "postal_code",
+    header: "Postal Code",
   },
   {
     accessorKey: "email",
     header: "Email",
   },
   {
-    accessorKey: "employment_type",
-    header: "Type",
-  },
-  // {
-  //   accessorKey: "status",
-  //   header: "Status",
-  // },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      const status = row.getValue("status");
-      let bgColor = "";
-
-      switch (status) {
-        case "AVAILABLE":
-          bgColor = "bg-purple-200 text-purple-700";
-          break;
-        case "ASSIGNED":
-          bgColor = "bg-yellow-200 text-yellow-900";
-          break;
-        default:
-          bgColor = "bg-gray-500"; // Add a default color for unknown statuses
-          break;
-      }
-
-      return (
-        <div className={`px-1 py-1 rounded text-center ${bgColor}`}>
-          {status as string}
-        </div>
-      );
-    },
+    accessorKey: "phone_number",
+    header: "Phone Number",
   },
 
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
+      const client = row.original;
 
       return (
         <DropdownMenu>
@@ -98,10 +64,7 @@ export const columns: ColumnDef<Client>[] = [
 
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href={`/users/${payment.id}`}>View Staff Details</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-red-500">
-              Delete Staff
+              <Link href={`/clients/${client.id}`}>View Client Details</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

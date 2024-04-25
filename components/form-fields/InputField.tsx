@@ -28,7 +28,7 @@ const InputField: React.FC<InputFieldProps> = ({
       type={type}
       className={`text-lg p-4   ${errors[name] ? "border-red-500" : ""}`}
       disabled={disabled}
-      value={value}
+      defaultValue={value}
     />
     <p className="text-red-600 text-xs font-extralight">
       {errors[name]?.message}

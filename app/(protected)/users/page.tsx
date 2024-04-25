@@ -2,7 +2,7 @@ import React from "react";
 import UsersTable from "./_component/UsersTable";
 import Link from "next/link";
 
-const page = () => {
+const UsersPage = () => {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4 overflow-x-auto">
@@ -21,4 +21,6 @@ const page = () => {
   );
 };
 
-export default page;
+export const revalidate = 1;
+
+export default UsersPage;
