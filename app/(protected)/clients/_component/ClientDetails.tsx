@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import React from "react";
+import ClientDeleteAction from "./ClientDeleteAction";
 
 const ClientDetails = (client: User) => {
   return (
@@ -126,6 +127,7 @@ const ClientDetails = (client: User) => {
           </div> */}
         </dl>
       </div>
+      <ClientDeleteAction clientId={client.id} name={client.name} />
     </div>
   );
 };
