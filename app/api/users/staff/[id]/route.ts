@@ -62,6 +62,29 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const body = await request.json();
-  console.log(body);
+  const user = await db.user.findUnique({
+    where: { id: params.id },
+  });
+
+  if (!user)
+    return NextResponse.json({ error: "Invalid user" }, { status: 404 });
+
+  const assignTasks = await db.booking.updateMany({
+    where: { assignedToUserId: user.id },
+    data: {
+      assignedToUserId: null,
+      assigneeName: null,
+      assigned_status: "UNASSIGNED",
+      cleaning_status: "NEW",
+    },
+  });
+
+  await db.user.delete({
+    where: { id: user.id },
+  });
+
+  return NextResponse.json({
+    message: "User deleted successfully",
+    status: 200,
+  });
 }

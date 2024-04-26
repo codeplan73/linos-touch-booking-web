@@ -77,7 +77,6 @@ model Booking {
   address          String  @db.VarChar(255)
   city             String  @db.VarChar(50)
   review           String? @db.LongText()
-
   client_approval  ClientApproval @default(PENDING)
   booking_status   BookingStatus  @default(PENDING)
   cleaning_status  CleaningStatus @default(NEW)
@@ -85,7 +84,6 @@ model Booking {
   assigneeName     String?        @db.VarChar(100)
   assignedToUserId String?        @db.VarChar(255)
   assignedToUser   User?          @relation(fields: [assignedToUserId], references: [id])
-
   amount           Int           @default(100)
   payment_status   PaymentStatus @default(PENDING)
   payment_id       String?       @db.VarChar(255)

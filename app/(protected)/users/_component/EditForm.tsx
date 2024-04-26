@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -15,18 +15,7 @@ import InputField from "@/components/form-fields/InputField";
 import InputFieldWrapper from "@/components/form-fields/InputFieldWrapper";
 import SelectField from "@/components/form-fields/SelectField";
 import { User } from "@prisma/client";
-
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import UserDeleteAction from "./UserDeleteAction";
 
 export type RegisterStaffFormData = z.infer<typeof UpdateStaffSchema>;
 
@@ -243,24 +232,7 @@ const EditForm = ({ user }: { user: User }) => {
       </form>
 
       <div className="absolute bottom-4 md:left-32">
-        <AlertDialog>
-          <AlertDialogTrigger>
-            <Button variant="destructive">Delete User</Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction>Continue</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <UserDeleteAction userId={user.id} name={user.name} />
       </div>
     </div>
   );
