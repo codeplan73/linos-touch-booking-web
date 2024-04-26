@@ -15,6 +15,6 @@ const TasksPage = () => {
   );
 };
 
-export const revalidate = 10;
+export const revalidate = 100;
 
 export default TasksPage;

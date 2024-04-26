@@ -84,10 +84,10 @@ export const columns: ColumnDef<Payment>[] = [
 
       switch (status) {
         case "AVAILABLE":
-          bgColor = "bg-purple-200 text-purple-700";
+          bgColor = "bg-purple-300 text-purple-900";
           break;
         case "ASSIGNED":
-          bgColor = "bg-yellow-200 text-yellow-900";
+          bgColor = "bg-yellow-300 text-yellow-900";
           break;
         default:
           bgColor = "bg-gray-500";

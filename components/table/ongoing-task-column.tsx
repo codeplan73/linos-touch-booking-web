@@ -56,14 +56,14 @@ export const onGoingColumns: ColumnDef<Payment>[] = [
       let bgColor = "";
 
       switch (status) {
-        case "PENDING":
-          bgColor = "bg-yellow-200 text-yellow-700";
+        case "NEW":
+          bgColor = "bg-yellow-200 text-yellow-900";
           break;
         case "ONGOING":
-          bgColor = "bg-purple-200 text-purple-700";
+          bgColor = "bg-purple-300 text-purple-900";
           break;
         case "COMPLETED":
-          bgColor = "bg-green-200 text-green-700";
+          bgColor = "bg-green-300 text-green-900";
           break;
         default:
           bgColor = "bg-gray-500"; // Add a default color for unknown statuses
@@ -71,7 +71,7 @@ export const onGoingColumns: ColumnDef<Payment>[] = [
       }
 
       return (
-        <div className={`px-2 py-1 rounded text-white text-center ${bgColor}`}>
+        <div className={`p-1 rounded text-center ${bgColor}`}>
           {status as string}
         </div>
       );

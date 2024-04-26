@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { stat } from "fs";
 // import { assignedToUserIdSchema } from "@/schemas";
 
 export async function PATCH(
@@ -43,4 +44,27 @@ export async function PATCH(
   });
 
   return NextResponse.json({ updatedBooking, assignedUser }, { status: 200 });
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const booking = await db.booking.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+
+  console.log(booking);
+
+  if (!booking)
+    return NextResponse.json({ error: "Invalid booking" }, { status: 404 });
+
+  await db.booking.delete({
+    where: { id: booking.id },
+  });
+
+  return NextResponse.json({
+    message: "Booking deleted successfully",
+    status: 200,
+  });
 }

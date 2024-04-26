@@ -1,6 +1,7 @@
 import React from "react";
 import { Booking } from "@prisma/client";
 import AssingTask from "./AssingTask";
+import DeleteAction from "./DeleteAction";
 
 const BookingDetails = (booking: Booking) => {
   const getCleaningStatusColor = () => {
@@ -146,17 +147,21 @@ const BookingDetails = (booking: Booking) => {
         </p>
       </div>
 
-      {booking.assigned_status === "UNASSIGNED" ? (
-        <div>
-          <AssingTask id={booking.id} />
-        </div>
-      ) : (
-        ""
-      )}
+      <div className="flex space-x-4">
+        {booking.assigned_status === "UNASSIGNED" ? (
+          <div>
+            <AssingTask id={booking.id} />
+          </div>
+        ) : (
+          ""
+        )}
+
+        <DeleteAction bookingId={booking.id} />
+      </div>
     </div>
   );
 };
 
-export const revalidate = 10;
+export const revalidate = 100;
 
 export default BookingDetails;
