@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -24,6 +24,7 @@ const NewForm = ({ user }: { user?: User }) => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setSubmitting] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -48,7 +49,6 @@ const NewForm = ({ user }: { user?: User }) => {
     }
   };
 
-  const router = useRouter();
   return (
     <form
       onSubmit={handleSubmit(handleRegisterStaff)}

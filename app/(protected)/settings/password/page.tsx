@@ -20,7 +20,7 @@ const PasswordPage = () => {
         currentSection="Password"
       />
 
-      <Card className="w-full md:w-6/12">
+      <Card className="w-full md:w-8/12">
         <CardHeader>
           <CardTitle>Change Password</CardTitle>
           <CardDescription>Update Password.</CardDescription>

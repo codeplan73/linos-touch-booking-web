@@ -190,7 +190,6 @@ model Pricing {
   post_construction       Int
   extra_task              Int
   bring_our_own_materials Int
-  price                   Int
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
 }
