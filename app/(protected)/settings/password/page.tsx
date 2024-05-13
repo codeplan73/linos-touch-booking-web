@@ -10,8 +10,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import BreadCumNav from "@/components/BreadCumNav";
+import { useSession } from "next-auth/react";
 
 const PasswordPage = () => {
+  const session = useSession();
   return (
     <div className="flex flex-col gap-4">
       <BreadCumNav

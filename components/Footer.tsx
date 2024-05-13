@@ -107,6 +107,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
         <hr className="border border-slate-700 w-full" />
         <div className="w-full flex flex-col md:flex-row items-center gap-4 md:items-start justify-between">
           <Link

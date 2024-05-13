@@ -58,7 +58,7 @@ const AboutPage = () => {
             <Card
               icon={<GrUserExpert className="text-slate-200 p-1 font-bold" />}
               title=" Qualified & Expert Professionals"
-              text=" LLinostouch Global Services, founded by Amaziah Jechin Samuel in Lagos, Nigeria in 2010 and registered in England and Wales, stands firm on the pillars of trust, customer satisfaction, commitment, responsibility, and passion. Our ethos revolves around acting with integrity towards our staff, customers, community, and environment. We prioritize the well-being of our staff, customers, and the environment, striving for excellence in all aspects of our services. With a dedication to quality cleaning and unparalleled customer service, we aim to deliver the best possible experience to our clients while upholding our values of integrity and excellence."
+              text=" Linostouch Global Services, founded by Amaziah Jechin Samuel in Lagos, Nigeria in 2010 and registered in England and Wales, stands firm on the pillars of trust, customer satisfaction, commitment, responsibility, and passion. Our ethos revolves around acting with integrity towards our staff, customers, community, and environment. We prioritize the well-being of our staff, customers, and the environment, striving for excellence in all aspects of our services. With a dedication to quality cleaning and unparalleled customer service, we aim to deliver the best possible experience to our clients while upholding our values of integrity and excellence."
             />
 
             <Card

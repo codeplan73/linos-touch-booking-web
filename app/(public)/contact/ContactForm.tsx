@@ -74,19 +74,6 @@ const ContactForm = () => {
             </FormItem>
           )}
         />
-        {/* <FormField
-          control={form.control}
-          name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter Phone Number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
         <FormField
           control={form.control}
           name="subject"
