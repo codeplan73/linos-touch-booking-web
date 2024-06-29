@@ -150,7 +150,7 @@ export default function Form() {
 
   return (
     <section className="relative w-full md:w-8/12 inset-0 flex flex-col justify-between">
-      {/* <nav
+      <nav
         aria-label="Progress"
         className="sticky top-20 md:bg-white drop-shadow-lg z-10 px-2 py-5 mb-6"
       >
@@ -187,7 +187,7 @@ export default function Form() {
             </li>
           ))}
         </ol>
-      </nav> */}
+      </nav>
 
       {/* Form */}
       <form className="" onSubmit={handleSubmit(processForm)}>
