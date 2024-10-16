@@ -1,20 +1,15 @@
 import React from "react";
+import NumberTicker from "@/components/ui/number-ticker";
 
-const Counter = () => {
+const Counter = ({ title, count }: { title: string; count: number }) => {
   return (
-    <div className="flex flex-col gap-10 items-start justify-center">
-      <h2 className="font-bold text-4xl">
-        <span className="mr-2 border-4 border-t-white border-r-white border-l-white border-b-primaryColor">
-          By the
-        </span>
-        numbers
-      </h2>
-      <div className="flex">
-        <div className="flex flex-col gap-4 items-start justify-start">
-          <p className="text-slate-500 text-sm">Years</p>
-          <h4 className="text-7xl font-bold text-primaryColor">10+</h4>
-        </div>
-      </div>
+    <div className="flex flex-col items-center justify-start gap-4">
+      <p className="text-lg text-center text-primaryColor text-nowrap">
+        {title}
+      </p>
+      <h4 className="text-4xl font-bold text-center md:text-7xl text-primaryColor">
+        <NumberTicker className=" text-primaryColor" value={count} />
+      </h4>
     </div>
   );
 };

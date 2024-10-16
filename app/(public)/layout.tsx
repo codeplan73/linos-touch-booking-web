@@ -10,10 +10,10 @@ import "slick-carousel/slick/slick-theme.css";
 import "photoswipe/dist/photoswipe.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
-
 const heebo = Heebo({ subsets: ["latin"] });
 
 import { cn } from "@/lib/utils";
+import AOSProvider from "./AOSProvider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -31,6 +31,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
+
   return (
     <SessionProvider session={session}>
       <html lang="en" suppressHydrationWarning>
@@ -39,6 +40,7 @@ export default async function RootLayout({
         {/* <body className={`${heebo.className}, ${cn(fontSans.variable)}`}> */}
         <body className={`${heebo.className}`}>
           <Navbar />
+          <AOSProvider />
           <main className="w-full">{children}</main>
           <Footer />
         </body>

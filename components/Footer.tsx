@@ -29,15 +29,15 @@ const servcices = [
 const Footer = () => {
   return (
     <div className="w-full bg-secondaryColor2 font-seri">
-      <div className="container max-w-7xl py-10 flex flex-col items-center gap-12 justify-start">
-        <div className="w-full flex flex-col md:flex-row items-start justify-start gap-8 md:gap-12">
-          <div className="w-full md:w-4/12 flex flex-col items-start gap-6">
+      <div className="container flex flex-col items-center justify-start gap-12 py-10 max-w-7xl">
+        <div className="flex flex-col items-start justify-start w-full gap-8 md:flex-row md:gap-12">
+          <div className="flex flex-col items-start w-full gap-6 md:w-4/12">
             <Image
               src="/images/logo.png"
               alt="logo"
               width={1000}
               height={1000}
-              className="h-12 md:h-20 w-12 md:w-20"
+              className="w-12 h-12 md:h-20 md:w-20"
             />
             <p className=" text-slate-400">
               we are a well known professional cleaning company based in south
@@ -48,20 +48,20 @@ const Footer = () => {
 
             <div className="flex items-start gap-4">
               <Link href="/">
-                <FaFacebook className="bg-slate-400 rounded-full text-secondaryColor text-4xl p-2" />
+                <FaFacebook className="p-2 text-4xl rounded-full bg-slate-400 text-secondaryColor" />
               </Link>
               <Link href="/">
-                <FaTwitter className="bg-slate-400 rounded-full text-secondaryColor text-4xl p-2" />
+                <FaTwitter className="p-2 text-4xl rounded-full bg-slate-400 text-secondaryColor" />
               </Link>
               <Link href="/">
-                <FaYoutube className="bg-slate-400 rounded-full text-secondaryColor text-4xl p-2" />
+                <FaYoutube className="p-2 text-4xl rounded-full bg-slate-400 text-secondaryColor" />
               </Link>
             </div>
           </div>
 
-          <div className="w-full md:w-8/12 flex flex-col md:flex-row md:justify-between gap-6">
-            <div className="w-6/12 md:w-4/12 flex flex-col gap-2 items-start">
-              <h4 className="text-md text-slate-50 mb-1 font-bold">
+          <div className="grid w-full grid-cols-2 gap-6 md:grid-cols-3 md:w-8/12">
+            <div className="flex flex-col items-start w-6/12 gap-2 md:w-4/12">
+              <h4 className="mb-1 font-bold text-md text-slate-50 text-nowrap">
                 Quick Link
               </h4>
 
@@ -75,8 +75,8 @@ const Footer = () => {
                 </Link>
               ))}
             </div>
-            <div className="w-6/12 md:w-4/12 flex flex-col gap-2 items-start">
-              <h4 className="text-md text-slate-50 mb-2 font-bold">Service</h4>
+            <div className="flex flex-col items-start w-6/12 gap-2 md:w-4/12">
+              <h4 className="mb-2 font-bold text-md text-slate-50">Service</h4>
 
               {servcices.map((link) => (
                 <Link
@@ -88,31 +88,31 @@ const Footer = () => {
                 </Link>
               ))}
             </div>
-            <div className="w-6/12 md:w-4/12 flex flex-col gap-2 items-start">
-              <h4 className="text-md text-slate-50 mb-2 font-bold">
+            <div className="flex flex-col items-start w-6/12 gap-2 md:w-4/12">
+              <h4 className="mb-2 font-bold text-md text-slate-50 text-nowrap">
                 Contact Info
               </h4>
-              <p className="text-slate-500 flex items-center gap-2">
-                <IoMdMail />
+              <p className="flex items-center gap-2 text-slate-500">
+                <IoMdMail className="text-xl" />
                 bookings@linostouch.com
               </p>
-              <p className="text-slate-500 flex items-center gap-2">
-                <PiPhoneCallBold />
+              <p className="flex items-center gap-2 text-slate-500">
+                <PiPhoneCallBold className="text-xl" />
                 +447514603137
               </p>
-              <p className="text-slate-500 flex items-center gap-2">
-                <FaMapLocation />
-                Location: 103, Crofton Park Road, Brookley London
+              <p className="flex items-start gap-2 text-slate-500">
+                <FaMapLocation className="text-5xl" />
+                103, Crofton Park Road, Brookley London
               </p>
             </div>
           </div>
         </div>
 
-        <hr className="border border-slate-700 w-full" />
-        <div className="w-full flex flex-col md:flex-row items-center gap-4 md:items-start justify-between">
+        <hr className="w-full border border-slate-700" />
+        <div className="flex flex-col items-center justify-between w-full gap-4 md:flex-row md:items-start">
           <Link
             href="https://https://globeraven.vercel.app/"
-            className="text-slate-500 text-sm"
+            className="text-sm text-slate-500"
           >
             Powered by Glob-Rave &copy; {new Date().getFullYear()} All Rights
             Reserved

@@ -14,9 +14,9 @@ const links = [
   { label: "Our Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "Contact", href: "/contact" },
-  { label: "Login", href: "/auth/login" },
-  { label: "SignUp", href: "/auth/register" },
-  { label: "Appointment", href: "/booking" },
+  // { label: "Login", href: "/auth/login" },
+  // { label: "SignUp", href: "/auth/register" },
+  { label: "Book Appointment", href: "/booking" },
 ];
 
 const Navbar = () => {
@@ -51,8 +51,8 @@ const Navbar = () => {
       }`}
     >
       {/* Blur effect is applied to the background here */}
-      <div className="relative container">
-        <div className="w-full container mx-auto px-4 py-4 flex items-center justify-between text-white">
+      <div className="container relative">
+        <div className="container flex items-center justify-between w-full px-4 py-4 mx-auto text-white">
           <Link href="/" className="">
             <Image
               src="/images/logo.png"
@@ -62,8 +62,8 @@ const Navbar = () => {
               className="h-14 w-14"
             />
           </Link>
-          <ul className="hidden md:flex items-center gap-28">
-            <ul className="hidden md:flex items-center justify-start space-x-2">
+          <ul className="items-center hidden md:flex gap-28">
+            <ul className="items-center justify-start hidden space-x-2 md:flex">
               {links.map((link) => (
                 <Link
                   key={link.href}
@@ -83,19 +83,19 @@ const Navbar = () => {
             </ul>
             <Link
               href="/download"
-              className="bg-warningColor text-white px-4 py-2 rounded-xl hover:bg-secondaryColor"
+              className="px-4 py-2 text-white bg-warningColor rounded-xl hover:bg-secondaryColor"
             >
               Download app
             </Link>
           </ul>
           {open ? (
             <CgMenuMotion
-              className="block md:hidden text-slate-300 text-3xl font-semibold cursor-pointer h-full"
+              className="block h-full text-3xl font-semibold cursor-pointer md:hidden text-slate-300"
               onClick={() => setIsOpen(!open)}
             />
           ) : (
             <TiThMenu
-              className="block md:hidden text-slate-300 text-3xl cursor-pointer h-full"
+              className="block h-full text-3xl cursor-pointer md:hidden text-slate-300"
               onClick={() => setIsOpen(!open)}
             />
           )}
@@ -106,7 +106,7 @@ const Navbar = () => {
       {/* Overlay */}
       {open && (
         <div
-          className="fixed inset-0 bg-black opacity-70 z-10"
+          className="fixed inset-0 z-10 bg-black opacity-70"
           onClick={() => setIsOpen(false)}
         ></div>
       )}
@@ -121,7 +121,7 @@ const Navbar = () => {
             <Link
               key={link.href}
               href={link.href}
-              className="flex p-4 text-slate-700 w-full hover:bg-secondaryColor hover:text-white"
+              className="flex w-full p-4 text-slate-700 hover:bg-secondaryColor hover:text-white"
               onClick={() => setIsOpen(false)}
             >
               <span>{link.label}</span>

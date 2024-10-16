@@ -1,44 +1,48 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { AiOutlineStar } from "react-icons/ai";
 
 interface Props {
   name: string;
   rating: string;
-  title: string;
   text: string;
 }
 
-const TestimonialCard = ({ name, rating, title, text }: Props) => {
+const TestimonialCard = ({ name, rating, text }: Props) => {
+  const ratingNumber = parseFloat(rating);
+  const fullStars = Math.floor(ratingNumber);
+  const hasHalfStar = ratingNumber % 1 !== 0;
+
   return (
-    <div className="flex flex-col gap-6 max-w-max-w-md bg-white rounded-2xl drop-shadow-2xl p-8 font-sans">
-      <div className="flex items-start justify-start gap-4">
-        <p className="bg-blue-500 h-20 w-20 rounded-2xl"></p>
-        <div className="flex flex-col items-start gap-4">
-          <h4 className="text-xl md:text-2xl font-semibold">{name}</h4>
-          <p className="flex items-center gap-2">
-            <FaStar className="text-primaryColor text-2xl" />
-            <span className="text-blue-500 font-light">{rating}</span>
-          </p>
+    <div className="flex flex-col h-full gap-6 p-8 font-sans bg-white rounded-2xl drop-shadow-2xl">
+      <div className="flex flex-col items-start gap-4">
+        <h4 className="text-xl font-semibold md:text-2xl">{name}</h4>
+        <div className="flex items-center gap-1">
+          {[...Array(5)].map((_, index) => {
+            if (index < fullStars) {
+              return (
+                <FaStar key={index} className="text-2xl text-primaryColor" />
+              );
+            } else if (index === fullStars && hasHalfStar) {
+              return (
+                <FaStarHalfAlt
+                  key={index}
+                  className="text-2xl text-primaryColor"
+                />
+              );
+            } else {
+              return (
+                <AiOutlineStar
+                  key={index}
+                  className="text-2xl text-primaryColor"
+                />
+              );
+            }
+          })}
+          <span className="ml-2 font-light text-blue-500">{rating}</span>
         </div>
-      </div>
-
-      <div className="flex flex-col items-start justify-start gap-4">
-        <div className="flex items-center gap-2 justify-start">
-          <span>
-            <AiOutlineInfoCircle className="text-red-500 text-xl" />
-          </span>
-          <h4 className="text-md font-semibold text-secondaryColor">{title}</h4>
-        </div>
-
-        <p className="text-md text-slate-400 text-left">{text}</p>
-        <p className="text-sm text-slate-400">
-          {new Date().toLocaleDateString("default", {
-            weekday: "long",
-            month: "long",
-            day: "numeric",
-          })}{" "}
-          {new Date().getFullYear()}
+        <p className="flex-grow overflow-y-auto text-left text-md text-slate-400">
+          {text}
         </p>
       </div>
     </div>
