@@ -7,7 +7,7 @@ const Banner = () => {
       style={{ backgroundImage: "url('/images/about-banner.jpeg" }}
     >
       <div className="absolute inset-0 bg-black opacity-40"></div>
-      <h4 className="text-white text-3xl md:text-7xl font-bold z-20">
+      <h4 className="z-20 text-3xl font-bold text-white md:text-7xl">
         About us
       </h4>
     </div>

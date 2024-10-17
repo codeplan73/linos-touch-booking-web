@@ -10,16 +10,20 @@ import MapLocation from "./MapLocation";
 const page = () => {
   return (
     <>
-      <PageBanner link="contact" page="Contact" />
+      <PageBanner
+        link="contact"
+        page="Contact"
+        bannerImg="/images/banner-about.jpeg"
+      />
 
-      <section className="container py-10 md:py-20  md:px-20">
+      <section className="container py-10 md:py-20 md:px-20">
         <div className="flex flex-col items-center gap-12 md:gap-20">
           <p className="text-lg text-primaryColor">Contact information</p>
-          <h2 className="text-2xl font-semibold md:text-5xl capitalize text-center">
+          <h2 className="text-2xl font-semibold text-center capitalize md:text-5xl">
             We want to share our location <br /> to find us easily
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <ContactCard
               icon={<FaMapLocation className="" />}
               tittle="Office Address"
@@ -37,7 +41,7 @@ const page = () => {
             />
           </div>
 
-          <div className="md:container flex flex-col-reverse md:flex-row gap-12 w-full items-start">
+          <div className="flex flex-col-reverse items-start w-full gap-12 md:container md:flex-row">
             <MapLocation />
             <ContactForm />
           </div>

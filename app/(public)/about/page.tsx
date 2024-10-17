@@ -12,8 +12,8 @@ const AboutPage = () => {
     <>
       <Banner />
 
-      <section className="container flex flex-col-reverse w-full py-16 md:py-32 md:flex-row md:gap-20">
-        <div className="flex flex-col w-full gap-6 p-8 md:w-6/12">
+      <section className="container flex flex-col-reverse w-full py-6 md:py-32 md:flex-row md:gap-20">
+        <div className="flex flex-col w-full gap-6 p-4 md:w-6/12">
           <div className="flex items-end justify-start w-full gap-6">
             <Image
               src="/images/about-project-1.jpeg"
@@ -49,8 +49,8 @@ const AboutPage = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-start justify-start w-full gap-12 md:w-6/12">
-          <h4 className="text-3xl font-semibold leading-snug text-center capitalize md:text-pretty md:text-5xl">
+        <div className="flex flex-col items-start justify-start w-full gap-8 md:w-6/12">
+          <h4 className="text-xl font-semibold leading-snug text-center capitalize md:text-pretty md:text-5xl">
             Transforming any space into clean, neat perfection
           </h4>
 
@@ -70,12 +70,12 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="container flex flex-col w-full gap-10 px-10 pb-16 md:pb-32 md:pt-10 md:gap-20 md:px-20">
+      <section className="container flex flex-col w-full gap-6 px-10 pb-16 md:pb-32 md:pt-10 md:gap-20 md:px-20">
         <div className="flex flex-col items-center justify-center w-full gap-6 mx-auto md:w-6/12">
           <h2 className="text-3xl font-bold text-center md:text-5xl">
             Why Hire Us?
           </h2>
-          <p className="font-sans text-center text-slate-500 text-md ">
+          <p className="font-sans text-lg text-center text-slate-500 ">
             {`
            Choose us because of our reputation for excellence. For more than 10
             years, we've earned a name for quality and customer service. The
@@ -87,32 +87,26 @@ const AboutPage = () => {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           <HireCard
-            icon={<FaTools className="p-1 font-bold text-slate-200" />}
             title="With Us, Your Satisfaction is Guaranteed"
             text="The experts at Linostouch are commited to providing thorough house cleaning services four our valued customers nationwide, in order to accomplish this goal, we adhere to strict standards that remain consistent accross the board"
           />
           <HireCard
-            icon={<FaTools className="p-1 font-bold text-slate-200" />}
             title="Our Bonded & Insured Cleaning Team"
             text="Our compnay is fully bonded and insured, which means you can have peace of mind when hire us as your residentail cleaning service helpin our customer feel confident in our services is very important to us."
           />
           <HireCard
-            icon={<FaTools className="p-1 font-bold text-slate-200" />}
             title="Our Team Consist of Fully Trained Employees"
             text="It means every individual hired at a franchise location of Linostouch cleaning services goes through athorough screening process, and then is trained in every aspect of our home cleaning services. This ensured high-quality service every time"
           />
           <HireCard
-            icon={<FaTools className="p-1 font-bold text-slate-200" />}
             title="Locally Owned Home Cleaning Services"
             text="life is just too short to clean your own home. You should be able to enjoy peace of mind knowing that your home is in good hands, while focusing on things that matter more to you, such as your family and loved ones."
           />
           <HireCard
-            icon={<FaTools className="p-1 font-bold text-slate-200" />}
             title="Free Over Phone Estimates"
             text="LinosTouch Cleaning Services service is the key to keeping a beautiful homewhile more time for yourself and the things you love most. Contact us for a free estimate."
           />
           <HireCard
-            icon={<FaTools className="p-1 font-bold text-slate-200" />}
             title="We Guarantee Our Work"
             text="LinosTouch Cleaning Services strive to provide the highest level if qulity, service and value to each and every customer, If you are not completely satisfied with our service, please inform us within 24 hours or your clean so we may resolve the sitaution."
           />

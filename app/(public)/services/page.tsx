@@ -1,14 +1,26 @@
 import React from "react";
-import { FaHouseChimney } from "react-icons/fa6";
 import ServiceCard from "./_components/serviceCard";
 import PageBanner from "../../../components/PageBanner";
 import Counter from "../../../components/Counter";
+import CounterSection from "@/components/home/CounterSection";
+
+import {
+  FaHouseChimney,
+  FaHouse,
+  FaTruckRampBox,
+  FaBroom,
+  FaWindowMaximize,
+  FaBuilding,
+  FaHouseUser,
+} from "react-icons/fa6";
+import { FaHardHat } from "react-icons/fa";
+import { MdCurtainsClosed } from "react-icons/md";
 
 const services = [
   {
     id: 1,
     icon: (
-      <FaHouseChimney className="text-6xl bg-warningColor text-white rounded-lg p-2" />
+      <FaHouseChimney className="p-2 text-6xl text-white rounded-lg bg-warningColor" />
     ),
     title: "Apartment Cleaning",
     text: "LinosTouch-Global-Services offers a program designed to service residents of apartments and condominiums.",
@@ -16,15 +28,15 @@ const services = [
   {
     id: 2,
     icon: (
-      <FaHouseChimney className="text-6xl bg-warningColor text-white rounded-lg p-2" />
+      <FaHouse className="p-2 text-6xl text-white rounded-lg bg-warningColor" />
     ),
     title: "House Cleaning",
-    text: "For over 10 years we’ve performed housekeeping services according to the wishes of our clients.",
+    text: "For over 10 years we've performed housekeeping services according to the wishes of our clients.",
   },
   {
     id: 3,
     icon: (
-      <FaHouseChimney className="text-6xl bg-warningColor text-white rounded-lg p-2" />
+      <FaTruckRampBox className="p-2 text-6xl text-white rounded-lg bg-warningColor" />
     ),
     title: "Move in/ Move out",
     text: "In fact, many people say that moving is one of the most stressful and exhausting life experiences.",
@@ -32,15 +44,15 @@ const services = [
   {
     id: 4,
     icon: (
-      <FaHouseChimney className="text-6xl bg-warningColor text-white rounded-lg p-2" />
+      <FaBroom className="p-2 text-6xl text-white rounded-lg bg-warningColor" />
     ),
-    title: "Carpet  Cleaning",
+    title: "Carpet Cleaning",
     text: "When you choose us, you get a deeper clean, faster-drying carpets and a healthier home.",
   },
   {
     id: 5,
     icon: (
-      <FaHouseChimney className="text-6xl bg-warningColor text-white rounded-lg p-2" />
+      <FaWindowMaximize className="p-2 text-6xl text-white rounded-lg bg-warningColor" />
     ),
     title: "window cleaning",
     text: "Indulge in high-quality window cleaning from bonded professionals.",
@@ -48,7 +60,7 @@ const services = [
   {
     id: 6,
     icon: (
-      <FaHouseChimney className="text-6xl bg-warningColor text-white rounded-lg p-2" />
+      <FaBuilding className="p-2 text-6xl text-white rounded-lg bg-warningColor" />
     ),
     title: "Commercial Cleaning",
     text: "Anyone who has done a renovation project knows the mess that comes with it.",
@@ -56,23 +68,23 @@ const services = [
   {
     id: 7,
     icon: (
-      <FaHouseChimney className="text-6xl bg-warningColor text-white rounded-lg p-2" />
+      <FaHouseUser className="p-2 text-6xl text-white rounded-lg bg-warningColor" />
     ),
-    title: "Residential  Cleaning",
+    title: "Residential Cleaning",
     text: "We will take down uninstall your curtains and dry-clean right on the spot!.",
   },
   {
     id: 8,
     icon: (
-      <FaHouseChimney className="text-6xl bg-warningColor text-white rounded-lg p-2" />
+      <MdCurtainsClosed className="p-2 text-6xl text-white rounded-lg bg-warningColor" />
     ),
-    title: "curtail  cleaning",
+    title: "curtail cleaning",
     text: "We will take down uninstall your curtains and dry-clean right on the spot!",
   },
   {
     id: 9,
     icon: (
-      <FaHouseChimney className="text-6xl bg-warningColor text-white rounded-lg p-2" />
+      <FaHardHat className="p-2 text-6xl text-white rounded-lg bg-warningColor" />
     ),
     title: "After Renovation",
     text: "Anyone who has done a renovation project knows the mess that comes with it.",
@@ -81,59 +93,48 @@ const services = [
 
 const ServicesPage = () => {
   return (
-    <section className="flex flex-col">
-      <PageBanner page="Services" link={"services"} />
+    <>
+      <section className="flex flex-col">
+        <PageBanner
+          page="Services"
+          link={"services"}
+          bannerImg="/images/banner-services.jpeg"
+        />
 
-      <div className="container px-10 md:px-32 md:gap-24">
-        <div className="w-full flex flex-col gap-10 py-12">
-          <div className="flex items-start gap-2 justify-start">
-            <hr className="w-20 mt-3  border-1 border-warningColor " />
-            <h4 className="text-warningColor text-lg uppercase tracking-wider">
-              best services
-            </h4>
-          </div>
-
-          <div className="flex flex-col gap-4 items-start w-full md:w-5/12 pr-10">
-            <h2 className="text-4xl font-semibold capitalize">
-              what our services
-            </h2>
-            <p className="text-slate-400">
-              While we can customize your cleaning plan to suit your needs, most
-              clients schedule regular cleaning services:
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {services.map((service) => (
-              <ServiceCard
-                key={service.id}
-                image={service.icon}
-                title={service.title}
-                text={service.text}
-              />
-            ))}
-          </div>
-        </div>
-        <div className=" flex flex-col gap-10 items-start justify-center py-20">
-          <h2 className="font-bold text-4xl">
-            <span className="mr-2 border-4 pb-4 border-t-white border-r-white border-l-white border-b-primaryColor">
-              By the
-            </span>
-            numbers
-          </h2>
-          <div className="w-full flex flex-col md:flex-row items-start justify-between gap-6 ">
-            <div className="w-full md:w-6/12 flex justify-between md:justify-start md:gap-56 px-4 md:px-0">
-              <Counter title="Year" count={10} />
-              <Counter title="Employees" count={160} />
+        <div className="container px-10 md:px-32 md:gap-24">
+          <div className="flex flex-col w-full gap-10 py-12">
+            <div className="flex items-start justify-start gap-2">
+              <hr className="w-20 mt-3 border-1 border-warningColor " />
+              <h4 className="text-lg tracking-wider uppercase text-warningColor">
+                best services
+              </h4>
             </div>
-            <div className="w-full md:w-6/12 flex md:ml-32 justify-between px-4 md:px-0">
-              <Counter title="Award" count={20} />
-              <Counter title="Completed Projects" count={200} />
+
+            <div className="flex flex-col items-start w-full gap-4 pr-10 md:w-5/12">
+              <h2 className="text-4xl font-semibold capitalize">
+                what our services
+              </h2>
+              <p className="text-slate-400">
+                While we can customize your cleaning plan to suit your needs,
+                most clients schedule regular cleaning services:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {services.map((service) => (
+                <ServiceCard
+                  key={service.id}
+                  image={service.icon}
+                  title={service.title}
+                  text={service.text}
+                />
+              ))}
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <CounterSection />
+    </>
   );
 };
 
