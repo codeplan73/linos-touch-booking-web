@@ -40,25 +40,16 @@ const Hero = () => {
             text="Give Best Services"
           />
         </div>
-        <div>
-          <FadeText
-            className="font-sans text-lg text-center"
-            direction="up"
-            framerProps={{
-              show: { transition: { delay: 0.9 } },
-            }}
-            text="Experience our renowned customer obserssion and commitment to perfect
-          service"
-          />
-          <FadeText
-            className="pl-12 font-sans text-lg text-center"
-            direction="up"
-            framerProps={{
-              show: { transition: { delay: 0.9 } },
-            }}
-            text="  delivery. Free quotes available - let us take the
-          stress our of cleaning"
-          />
+        <div data-aos="fade-up" data-aos-easing="ease-in-out">
+          <p
+            data-aos="fade-up"
+            data-aos-easing="ease-in-out"
+            className="px-6 font-sans text-lg text-center md:px-48 lg:px-64"
+          >
+            Experience our renowned customer obserssion and commitment to
+            perfect service delivery. Free quotes available - let us take the
+            stress our of cleaning
+          </p>
         </div>
 
         <HeroForm />
